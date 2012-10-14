@@ -1,16 +1,16 @@
-# Chrome Extension for Nyaa.eu
+# Chrome Extension for Nyaa
 
-This is my personal extension for tracking and quickly navigating to my currently watched anime.
+This is my personal extension for tracking and quickly navigating to my currently watched anime on [nyaa.eu](nyaa.eu).
 It does the following things:
-- sets the default sortby value to english-translated anime
+- sets the catagory dropdown form to the default value: english-translated anime
 - creates a sortable column of your currently watched anime on the right side of the page
 - each anime in your list automatically filters nyaa's anime to your chosen title/fansubber/quality
-- each anime in your list includes a link it's anime-planet profile page
+- each anime in your list includes a link it's [anime-planet](http://www.anime-planet.com/) profile page
 - each anime in your list includes the date the fansubber is expected to release the anime on
 
 ## Temporary Requirements
-- I'm temporarily using the [Minimalist](https://chrome.google.com/webstore/detail/minimalist-for-everything/bmihblnpomgpjkfddepdpdafhhepdbek) plugin for Google Chrome to run this plugin, until I can create a proper Chrome plugin myself. 
-- For the moment I'm storing informaiton about the anime i'm watching within a javascript object. 
+- I'm temporarily using the [Minimalist](https://chrome.google.com/webstore/detail/minimalist-for-everything/bmihblnpomgpjkfddepdpdafhhepdbek) plugin for Google Chrome to run this plugin. Later I will make a proper Chrome extension.
+- For the moment I'm storing information about the anime i'm watching within a javascript object.
 
 ## 3rd Party Dependencies
 - [Jquery1.8](http://jquery.com/)
