@@ -1,6 +1,7 @@
 # Chrome Extension for Nyaa
 
-This is my personal extension for tracking and quickly navigating to my currently watched anime on [nyaa.eu](nyaa.eu).
+This is my personal extension for tracking and quickly navigating to my currently watched anime on [nyaa.eu](http://nyaa.eu).
+
 It does the following things:
 - sets the catagory dropdown form to the default value: english-translated anime
 - creates a sortable column of your currently watched anime on the right side of the page
