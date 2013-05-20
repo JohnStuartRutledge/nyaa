@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<title>Nyaa Enhancement Suite Settings Page</title>
+<style>
+body {
+    background-color:#333;
+    color: #CCC;
+    width: 800px;
+    min-height: 300px;
+    font: 13px 'RobotoRegular', Arial, sans-serif;
+    font-size:100%;
+    line-height:1.7em;
+    margin:0 auto;
+}
+label { display: block; }
+textarea { font-family: monospace; }
+.message {
+    height: 20px;
+    background: #333;
+    color: green;
+    padding: 5px;
+}
+#my_anime {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+    <div class="message"></div>
+
+    <h3>Add new anime</h3>
+    <form class="form-inline">
+        <select id="fansubber" name="fansubber">
+            <option>none</option>
+            <option>HorribleSubs</option>
+            <option>Mazui</option>
+            <option>Commie</option>
+            <option>UTW</option>
+            <option>gg</option>
+            <option>CMS</option>
+            <option>Hadena</option>
+            <option>SubDESU</option>
+            <option>sage</option>
+            <option>Zero-Raws</option>
+        </select>
+        <input id="anime_title" name="anime_title" type="text" placeholder="Name">
+        <select id="fidelity" placeholder="fidelity">
+            <option>none</option>
+            <option>720p</option>
+            <option>1080</option>
+        </select>
+        <select id="release_date" name="release_date">
+            <option>unknown</option>
+            <option>mon</option>
+            <option>tue</option>
+            <option>wed</option>
+            <option>thu</option>
+            <option>fri</option>
+            <option>sat</option>
+            <option>sun</option>
+        </select>
+        <input id="animeplanet" type="text" placeholder="anime-planet url">
+        <button type="submit" class="save">Add</button>
+    </form>
+
+    <hr />
+
+    <h3>Your Anime</h3>
+    <ul id="my_anime"></ul>
+    <!--<textarea name="anime_txt" id="anime_txt" cols=80 rows=10></textarea>-->
+    <button class="reset">Reset Everything</button>
+    <hr />
+
+    <h3>Your Fansubbers</h3>
+    <p>form for adding new fansubber here</p>
+
+    <hr />
+    <h3>Other Options</h3>
+    <input type="checkbox" name="lang" value="en">Restrict anime to enlish subs only</input>
+
+    <hr />
+    <h3>Links to useful sites</h3>
+    <ul>
+        <li><a href="http://www.anime-planet.com">Anime Planet</a></li>
+        <li><a href="http://www.animenewsnetwork.com/encyclopedia/anime/upcoming/tv">Upcoming Anime</a></li>
+    </ul>
+    <br />
+    <button class="print_storage">print storage contents</button>
+
+
+    <script src="options.js"></script>
+</body>
+</html>

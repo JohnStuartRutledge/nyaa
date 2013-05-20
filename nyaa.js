@@ -15,6 +15,7 @@ $(document).ready(function(){
         "gg":           "http://www.ggkthx.org/",   // http://www.nyaa.eu/?page=torrents&user=9001
         "Hadena":       "http://hadena-subs.com/",  // http://www.nyaa.eu/?page=torrents&user=99024
         "HorribleSubs": "http://horriblesubs.info", // http://www.nyaa.eu/?page=torrents&user=64513
+        "Mazui":        "http://mazuisubs.com/",    // http://www.nyaa.eu??page=torrents&user=69762
         "SubDESU":      "http://www.subdesu.org/",  // http://www.nyaa.eu/?page=torrents&user=63756
         "UTW":          "http://utw.me/",           // http://www.nyaa.eu/?page=torrents&user=71629
         "sage":         "http://sagesubs.com",      // http://www.nyaa.eu/?page=torrents&user=129334
@@ -27,42 +28,34 @@ $(document).ready(function(){
     // define an object to serve as your anime database
     var myanime = {
         'Bakuman S3':                        {"sub":"SFW-Sage",     "fidelity":"720p", "date":"?",   "animeplanet": "bakuman-2012"},
-        'BTOOOM!':                           {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "btooom"},
+        'Boku_Ha_Tomodachi_Ga_Sukunai_NEXT': {"sub":"Mazui",        "fidelity":"",     "date":"?",   "animeplanet": "boku-wa-tomodachi-ga-sukunai-next"},
         'Busou Shinki':                      {"sub":"Commie",       "fidelity":"",     "date":"thu", "animeplanet": "busou-shinki"},
         'Chuunibyou_demo_Koi_ga_Shitai':     {"sub":"URW",          "fidelity":"720p", "date":"thu", "animeplanet": "chuunibyou-demo-koi-ga-shitai"},
-        'CØDE：BREAKER':                     {"sub":"sage",         "fidelity":"720p", "date":"sun", "animeplanet": "code-breaker"},
         'Fairy Tail':                        {"sub":"HorribleSubs", "fidelity":"720p", "date":"fri", "animeplanet": "Fairy-Tail"},
         'Gintama':                           {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "gintama-2012"},
         'Holy Knight':                       {"sub":"CMS",          "fidelity":"",     "date":"?",   "animeplanet": "holy-knight"},
         'Hunter X Hunter':                   {"sub":"HorribleSubs", "fidelity":"720p", "date":"sat", "animeplanet": "hunter-x-hunter-2011"},
         'Ixion Saga DT':                     {"sub":"HorribleSubs", "fidelity":"720p", "date":"sun", "animeplanet": "ixion-saga-dimension-transfer"},
         'Jormungand Perfect Order':          {"sub":"",             "fidelity":"",     "date":"?",   "animeplanet": "jormungand-perfect-order"},
-        '「K」':                              {"sub":"Commie",       "fidelity":"",     "date":"fri", "animeplanet": "k-anime"},
         'Kamisama Kiss':                     {"sub":"HorribleSubs", "fidelity":"720p", "date":"wed", "animeplanet": "kamisama-hajimemashita"},
-        'Kingdom':                           {"sub":"Hadena",       "fidelity":"720p", "date":"tue", "animeplanet": "kingdom"},
-        'Koi to Senkyo to Chocolate':        {"sub":"Hadena",       "fidelity":"720p", "date":"?",   "animeplanet": "koi-to-senkyo-to-chocolate"},
         'Little Busters!':                   {"sub":"UTW",          "fidelity":"720p", "date":"sun", "animeplanet": "little-busters"},
-        'Mädchen und Panzer':                {"sub":"Zero-Raws",    "fidelity":"",     "date":"mon", "animeplanet": "girls-und-panzer"},
-        'Medaka Box Abnormal':               {"sub":"",             "fidelity":"",     "date":"?",   "animeplanet": "medaka-box-abnormal"},
-        'Muv-Luv Alternative':               {"sub":"HorribleSubs", "fidelity":"720p", "date":"sun", "animeplanet": "muv-luv-alternative-total-eclipse"},
+        'Magi':                              {"sub":"gg",           "fidelity":"",     "date":"sun", "animeplanet": "magi"},
+        'Mangirl!':                          {"sub":"HorribleSubs", "fidelity":"72op", "date":"?",   "animeplanet": "mangirl"},
+        'Maoyuu Maou Yuusha':                {"sub":"HorribleSubs", "fidelity":"720p", "date":"?",   "animeplanet": "maoyuu-maou-yuusha"},
         'Naruto Shippuuden':                 {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "naruto-shippuden"},
-        'Onii-chan Dakedo Ai Sae Areba':     {"sub":"Raw",          "fidelity":"",     "date":"sat", "animeplanet": "onii-chan-dakedo-ai-sae-areba-kankeinai-yo-ne"},
         'PSYCHO-PASS':                       {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "psycho-pass"},
-        'Robotics':                          {"sub":"HorribleSubs", "fidelity":"720p", "date":"fri", "animeplanet": "robotics-notes"},
         'Saint Seiya Omega':                 {"sub":"HorribleSubs", "fidelity":"720p", "date":"wed", "animeplanet": "saint-seiya-omega"},
         'Sakurasou no Pet na Kanojo':        {"sub":"Hadena",       "fidelity":"720p", "date":"tue", "animeplanet": "sakurasou-no-pet-na-kanojo"},
         'Senjou no Valkyria 3':              {"sub":"CMS",          "fidelity":"",     "date":"?",   "animeplanet": "valkyria-chronicles"},
+        'Senran Kagura':                     {"sub":"Commie",       "fidelity":"",     "date":"?",   "animeplanet": "senran-kagura"},
+        'Senyuu':                            {"sub":"HorribleSubs", "fidelity":"720p", "date":"?",   "animeplanet": "senyuu"},
         'Shinsekai Yori':                    {"sub":"Commie",       "fidelity":"",     "date":"sat", "animeplanet": "from-the-new-world"},
         'Space Brothers':                    {"sub":"HorribleSubs", "fidelity":"720p", "date":"sat", "animeplanet": "space-brothers"},
-        'Sukitte Ii na yo':                  {"sub":"Hadena",       "fidelity":"720p", "date":"sun", "animeplanet": "suki-tte-ii-na-yo"},
-        'Sakurasou no Pet na Kanojo':        {"sub":"Hadena",       "fidelity":"720p", "date":"tue", "animeplanet": "sakurasou-no-pet-na-kanojo"},
-        'Sword Art Online':                  {"sub":"HorribleSubs", "fidelity":"720p", "date":"sat", "animeplanet": "sword-art-online"},
+        'Sukitte Ii na yo':                  {"sub":"HorribleSubs", "fidelity":"720p", "date":"sun", "animeplanet": "suki-tte-ii-na-yo"},
+        'Tamako_Market':                     {"sub":"Mazui",        "fidelity":"",     "date":"?",   "animeplanet": "tamako-market"},
         'Tanken_Driland':                    {"sub":"sage",         "fidelity":"720p", "date":"?",   "animeplanet": "driland"},
         'Tari Tari':                         {"sub":"HorribleSubs", "fidelity":"720p", "date":"sun", "animeplanet": "tari-tari"},
-        'To Love Ru Darkness':               {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "to-love-ru-darkness"},
-        'Tonari no Kaibutsu-kun':            {"sub":"HorribleSubs", "fidelity":"720p", "date":"mon", "animeplanet": "tonari-no-kaibutsu-kun"},
-        'Utakoi':                            {"sub":"HorribleSubs", "fidelity":"720p", "date":"mon", "animeplanet": "chouyaku-hyakunin-isshu-uta-koi"},
-        'Yurumate3Dei':                      {"sub":"HorribleSubs", "fidelity":"720p", "date":"fri", "animeplanet": "yurumates-3d-plus"},
+        'To Love Ru Darkness':               {"sub":"Commie",       "fidelity":"",     "date":"thu", "animeplanet": "to-love-ru-darkness"},
         'Zetsuen no Tempest':                {"sub":"HorribleSubs", "fidelity":"720p", "date":"thu", "animeplanet": "zetsuen-no-tempest-the-civilization-blaster"}
     };
 
@@ -92,14 +85,14 @@ $(document).ready(function(){
         var fidelity = isBlank(obj["fidelity"]) ? '' : ':contains('+ obj["fidelity"] +')';
         var fansuber = isBlank(obj["sub"]) ? '' : ':contains('+ obj["sub"] +')';
 
-        // highlight anime
+        // highlight matching anime on nyaa's list of torrents
         $('a'+ fansuber +':contains('+ anime +')'+ fidelity).highlight(anime);
 
-        // create links for searching nyaa for specific anime to your list
+        // create links for searching nyaa for the specific anime in your list
         var anime_link = nyaa + encodeURIComponent(anime +' '+ obj['sub'] +' '+ obj['fidelity']);
         var li = $('<li>').attr('data', obj['date']).appendTo(animelist);
 
-        // link to custom search page on nyaa
+        // Build link for searching nyaa for your specific anime
         var aa = $('<a>')
             .addClass('stu_anime')
             .text(anime +' ('+obj['date']+')')
@@ -135,7 +128,7 @@ $(document).ready(function(){
     });
 
 
-    // persist the anime list's sort state across page refreshes
+    // persist the anime-list's sort state across page refreshes.
     // setTimeout is used to recursively run this function until
     // the dynamically created #stu_anime_list object exists
     function sortAnime() {
@@ -166,5 +159,6 @@ $(document).ready(function(){
 // create an interface for adding/removing anime
 // only highlight undownloaded anime
 // when searching for raw anime the url should include: &cats=1_11
+// remove or relocate ads to the bottom
 
 });

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anime Settings Page</title>
+    <link rel="stylesheet" href="css/nyaa.css">
+</head>
+<body onload="getPath();">
+
+<h3>Add new anime</h3>
+<form class="form-inline">
+    <select id="fansubber" name="fansubber">
+        <option>HorribleSubs</option>
+        <option>Mazui</option>
+        <option>Commie</option>
+        <option>UTW</option>
+        <option>gg</option>
+        <option>CMS</option>
+        <option>Hadena</option>
+        <option>SubDESU</option>
+        <option>sage</option>
+        <option>Zero-Raws</option>
+    </select>
+    <input id="anime_title" name="anime_title" type="text" placeholder="Name">
+    <select id="fidelity" placeholder="fidelity">
+        <option>none</option>
+        <option>720p</option>
+        <option>1080</option>
+    </select>
+    <select id="release_date" name="release_date">
+        <option>mon</option>
+        <option>tue</option>
+        <option>wed</option>
+        <option>thu</option>
+        <option>fri</option>
+        <option>sat</option>
+        <option>sun</option>
+    </select>
+    <input id="animeplanet" type="text" placeholder="anime-planet url">
+    <button type="submit" class="submit">Add</button>
+</form>
+
+<h3>Your Anime</h3>
+<p>list anime here generate from local storage make editable via ajax</p>
+
+<h3>Your Fansubbers</h3>
+<p>add here</p>
+
+<h3>Other Options</h3>
+<p>Checkbox that restricts all anime to english only</p>
+
+<button id="testbtn" onclick="runTest();">Test Me</button>
+
+<h3>Links to useful sites</h3>
+<ul>
+    <li><a href="http://www.anime-planet.com">Anime Planet</a></li>
+    <li><a href="#">Anime News Network</a></li>
+</ul>
+
+<script src="js/options.js"></script>
+</body>
+</html>
