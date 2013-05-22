@@ -13,7 +13,7 @@
   "content_scripts": [
     {
       "matches": ["http://www.nyaa.eu/*"],
-      "js":      ["contentscript.js"],
+      "js":      ["jquery-1.9.0.min.js", "contentscript.js"],
       "css":     ["nyaa.css"],
       "run_at":  "document_end"
     }

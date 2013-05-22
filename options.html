@@ -13,8 +13,17 @@ body {
     line-height:1.7em;
     margin:0 auto;
 }
+a {
+    color: skyblue;
+}
+
+.edit_anime {
+    color: yellow;
+    margin: 0 0 0 10px;
+    text-decoration: none;
+}
+
 label { display: block; }
-textarea { font-family: monospace; }
 .message {
     height: 20px;
     background: #333;
@@ -28,6 +37,8 @@ textarea { font-family: monospace; }
 </style>
 </head>
 <body>
+    <button class="print_storage">print storage contents</button>
+    <button class="print_anime">print stored anime</button>
     <div class="message"></div>
 
     <h3>Add new anime</h3>
@@ -87,7 +98,7 @@ textarea { font-family: monospace; }
         <li><a href="http://www.animenewsnetwork.com/encyclopedia/anime/upcoming/tv">Upcoming Anime</a></li>
     </ul>
     <br />
-    <button class="print_storage">print storage contents</button>
+
 
 
     <script src="options.js"></script>
