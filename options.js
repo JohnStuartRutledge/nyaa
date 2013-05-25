@@ -32,19 +32,16 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     // class that holds functionality pretaining to the storage of anime
     // and the creation of some its UI elements
 
+    // make sure the default values for your arguments are in order
     if (isBlank(title)) { message("You must specify an anime title"); return; }
-    //if (fansubber==='none') fansubber = '';
     fansubber = (isBlank(fansubber)) ? '' : fansubber;
     if (fidelity==='none' || isBlank(fidelity)) fidelity = '';
     if (release_date==='unknown' || isBlank(release_date)) release_date = '?';
-    if (isBlank(anime_planet)) {
-        anime_planet = '';
-    } else if (anime_planet.indexOf("anime-planet.com") !== -1) {
-        // pass
-    } else {
-        anime_planet = 'http://www.anime-planet.com/anime/'+anime_planet;
-    }
+    if (anime_planet.indexOf("anime-planet.com") !== -1) {}
+    else if (isBlank(anime_planet)) anime_planet = '';
+    else anime_planet = 'http://www.anime-planet.com/anime/'+anime_planet;
 
+    // setup global properties for this calss
     var self = {};
     self.fansubber    = fansubber;
     self.title        = title;
@@ -94,20 +91,20 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
 
         // update the info_divs values with new info
 
-        // unhide the info div
-        info_div.style.display = 'visible';
-
         // remove the form element
         form_div.parentNode.removeChild(form_div);
 
+        // unhide the info div
+        info_div.style.display = 'visible';
 
-        loadChanges();
+        // loadChanges();
     };
 
     self.remove = function() {
         // remove anime from local storage
         var idx = self.getIndex();
-        if (idx) {
+        console.log('remove function called on index=', idx);
+        if (idx || idx===0) {
             storage.remove('anime_list', function() {
                 anime_list.splice(idx, 1);
                 storage.set({"anime_list": anime_list}, function() {
@@ -118,29 +115,79 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
         }
     };
 
+    self.cancel = function() {
+        // unhides the info div and removes the edit form
+
+        // TODO
+        // make it so the cancel button only closes the specific
+        // anime you are editing, vs the current behavior which will close
+        // all anime when the screen is redrawn
+        loadChanges();
+    };
+
     self.makeForm = function () {
         // construct and return an editable form
         var li         = document.getElementById(self.id),
             info_div   = document.getElementById('div_'+self.id),
             form_div   = document.createElement('div'),
-            delete_btn = document.createElement('button');
+            select_day = document.createElement('select'),
+            select_fid = document.createElement('select'),
+            update_btn = document.createElement('button'),
+            delete_btn = document.createElement('button'),
+            cancel_btn = document.createElement('button');
 
-        form_div.id = 'form_'+self.id;
-        form_div.innerHTML = '<form class="anime_form">'
-            + '<select></select>'
-            + '<input type="text" />'
-            + '<select></select>'
-            + '<select></select>'
-            + '<input type="text" />'
-            + '<button type="submit">update</button>'
-        + '</form>';
-
-        delete_btn.innerHTML = 'delete';
-        delete_btn.addEventListener('click', self.remove);
-        form_div.appendChild(delete_btn);
+        var og_anime_planet = self.anime_planet.replace(
+                                    'http://www.anime-planet.com/anime/', '');
 
         // hide the info div
         info_div.style.display = 'none';
+
+        // construct the fidelity select form and select previous saved option
+        var sizes = ['none', '480p', '720p', '1080p'];
+        for (var i in sizes) {
+            var opt = document.createElement('option');
+            opt.innerHTML = sizes[i];
+            if (self.fidelity===sizes[i]) {
+                opt.setAttribute('selected', 'selected');
+            }
+            select_fid.appendChild(opt);
+        }
+
+        // construct the release date select form an load previous saved option
+        var days = ['?','mon','tue','wed','thu','fri','sat','sun'];
+        for (var i in days) {
+            var opt = document.createElement('option');
+            opt.innerHTML = days[i];
+            if (self.release_date===days[i]){
+                opt.setAttribute('selected', 'selected');
+            }
+            select_day.appendChild(opt);
+        }
+
+        // construct the form
+        form_div.id = 'form_'+self.id;
+        form_div.setAttribute('class', 'form_div');
+        form_div.innerHTML = [
+            '<form class="anime_form">',
+            '<input type="text" value="'+self.fansubber+'"/>',
+            '<input type="text" value="'+self.title+'"/>',
+            select_fid.outerHTML,
+            select_day.outerHTML,
+            '<input type="text" value="'+og_anime_planet+'" />',
+            '</form>'
+        ].join('\n');
+
+        update_btn.innerHTML = 'update';
+        delete_btn.innerHTML = 'delete';
+        cancel_btn.innerHTML = 'cancel';
+
+        update_btn.addEventListener('click', self.update);
+        delete_btn.addEventListener('click', self.remove);
+        cancel_btn.addEventListener('click', self.cancel);
+
+        form_div.appendChild(update_btn);
+        form_div.appendChild(delete_btn);
+        form_div.appendChild(cancel_btn);
 
         // add the form to the page
         li.appendChild(form_div);
@@ -303,5 +350,6 @@ var fansubbers = {
 /*
 
 - make forms fansubber select item optional and change it to a text input
+- make info_div and form_div global variables w/in the Anime glass
 
 */
