@@ -18,9 +18,7 @@ a {
 }
 
 .edit_anime {
-    color: yellow;
     margin: 0 0 0 10px;
-    text-decoration: none;
 }
 
 label { display: block; }
@@ -43,19 +41,7 @@ label { display: block; }
 
     <h3>Add new anime</h3>
     <form class="form-inline">
-        <select id="fansubber" name="fansubber">
-            <option>none</option>
-            <option>HorribleSubs</option>
-            <option>Mazui</option>
-            <option>Commie</option>
-            <option>UTW</option>
-            <option>gg</option>
-            <option>CMS</option>
-            <option>Hadena</option>
-            <option>SubDESU</option>
-            <option>sage</option>
-            <option>Zero-Raws</option>
-        </select>
+        <input id="fansubber" name="fansubber" type="text" placeholder="Fansubber">
         <input id="anime_title" name="anime_title" type="text" placeholder="Name">
         <select id="fidelity" placeholder="fidelity">
             <option>none</option>
@@ -84,12 +70,12 @@ label { display: block; }
     <button class="reset">Reset Everything</button>
     <hr />
 
-    <h3>Your Fansubbers</h3>
-    <p>form for adding new fansubber here</p>
+    <h3>Trusted Fansubbers</h3>
+    <p>List of trustworthy fansubbers and useful links to pertinent pages</p>
 
     <hr />
     <h3>Other Options</h3>
-    <input type="checkbox" name="lang" value="en">Restrict anime to enlish subs only</input>
+    <input type="checkbox" name="lang" value="en">Restrict anime to enlish subs only
 
     <hr />
     <h3>Links to useful sites</h3>
