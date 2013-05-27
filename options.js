@@ -341,7 +341,7 @@ function message(msg) {
     message.innerText = msg;
     setTimeout(function() {
         message.innerText = '';
-    }, 8000);
+    }, 6000);
 }
 
 //----------------------------------------------------------------------------
@@ -395,6 +395,9 @@ var fansubbers = {
 /*
 
 - make info_div and form_div global variables w/in the Anime class
-- make the update function overwrite the existing item
-
+- automatically create links out of the fansubber tags (e.g., [HorribleSubs])
+  to the fansubbers home site if the fansubber is in our trusted list.
+- make the dark theme an option like reddit does (night mode)
+- make animeplanet urls and tracking optional. If the checkbox is not activated
+  the remove all animeplanet related stuff.
 */

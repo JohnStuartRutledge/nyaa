@@ -28,6 +28,9 @@ var today   = weekday[d.getDay()];
 var mywrapper = $(document.createElement('div')).attr('id', 'stu_wrapper');
 var mydiv     = $(document.createElement('div')).attr('id', 'stu_showtimes');
 var animelist = $(document.createElement('ul')).attr('id', 'stu_anime_list');
+var optionspg = $(document.createElement('a')).attr('id', 'btn_add_anime')
+                    .attr("href", chrome.extension.getURL("options.html"))
+                    .text("add anime");
 var stubutton = $(document.createElement('a')).attr('id', 'stu_btn')
                     .attr('href', '')
                     .text('sort me');
@@ -37,10 +40,12 @@ function loadAnime() {
     // load anime from local storage and append it as a list on side bar.
     // Highlight the users saved anime/preferences and apply them to page.
     chrome.storage.local.get('anime_list', function(result) {
+
+        // make a link to the options page when no anime is found
         if (result.anime_list==undefined) {
             var options_link = $('<a>')
                 .attr("href", chrome.extension.getURL("options.html"))
-                .text("Click To Add Anime");
+                .text("Go To The Options Page To Add Your Anime");
             $('#stu_anime_list').append(options_link);
             return;
         }
@@ -104,11 +109,6 @@ stubutton.click(function(){
     }
 });
 
-function isBlank(str) {
-    // function for detecting if a sting is blank
-    return (!str || /^\s*$/.test(str));
-};
-
 function sortAnime() {
     // persist the anime-list's sort state across page refreshes.
     // setTimeout is used to recursively run this function until
@@ -132,6 +132,7 @@ loadAnime();
 
 // append your completed HTML to the webpage and sort your list
 mydiv.append(stubutton);
+mydiv.append(optionspg);
 mydiv.append(animelist);
 mywrapper.append(mydiv);
 $('#main').prepend(mywrapper);
@@ -140,8 +141,18 @@ sortAnime();
 //----------------------------------------------------------------------------
 // TODO
 //----------------------------------------------------------------------------
-// sort by both date, and 2ndary sort by title
-// only highlight undownloaded anime
-// when searching for raw anime the url should include: &cats=1_11
-// make an icon that shows in the address bar on nyaa that takes you to the option page
-// fix your css class names
+/*
+- sort by both date, and 2ndary sort by title
+- only highlight undownloaded anime
+- when searching for raw anime the url should include: &cats=1_11
+- make an icon that shows in the address bar on nyaa that takes you to the option page
+- fix your css class names
+- use chrome local storage to store sort state
+- move 3rd party plugins out of this file
+- everytime you click the download link of a particular anime you should run a
+  search that checks the current page for all titles in local storage and when
+  it finds a match it should update the latest number you have downloaded. That
+  way you can force nyaa to only highlight anime you have not yet downloaded.
+- be sure to highlight anime with and without underscores between the words
+  in it's title. as it stands you are highlighting literal matches only.
+*/

@@ -76,13 +76,13 @@ td.tlisticon a img {
 #stu_showtimes {
     position: absolute;
     display: block;
-    max-width: 200px;
-    min-height: 400px;
+    max-width: 240px;
+    min-height: 300px;
     float: right;
     background: #333;
 }
 
-#stu_btn {
+#stu_btn, #btn_add_anime {
     padding: 7px;
     text-decoration: underline;
     float: right;
