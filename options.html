@@ -61,10 +61,19 @@ label { display: block; }
 
     <h3>Add new anime</h3>
     <form class="form-inline">
-        <input id="fansubber" name="fansubber" type="text" placeholder="Fansubber">
+        <input id="fansubber" name="fansubber" type="text" placeholder="Fansubber" list="fansubbers">
+        <datalist id="fansubbers">
+            <option value="Commie"></option>
+            <option value="gg"></option>
+            <option value="Hadena"></option>
+            <option value="HorribleSubs"></option>
+            <option value="UTW"></option>
+            <option value="Yibis"></option>
+        </datalist>
         <input id="anime_title" name="anime_title" type="text" placeholder="Name">
         <select id="fidelity" placeholder="fidelity">
             <option>none</option>
+            <option>480p</option>
             <option>720p</option>
             <option>1080</option>
         </select>

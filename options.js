@@ -41,7 +41,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     else if (isBlank(anime_planet)) anime_planet = '';
     else anime_planet = 'http://www.anime-planet.com/anime/'+anime_planet;
 
-    // setup global properties for this calss
+    // setup global properties for this class
     var self = {};
     self.fansubber    = fansubber;
     self.title        = title;
@@ -51,7 +51,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.id           = (fansubber + title + fidelity).replace(/\s+/g, '');
 
     self.getIndex = function() {
-        // get index of where this anime exists w/in the local storage array
+        // get index of where in the local storage array this anime exists
         for (var i=0, anime; anime=anime_list[i++];) {
             if (anime.id===self.id) return i-1;
         }
@@ -84,20 +84,63 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.update = function () {
         // update existing anime details and resave to local storage
         var info_div = document.getElementById('div_'+self.id),
-            form_div = document.getElementById('form_'+self.id);
+            form_div = document.getElementById('form_'+self.id),
+            form     = form_div.childNodes[0],
+            idx      = self.getIndex();
 
-        // extract new information from the
-        // div and resave the new to storage
+        // extract new information from the forms
+        for (var i=0; i<form.childNodes.length; i++) {
+            switch (form.childNodes[i].className) {
+                case "form_fansubber":
+                    self.fansubber = form.childNodes[i].value;
+                    if (isBlank(self.fansubber)) self.fansubber = '';
+                    break;
+                case "form_anime_title":
+                    var new_title = form.childNodes[i].value;
+                    if (isBlank(new_title)) {
+                        message("You must specify an anime title.");
+                        return;
+                    } else { self.title = new_title; }
+                    break;
+                case "form_fidelity":
+                    self.fidelity = form.childNodes[i].value;
+                    if (self.fidelity==='none' || isBlank(self.fidelity)) {
+                        self.fidelity = '';
+                    }
+                    break;
+                case "form_release_date":
+                    self.release_date = form.childNodes[i].value;
+                    if (self.release_date==='unknown' || isBlank(self.release_date)) {
+                        self.release_date = '?';
+                    }
+                    break;
+                case "form_animeplanet":
+                    self.anime_planet = form.childNodes[i].value;
+                    if (self.anime_planet.indexOf("anime-planet.com") !== -1) {}
+                    else if (isBlank(self.anime_planet)) self.anime_planet = '';
+                    else self.anime_planet = 'http://www.anime-planet.com/anime/'+self.anime_planet;
+                    break;
+            }
+        }
 
-        // update the info_divs values with new info
+        // grab the global anime_list, update it, and save it to storage
+        anime_list[idx] = {
+            'id'          : self.id,
+            'fansubber'   : self.fansubber,
+            'title'       : self.title,
+            'fidelity'    : self.fidelity,
+            'release_date': self.release_date,
+            'anime_planet': self.anime_planet
+        };
 
-        // remove the form element
-        form_div.parentNode.removeChild(form_div);
+        storage.set({"anime_list": anime_list}, function() {
+            message(self.title + " was updated");
 
-        // unhide the info div
-        info_div.style.display = 'visible';
+            // remove the form element
+            // form_div.parentNode.removeChild(form_div);
+            loadChanges();
+        });
 
-        // loadChanges();
     };
 
     self.remove = function() {
@@ -152,6 +195,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
             }
             select_fid.appendChild(opt);
         }
+        select_fid.setAttribute('class', 'form_fidelity');
 
         // construct the release date select form an load previous saved option
         var days = ['?','mon','tue','wed','thu','fri','sat','sun'];
@@ -163,17 +207,18 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
             }
             select_day.appendChild(opt);
         }
+        select_day.setAttribute('class', 'form_release_date');
 
         // construct the form
         form_div.id = 'form_'+self.id;
         form_div.setAttribute('class', 'form_div');
         form_div.innerHTML = [
             '<form class="anime_form">',
-            '<input type="text" value="'+self.fansubber+'"/>',
-            '<input type="text" value="'+self.title+'"/>',
+            '<input type="text" class="form_fansubber" value="'+self.fansubber+'"/>',
+            '<input type="text" class="form_anime_title" value="'+self.title+'"/>',
             select_fid.outerHTML,
             select_day.outerHTML,
-            '<input type="text" value="'+og_anime_planet+'" />',
+            '<input type="text" class="form_animeplanet" value="'+og_anime_planet+'" />',
             '</form>'
         ].join('\n');
 
@@ -349,7 +394,7 @@ var fansubbers = {
 //----------------------------------------------------------------------------
 /*
 
-- make forms fansubber select item optional and change it to a text input
-- make info_div and form_div global variables w/in the Anime glass
+- make info_div and form_div global variables w/in the Anime class
+- make the update function overwrite the existing item
 
 */
