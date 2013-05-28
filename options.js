@@ -378,7 +378,7 @@ var fansubbers = {
     'Commie': 'http://commiesubs.com',
     'FFF': 'http://fffansubs.org',
     'Hadena': 'http://hadena-subs.com',
-    'HorribleSubs': 'horriblesubs.info',
+    'HorribleSubs': 'horriblesubs.info', // http://www.nyaa.eu/?user=64513
     'gg': 'http://www.ggkthx.org',
     'Mazui': 'http://mazuisubs.com',
     'sage': 'http://www.sagesubs.com',
@@ -400,4 +400,10 @@ var fansubbers = {
 - make the dark theme an option like reddit does (night mode)
 - make animeplanet urls and tracking optional. If the checkbox is not activated
   the remove all animeplanet related stuff.
+- put list of anime in a table so and label the columns.
+- add color coded error messages to the message() function
+- create function for extracting anime data from forms. Curently you have some
+  repetative code when instantiating a new Anime class and when updating
+  an anime.
+- add links to fansubber/user page on nyaa.
 */

@@ -17,12 +17,21 @@ It does the following things:
 - [Jquery TinysSort Plugin](http://tinysort.sjeiti.com/)
 
 ## TODOS
-- make sure you can edit already saved anime on the options page
 - when sorting anime by release date, ensure the day names are in order
-- find a new sorting plugin that supports secondary sorting AKA sorting on two dimensions
+- find a new sorting plugin that supports sorting on two dimensions
+- use chrome local storage for storing your sort state
 - only highlight episodes you have not yet downloaded
 - when your anime is from a fansubber that does only raw untranslated anime make sure your url uses &cats=1_11
-- render links to the major fansubbers websites, as well as to animedb and animenetwork's upcoming page
-- change your CSS class names to something more explicit
-- remove all 3rd party jquery libraries and substitute it with plain Jane Javascript
-
+- change the CSS class names to something more explicit
+- automatically create links out of the fansubber tags (e.g., [HorribleSubs])
+  to the fansubbers home site if the fansubber is in our trusted list.
+- make the dark theme an option similar to reddit enhancment suite (night mode)
+- make animeplanet urls and tracking optional. If the checkbox is not activated
+  the remove all animeplanet related stuff.
+- change list of anime so its in a <table> element vs the current <li> element
+- add color coded error messages to the message() function
+- refactor the code to be more DRY. Currently you have some repetative code
+  (see: instantiating a new Anime class and updating an anime)
+- add links to fansubber/user page on nyaa.
+- fix bug where anime that uses underscores instead of spaces in the title
+  breaks the highlighting feature.
