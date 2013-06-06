@@ -4,8 +4,8 @@ html, body, #main {
 }
 
 a { color: #A8A8A8 !important; }
-a:hover { color: tomato; }
-a:visited { color: violet; }
+.content a:hover { color: tomato; }
+.content a:visited { color: violet !important; }
 
 div.content, .remake, .trusted, .aplus {
     background-color: #444 !important;

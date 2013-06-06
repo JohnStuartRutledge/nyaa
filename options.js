@@ -273,6 +273,7 @@ function drawAnimeList(anime_list) {
         li.id  = x.id;
         div.id = 'div_'+x.id;
         animeplanet.setAttribute('href', x.anime_planet);
+        animeplanet.setAttribute('target', '_blank');
         animeplanet.innerHTML = 'anime planet';
         edit.setAttribute('class', 'edit_anime');
         edit.innerHTML = 'edit';

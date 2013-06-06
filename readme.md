@@ -23,15 +23,14 @@ It does the following things:
 - only highlight episodes you have not yet downloaded
 - when your anime is from a fansubber that does only raw untranslated anime make sure your url uses &cats=1_11
 - change the CSS class names to something more explicit
-- automatically create links out of the fansubber tags (e.g., [HorribleSubs])
-  to the fansubbers home site if the fansubber is in our trusted list.
+- automatically create links out of the fansubber tags (e.g., [HorribleSubs]) to the fansubbers home site if the fansubber is in our trusted list.
 - make the dark theme an option similar to reddit enhancment suite (night mode)
-- make animeplanet urls and tracking optional. If the checkbox is not activated
-  the remove all animeplanet related stuff.
-- change list of anime so its in a <table> element vs the current <li> element
+- make animeplanet urls and tracking optional. If the checkbox is not activated then remove all animeplanet related stuff.
+- change list of anime so its in a table element vs the current li element
 - add color coded error messages to the message() function
-- refactor the code to be more DRY. Currently you have some repetative code
-  (see: instantiating a new Anime class and updating an anime)
+- refactor the code to be more DRY. Currently you have some repetative code (see: instantiating a new Anime class and updating an anime)
 - add links to fansubber/user page on nyaa.
 - fix bug where anime that uses underscores instead of spaces in the title
   breaks the highlighting feature.
+- relocate nyaa's into a tab on your sidebar. Set the sidebar min-width to the exact width of the ad
+- put some real effort into making the UI design look better
