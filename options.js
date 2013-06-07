@@ -395,6 +395,10 @@ var fansubbers = {
 //----------------------------------------------------------------------------
 /*
 
+- Add link to nyaa
+- Add link to previous page, AKA a back button. Also make sure hitting back
+  in your browser will take you to the previous page regardless of how many
+  anime you have edited.
 - make info_div and form_div global variables w/in the Anime class
 - automatically create links out of the fansubber tags (e.g., [HorribleSubs])
   to the fansubbers home site if the fansubber is in our trusted list.
@@ -407,4 +411,8 @@ var fansubbers = {
   repetative code when instantiating a new Anime class and when updating
   an anime.
 - add links to fansubber/user page on nyaa.
+
+- an error is occuring where either one of two things are happening:
+    1.) you are unable to edit/update the first item in the list
+    2.) same as 1. but it breaks after editing another anime first
 */

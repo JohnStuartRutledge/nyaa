@@ -72,12 +72,31 @@ function loadAnime() {
             // whitespace, underscores, dashes, or periods seperate the words
             var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
             var title_regex = anime.title.replace(escaped_pattern, "[\\s|\\_|\\-|\\.]")
-            matching_anime = $('a:containsRegex("/'+ title_regex +'/i"):contains('+ anime.fansubber +'):contains('+ anime.fidelity +')');
+            matching_anime = $('a:containsRegex("/'+ title_regex +'/i"):contains("'+ anime.fansubber +'"):contains("'+ anime.fidelity +'")');
+
             matching_anime.each(function() {
+
                 // TODO
+                // move the variable declerations out of the each statement
+                // you only need to resave them once per anime.title
+
                 // highlight just the title and not the whole line
                 var txt = $(this).text();
-                $(this).html('<span class="highlight">'+txt+'</span>');
+                var words       = anime.title.match(/\S+/gi),
+                    first_word  = words[0],
+                    last_word   = words[words.length-1],
+                    start_index = txt.indexOf(words[0]),
+                    start_end   = start_index + first_word.length,
+                    end_index   = txt.lastIndexOf(last_word)+last_word.length,
+                    end_start   = end_index - last_word.length;
+
+                var foo = txt.substring(0, start_index)
+                    + '<span class="highlight">'
+                    + txt.substring(start_index, end_index)
+                    + '</span>'
+                    + txt.substring(end_index, txt.length);
+
+                $(this).html(foo);
             });
 
             // highlight matching anime on nyaa's list of torrents
