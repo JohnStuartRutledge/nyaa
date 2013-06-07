@@ -1,4 +1,5 @@
 
+
 // set default selection to english translated anime
 $('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
 $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
@@ -67,9 +68,20 @@ function loadAnime() {
                 .attr('target', '_blank')
                 .appendTo(li);
 
+            // ensure that the anime gets highlighted regardles of whether
+            // whitespace, underscores, dashes, or periods seperate the words
+            var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
+            var title_regex = anime.title.replace(escaped_pattern, "[\\s|\\_|\\-|\\.]")
+            matching_anime = $('a:containsRegex("/'+ title_regex +'/i"):contains('+ anime.fansubber +'):contains('+ anime.fidelity +')');
+            matching_anime.each(function() {
+                // TODO
+                // highlight just the title and not the whole line
+                var txt = $(this).text();
+                $(this).html('<span class="highlight">'+txt+'</span>');
+            });
+
             // highlight matching anime on nyaa's list of torrents
-            //$('a'+ anime.fansubber + ':contains('+ anime.title +')'+ anime.fidelity).highlight(anime.title);
-            $('a:contains('+ anime.fansubber +'):contains('+ anime.title +'):contains('+ anime.fidelity +')').highlight(anime.title);
+            //$('a:contains('+ anime.fansubber +'):contains('+ anime.title +'):contains('+ anime.fidelity +')').highlight(anime.title);
 
             // highlight anime whose release date is today
             if (anime.release_date === today) { aa.addClass('stu_today'); }
