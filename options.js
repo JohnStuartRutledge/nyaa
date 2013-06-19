@@ -51,7 +51,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.id           = (fansubber + title + fidelity).replace(/\s+/g, '');
 
     self.getIndex = function() {
-        // get index of where in the local storage array this anime exists
+        // get this animes index from out of the local storage array
         for (var i=0, anime; anime=anime_list[i++];) {
             if (anime.id===self.id) return i-1;
         }
@@ -59,8 +59,8 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     };
 
     self.add = function() {
-        // add anime to anime_list in local storage if it's not already in
-        // there. If it already exists then return an error message.
+        // add the anime to anime_list in local storage if it's not already
+        // in there. If it already exists then return an error message.
         var idx = self.getIndex();
         if (idx || idx === 0) {
             message('That anime already exists');
@@ -123,6 +123,10 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
             }
         }
 
+        // update the div id of the parent div to reflect any changes
+        self.id = (
+            self.fansubber + self.title + self.fidelity).replace(/\s+/g, '');
+
         // grab the global anime_list, update it, and save it to storage
         anime_list[idx] = {
             'id'          : self.id,
@@ -171,6 +175,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.makeForm = function () {
         // construct and return an editable form
         var li         = document.getElementById(self.id),
+            //info_div   = document.getElementById('div_'+self.id),
             info_div   = document.getElementById('div_'+self.id),
             form_div   = document.createElement('div'),
             select_day = document.createElement('select'),
@@ -293,7 +298,6 @@ function editAnime(elem) {
     // function that gets invoked when the user clicks the 'edit' button
     // for an existing anime in the 'watched anime' list
     var line_id = this.parentNode.parentNode.id;
-
     getAnimeById(line_id, function(anime) {
         anime.makeForm();
     });
@@ -303,7 +307,7 @@ function getAnimeById(anime_id, callback) {
     // takes in the anime id and returns its info from storage
     // and instantiates an Anime object
     storage.get('anime_list', function(items) {
-        for(i in items.anime_list) {
+        for (i in items.anime_list) {
             if (items.anime_list[i].id === anime_id) {
                 var x = items.anime_list[i];
                 var anime = new Anime(x.fansubber, x.title, x.fidelity,
@@ -395,7 +399,6 @@ var fansubbers = {
 //----------------------------------------------------------------------------
 /*
 
-- Add link to nyaa
 - Add link to previous page, AKA a back button. Also make sure hitting back
   in your browser will take you to the previous page regardless of how many
   anime you have edited.
@@ -415,4 +418,21 @@ var fansubbers = {
 - an error is occuring where either one of two things are happening:
     1.) you are unable to edit/update the first item in the list
     2.) same as 1. but it breaks after editing another anime first
+
+
+
+[UTW-Mazui] Toaru Kagaku no Railgun S 720p ? to-aru-kagaku-no-railgun-s
+[HorribleSubs] Naruto Shippuuden 720p thu  naruto-shippuden
+[Anime-Koi] Dansai Bunri no Crime Edge 720p wed dansai-bunri-no-crime-edge
+[Commie] Red Data Girl wed red-data-girl
+[HorribleSubs] DEVIL SURVIVOR 2 THE ANIMATION 720p thu devil-survivor-2-the-animation
+[HorribleSubs] Haiyore! Nyaruko-san W 720p sun haiyore-nyaruko-san-w
+[UTW-Vivid] Suisei no Gargantia 720p sun suisei-no-gargantia
+[HorribleSubs] Hunter X Hunter 720p sun hunter-x-hunter
+[Anime-Koi] Karneval 720p fri karneval
+[Commie] Hataraku Maou-sama! thu hataraku-maou-sama
+[gg] Shingeki no Kyojin sat shingeki-no-kyojin 
+[HorribleSubs] Mushibugyo 720p mon mushibugyou
+[yibis] One Piece 720p ? one-piece
+[HorribleSubs] Majestic Prince 720p thu ginga-kikoutai-majestic-prince
 */

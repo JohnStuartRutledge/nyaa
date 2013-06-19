@@ -42,16 +42,10 @@ td.tlisticon a img {
     margin: 0px 2px;
 }
 
-.trusted a:visited {
-    color: skyblue !important;
-    text-decoration: line-through;
-}
-
-
 /*********************************/
 
 #topbar, #navbar {
-    z-index; 20;
+    z-index: 101;
 }
 
 .highlight {
@@ -62,9 +56,9 @@ td.tlisticon a img {
 
 #stu_wrapper {
     position: relative;
-    z-index: -1;
+    z-index: 100;
     float: right;
-    right: 100px;
+    right: 110px;
     font-size: 10px;
     color: #ccc;
 }
@@ -73,13 +67,19 @@ td.tlisticon a img {
     min-width: 180px;
 }
 
+.stu_anime {
+    /* pass */
+}
+
 #stu_showtimes {
     position: absolute;
     display: block;
-    max-width: 240px;
     min-height: 300px;
+    margin-top: 10px;
     float: right;
     background: #333;
+    border: 2px solid #666666;
+    border-radius: 5px;
 }
 
 #stu_btn, #btn_add_anime {
@@ -97,8 +97,10 @@ td.tlisticon a img {
 }
 
 #stu_showtimes ul {
+    margin-top: 5px;
     list-style-type: none;
     padding: 7px;
+    clear: both;
 }
 
 #stu_showtimes li {

@@ -80,6 +80,9 @@ function loadAnime() {
                 // move the variable declerations out of the each statement
                 // you only need to resave them once per anime.title
 
+                // TODO
+                // this is probably done better with a regexp
+
                 // highlight just the title and not the whole line
                 var txt = $(this).text();
                 var words       = anime.title.match(/\S+/gi),
