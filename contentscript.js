@@ -1,5 +1,4 @@
 
-
 // set default selection to english translated anime
 $('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
 $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
@@ -8,10 +7,6 @@ $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
 var d = new Date();
 var weekday = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 var today   = weekday[d.getDay()];
-
-//----------------------------------------------------------------------------
-//
-//----------------------------------------------------------------------------
 
 // construct nested HTML divs for holding my list of anime
 var mywrapper = $(document.createElement('div')).attr('id', 'stu_wrapper');
@@ -24,12 +19,14 @@ var stubutton = $(document.createElement('a')).attr('id', 'stu_btn')
                     .attr('href', '')
                     .text('sort me');
 
+//----------------------------------------------------------------------------
+// 
+//----------------------------------------------------------------------------
 
 function loadAnime() {
     // load anime from local storage and append it as a list on side bar.
     // Highlight the users saved anime/preferences and apply them to page.
     chrome.storage.local.get('anime_list', function(result) {
-
         // make a link to the options page when no anime is found
         if (result.anime_list==undefined) {
             var options_link = $('<a>')
@@ -39,6 +36,7 @@ function loadAnime() {
             return;
         }
 
+        //$.each(result.anime_list, function(){});
         for (var i in result.anime_list) {
 
             var anime = result.anime_list[i];
@@ -49,14 +47,19 @@ function loadAnime() {
                 .appendTo(animelist);
 
             // generate link for finding proper anime on nyaa
-            var anime_link = "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=" +
-                encodeURIComponent(anime.title +" "+ anime.fansubber +" "+ anime.fidelity) +
-                "&sort=1";
+            var anime_link = (
+                "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=" 
+                + encodeURIComponent(anime.title +" "+ anime.fansubber +" "
+                + anime.fidelity) + "&sort=1");
+
+            // truncate anime titles that are too long to fit in the sidebar
+            var display_title = (anime.title.length <= 31
+                    ) ? anime.title : anime.title.substring(0, 31) + '..';
 
             // add the anime title as a link and append to the sidebar
             var aa = $('<a>')
                 .addClass('stu_anime')
-                .text(anime.title +' ('+ anime.release_date +')')
+                .text(display_title +' ('+ anime.release_date +')')
                 .attr('href', anime_link)
                 .appendTo(li);
 
@@ -71,21 +74,21 @@ function loadAnime() {
             // ensure that the anime gets highlighted regardles of whether
             // whitespace, underscores, dashes, or periods seperate the words
             var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
-            var title_regex = anime.title.replace(escaped_pattern, "[\\s|\\_|\\-|\\.]")
-            matching_anime = $('a:containsRegex("/'+ title_regex +'/i"):contains("'+ anime.fansubber +'"):contains("'+ anime.fidelity +'")');
+            var title_regex = anime.title.replace(
+                                    escaped_pattern, "[\\s|\\_|\\-|\\.]")
+            matching_anime = $(
+                'a:containsRegex("/'+ title_regex +'/i"):contains("'
+                + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
 
             matching_anime.each(function() {
-
                 // TODO
                 // move the variable declerations out of the each statement
                 // you only need to resave them once per anime.title
-
-                // TODO
-                // this is probably done better with a regexp
+                // this is also better done with a regex
 
                 // highlight just the title and not the whole line
-                var txt = $(this).text();
-                var words       = anime.title.match(/\S+/gi),
+                var txt = $(this).text(),
+                    words       = anime.title.match(/\S+/gi),
                     first_word  = words[0],
                     last_word   = words[words.length-1],
                     start_index = txt.indexOf(words[0]),
@@ -175,4 +178,7 @@ sortAnime();
   way you can force nyaa to only highlight anime you have not yet downloaded.
 - be sure to highlight anime with and without underscores between the words
   in it's title. as it stands you are highlighting literal matches only.
+
+replace your jquery sort library with:
+    http://mottie.github.io/tablesorter/docs/
 */

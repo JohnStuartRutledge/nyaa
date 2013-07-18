@@ -175,7 +175,6 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.makeForm = function () {
         // construct and return an editable form
         var li         = document.getElementById(self.id),
-            //info_div   = document.getElementById('div_'+self.id),
             info_div   = document.getElementById('div_'+self.id),
             form_div   = document.createElement('div'),
             select_day = document.createElement('select'),
@@ -261,6 +260,8 @@ function createAnime() {
 }
 
 function drawAnimeList(anime_list) {
+    // TODO - use event bubbling here instead of attaching
+    //        the event listener using a for loop
 
     // get container div and clear it so we can start with a blank slate
     var list_div = document.getElementById('my_anime');
@@ -414,10 +415,6 @@ var fansubbers = {
   repetative code when instantiating a new Anime class and when updating
   an anime.
 - add links to fansubber/user page on nyaa.
-
-- an error is occuring where either one of two things are happening:
-    1.) you are unable to edit/update the first item in the list
-    2.) same as 1. but it breaks after editing another anime first
 
 
 
