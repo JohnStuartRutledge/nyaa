@@ -15,18 +15,218 @@ var anime_list,
 
 var editButtons = document.querySelectorAll('.edit_anime');
 
-// add event listeners for our buttons
-saveButton.addEventListener('click', createAnime);
-resetButton.addEventListener('click', reset);
-printButton.addEventListener('click', printStorage);
-animeButton.addEventListener('click', printAnime);
+//----------------------------------------------------------------------------
+// LocalStorage CRUD  
+//----------------------------------------------------------------------------
 
-//loadChanges();
-window.onload = loadChanges;
+var storageCRUD = {
+    // TODO - abstract this so that it can work for any databse and not just
+    //        designed to store anime
+    // Based on:
+    // http://mrbool.com/creating-a-crud-form-with-html5-local-storage-and-json/26719
+
+    var operation = "A",     // "A"=Adding; "E"=Editing
+        selected_index = -1, // Index of the selected list item
+        db = localStorage.getItem("db"), // Retrieve the stored data
+        db = (db === null) ? [] : JSON.parse(db); // convert to JS obj 
+
+    add: function () {
+        // storageCRUD.add(anime)
+        var anime = JSON.stringify({
+            fansubber   : $('td[class*="fansubber"]'  ).val(),
+            main_title  : $('td[class*="main_title"]' ).val(),
+            fidelity    : $('td[class*="fidelity"]'   ).val(),
+            release_day : $('td[class*="release_day"]').val(),
+            animeplanet : $('td[class*="animeplanet"]').val()
+        });
+        db.push(anime);
+        localStorage.setItem("db", JSON.stringify(db));
+        console.log('your anime was saved.');
+        return true;
+    },
+    edit: function() {
+        db[selected_index] = JSON.stringify({
+                fansubber   : $('td[class*="fansubber"]'  ).val(),
+                main_title  : $('td[class*="main_title"]' ).val(),
+                fidelity    : $('td[class*="fidelity"]'   ).val(),
+                release_day : $('td[class*="release_day"]').val(),
+                animeplanet : $('td[class*="animeplanet"]').val()
+            });//Alter the selected item on the table
+        localStorage.setItem("db", JSON.stringify(db));
+        console.log("The anime was edited.");
+        operation = "A"; //Return to default value
+        return true;
+    },
+    get: function(idx) {
+        // takes in the anime id and returns its info from storage
+        // and instantiates an Anime object
+        //   storageCRUD.get(1) 
+        //   storageCRUD.get.all()
+        //   storageCRUD.get.filter( function(i, anime){} )
+
+        // check if what you are lookin for is anywhere in storage
+        var store = [];
+        if ([undefined, null].indexOf(localStorage["db"]) !== -1) {
+            store = $.parseJSON(localStorage["db"]);
+        } else {
+            return store;
+        }
+
+        // get the index and return if it exists
+        if (idx) return new Anime(store[idx]);
+
+        // other wise return all the get methods
+        return {
+            all: function() {
+                return store; // return all the anime in the DB
+            },
+            filter: function(fn) {
+                // return anime as defined by the function you pass in
+                // your function must return a boolean true or false value
+                var foo = [];
+                $.each(store, function(i, anime) {
+                    if (fn(i, anime) === true) foo.push(anime);
+                });
+                return foo;
+            }
+        };
+
+        /*
+        storage.get('db', function(items) {
+            for (i in items.anime_list) {
+                if (items.anime_list[i].id === idx) {
+                    var x = items.anime_list[i];
+                    var anime = new Anime(x.fansubber, x.title, x.fidelity,
+                                          x.release_date, x.anime_planet);
+                    callback(anime);
+                }
+            }
+        });
+        */
+
+    },
+    delete: function() {
+        db.splice(selected_index, 1);
+        localStorage.setItem("db", JSON.stringify(db));
+        console.log("Anime deleted.");
+    },
+    reset: function() {
+        var am_sure = confirm("You sure you want to delete all your anime?");
+        if (am_sure === true) localStorage.clear();
+    }, 
+    list: function(alpha_sort) { 
+        if (alpha_sort === true) ? true : false; 
+
+        $("#animeList").html("");
+        $("#animeList").html(
+            "<thead>"+
+            "   <tr>"+
+            "   <th>Fansubber</th>"+
+            "   <th>Main Title</th>"+
+            "   <th>Fidelity</th>"+
+            "   <th>Release Date</th>"+
+            "   <th>Animeplanet</th>"+
+            "   <th></th>"+
+            "   </tr>"+
+            "</thead>"+
+            "<tbody>"+
+            "</tbody>");
+
+        for(var i in db) {
+            var anime = JSON.parse(db[i]);
+            $("#animeList tbody").append("<tr>"+
+                 "  <td>"+anime.fansubber+"</td>" + 
+                 "  <td>"+anime.main_title+"</td>" + 
+                 "  <td>"+anime.fidelity+"</td>" + 
+                 "  <td>"+anime.release_day+"</td>" + 
+                 "  <td>"+anime.animeplanet+"</td>" + 
+                 "  <td><img src='edit.png' alt='Edit"+i+"' class='btnEdit'/><img src='delete.png' alt='Delete"+i+"' class='btnDelete'/></td>" + 
+                 "</tr>");
+        }
+
+}
 
 //----------------------------------------------------------------------------
 //
 //----------------------------------------------------------------------------
+
+// functions that run depending what button the user presses
+var btn = {
+    edit: function(elem) {
+        // get the <li> id of this button and replace row with a form
+        // function that gets invoked when the user clicks the 'edit' button
+        // for an existing anime in the 'watched anime' list
+
+
+
+        elem.toggle();
+        // form.show();
+        elem.makeForm();
+        // on done elem.hide()
+    },
+    update: function(elem) {
+        // extract new anime data from the form
+        var anime = {
+           fansubber   : $(elem).find('.form_fansubber').val(),
+           main_title  : $(elem).find('.form_main_title').val(),
+           fidelity    : $(elem).find('.form_fidelity').val(),
+           release_day : $(elem).find('.form_release_day').val(),
+           animeplanet : $(elem).find('.form_animeplanet').val()
+        }
+
+        // update the local storage
+        storageCRUD.get('anime_list');
+
+        storage.set({"anime_list": anime_list}, function() {
+            message(self.title + " was updated");
+            // remove the form element
+            // form_div.parentNode.removeChild(form_div);
+            loadChanges();
+        });
+
+    },
+    delete: function(elem) {
+        // remove anime from local storage
+        storage.remove('anime_list', function() {
+
+            anime_list.splice(elem.idx, 1);
+
+            storage.set({"anime_list": anime_list}, function() {
+                message(elem.main_title + " was removed!");
+                loadChanges();
+            });
+        });
+    },
+    cancel: function(elem) {
+        // TODO
+        // make it so the cancel button only closes the specific
+        // anime you are editing, vs the current behavior which will close
+        // all anime when the screen is redrawn
+        // jquery toggle would go nice here
+        elem.toggle();
+    }
+}
+
+$("#my_anime").on("click", function(evt) {
+    $target = $(evt.target);
+    var li = $($target.closest('li'));
+
+    var anime = {
+        // TODO - replace your li's with tables
+        fansubber:   li('td[class*="fansubber"]'  ).val(),
+        main_title:  li('td[class*="main_title"]' ).val(),
+        fidelity:    li('td[class*="fidelity"]'   ).val(),
+        release_day: li('td[class*="release_day"]').val(),
+        animeplanet: li('td[class*="animeplanet"]').val()
+    }
+
+    btn[ $target.text ](anime);
+});
+
+//----------------------------------------------------------------------------
+// 
+//----------------------------------------------------------------------------
+
 
 function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     // class that holds functionality pretaining to the storage of anime
@@ -48,15 +248,6 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
     self.fidelity     = fidelity;
     self.release_date = release_date;
     self.anime_planet = anime_planet.replace(/\s+/g, '-');
-    self.id           = (fansubber + title + fidelity).replace(/\s+/g, '');
-
-    self.getIndex = function() {
-        // get this animes index from out of the local storage array
-        for (var i=0, anime; anime=anime_list[i++];) {
-            if (anime.id===self.id) return i-1;
-        }
-        return null;
-    };
 
     self.add = function() {
         // add the anime to anime_list in local storage if it's not already
@@ -80,6 +271,7 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
             });
         }
     };
+
 
     self.update = function () {
         // update existing anime details and resave to local storage
@@ -147,117 +339,51 @@ function Anime(fansubber, title, fidelity, release_date, anime_planet) {
 
     };
 
-    self.remove = function() {
-        // remove anime from local storage
-        var idx = self.getIndex();
-        console.log('remove function called on index=', idx);
-        if (idx || idx===0) {
-            storage.remove('anime_list', function() {
-                anime_list.splice(idx, 1);
-                storage.set({"anime_list": anime_list}, function() {
-                    message(self.title + " was removed!");
-                    loadChanges();
-                });
-            });
-        }
-    };
 
-    self.cancel = function() {
-        // unhides the info div and removes the edit form
-
-        // TODO
-        // make it so the cancel button only closes the specific
-        // anime you are editing, vs the current behavior which will close
-        // all anime when the screen is redrawn
-        loadChanges();
-    };
-
-    self.makeForm = function () {
+    self.makeForm = function(anime) {
         // construct and return an editable form
-        var li         = document.getElementById(self.id),
-            info_div   = document.getElementById('div_'+self.id),
-            form_div   = document.createElement('div'),
-            select_day = document.createElement('select'),
-            select_fid = document.createElement('select'),
-            update_btn = document.createElement('button'),
-            delete_btn = document.createElement('button'),
-            cancel_btn = document.createElement('button');
+        // main input form is #animeform
+        $theform = $('form').html([
+            "<input type='text' class='form_fansubber' value='"+anime.fansubber+"'>",
+            "<input type='text' class='form_anime_title' value='"+anime.main_title+"'>",
+            "<select class='form_fidelity'>",
+            "  <option>none</option>",
+            "  <option>480p</option>",
+            "  <option>720p</option>",
+            "  <option>1080p</option>",
+            "</select>",
+            "<select class='form_release_date'>",
+            "  <option>?</option>",
+            "  <option>mon</option>",
+            "  <option>tue</option>",
+            "  <option>wed</option>",
+            "  <option>thu</option>",
+            "  <option>fri</option>",
+            "  <option>sat</option>",
+            "  <option>sun</option>",
+            "</select>",
+            "<input type='text' class='form_animeplanet' value='"+anime.animeplanet+"'>"
+        ].join('\n'));
 
-        var og_anime_planet = self.anime_planet.replace(
-                                    'http://www.anime-planet.com/anime/', '');
+        // select the proper select boxes
+        $theform.find('.option:contains("'+anime.fidelity+'")')
+            .attr('selected', 'selected');
+        $theform.find('.option:contains("'+anime.release_date+'")')
+            .attr('selected', 'selected');
 
-        // hide the info div
-        info_div.style.display = 'none';
+        // add the three buttons to the end of the form
+        $theform.append($('div').attr('class', 'button_box').html([
+            "<button>update</button>",
+            "<button>delete</button>",
+            "<button>cancel</button>",
+        ]));
 
-        // construct the fidelity select form and select previous saved option
-        var sizes = ['none', '480p', '720p', '1080p'];
-        for (var i in sizes) {
-            var opt = document.createElement('option');
-            opt.innerHTML = sizes[i];
-            if (self.fidelity===sizes[i]) {
-                opt.setAttribute('selected', 'selected');
-            }
-            select_fid.appendChild(opt);
-        }
-        select_fid.setAttribute('class', 'form_fidelity');
-
-        // construct the release date select form an load previous saved option
-        var days = ['?','mon','tue','wed','thu','fri','sat','sun'];
-        for (var i in days) {
-            var opt = document.createElement('option');
-            opt.innerHTML = days[i];
-            if (self.release_date===days[i]){
-                opt.setAttribute('selected', 'selected');
-            }
-            select_day.appendChild(opt);
-        }
-        select_day.setAttribute('class', 'form_release_date');
-
-        // construct the form
-        form_div.id = 'form_'+self.id;
-        form_div.setAttribute('class', 'form_div');
-        form_div.innerHTML = [
-            '<form class="anime_form">',
-            '<input type="text" class="form_fansubber" value="'+self.fansubber+'"/>',
-            '<input type="text" class="form_anime_title" value="'+self.title+'"/>',
-            select_fid.outerHTML,
-            select_day.outerHTML,
-            '<input type="text" class="form_animeplanet" value="'+og_anime_planet+'" />',
-            '</form>'
-        ].join('\n');
-
-        update_btn.innerHTML = 'update';
-        delete_btn.innerHTML = 'delete';
-        cancel_btn.innerHTML = 'cancel';
-
-        update_btn.addEventListener('click', self.update);
-        delete_btn.addEventListener('click', self.remove);
-        cancel_btn.addEventListener('click', self.cancel);
-
-        form_div.appendChild(update_btn);
-        form_div.appendChild(delete_btn);
-        form_div.appendChild(cancel_btn);
-
-        // add the form to the page
-        li.appendChild(form_div);
+        return $theform;
     };
 
     return self;
 }
 
-
-function createAnime() {
-    // create an anime and save it to local storage when the user clicks
-    // the add anime button.
-    var anime = new Anime(
-        the_fansubber.value,
-        the_anime_title.value,
-        the_fidelity.value,
-        the_release_date.value,
-        the_anime_planet.value,
-        the_fansubber.value + the_anime_title.value + the_fidelity.value)
-    anime.add();
-}
 
 function drawAnimeList(anime_list) {
     // TODO - use event bubbling here instead of attaching
@@ -295,29 +421,7 @@ function drawAnimeList(anime_list) {
     }
 }
 
-function editAnime(elem) {
-    // function that gets invoked when the user clicks the 'edit' button
-    // for an existing anime in the 'watched anime' list
-    var line_id = this.parentNode.parentNode.id;
-    getAnimeById(line_id, function(anime) {
-        anime.makeForm();
-    });
-}
 
-function getAnimeById(anime_id, callback) {
-    // takes in the anime id and returns its info from storage
-    // and instantiates an Anime object
-    storage.get('anime_list', function(items) {
-        for (i in items.anime_list) {
-            if (items.anime_list[i].id === anime_id) {
-                var x = items.anime_list[i];
-                var anime = new Anime(x.fansubber, x.title, x.fidelity,
-                                      x.release_date, x.anime_planet);
-                callback(anime);
-            }
-        }
-    });
-}
 
 function loadChanges() {
     // update page and load current storage state into the anime_list variable
@@ -331,16 +435,13 @@ function loadChanges() {
     });
 }
 
-function reset() {
-    var x = confirm("WARNING! You sure you want to delete everything?");
-    if (x == true) {
-        // Remove the anime_list from storage.
-        storage.remove('anime_list', function(items) {
-            message('Removed All Anime');
-            location.reload();
-        });
-    }
-}
+
+$("#anime_options input[type=checkbox]").change(function(){
+    // keep an ear out for changes to dark theme
+    // animeplanet, etc
+    $this = $(this);
+    localStorage[$this.attr("name")] = $this.attr("checked");
+});
 
 function message(msg) {
     var message = document.querySelector('.message');
