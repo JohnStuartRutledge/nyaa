@@ -1,0 +1,332 @@
+
+//----------------------------------------------------------------------------
+// Variables
+//----------------------------------------------------------------------------
+
+// colors
+$black       = #000
+$grayDarker  = #222
+$grayDark    = #333
+$gray        = #555
+$grayLight   = #999
+$grayLighter = #eee
+$white       = #fff
+
+// Accent colors
+$blue     = #049cdb
+$blueDark = #0064cd
+$green    = #46a546
+$red      = #9d261d
+$yellow   = #ffc40d
+$orange   = #f89406
+$pink     = #c3325f
+$purple   = #7a43b6
+
+// Links
+$linkColor      = #08c
+$linkColorHover = darken($linkColor, 15%)
+
+// Typography
+
+
+
+$sansFontFamily = "Helvetica Neue", Helvetica, Arial, sans-serif
+$serifFontFamily= Georgia, "Times New Roman", Times, serif
+$monoFontFamily = Monaco, Menlo, Consolas, "Courier New", monospace
+$baseFontFamily = $sansFontFamily
+$baseFontSize   = 12px
+$baseLineHeight = 15px
+$altFontFamily  = $serifFontFamily
+
+$headingsFontFamily = inherit // empty to use BS default, $baseFontFamily
+$headingsFontWeight = bold    // instead of browser default, bold
+$headingsColor      = inherit // empty to use BS default, $textColor
+
+// Component sizing
+$fontSizeLarge     = $baseFontSize * 1.25 // ~18px
+$fontSizeSmall     = $baseFontSize * 0.85 // ~12px
+$fontSizeMini      = $baseFontSize * 0.75 // ~11px
+$paddingLarge      = 11px 19px // 44px
+$paddingSmall      = 2px 10px  // 26px
+$paddingMini       = 1px 6px   // 24px
+$baseBorderRadius  = 4px
+$borderRadiusLarge = 6px
+$borderRadiusSmall = 3px
+
+// Tables
+$tableBackground       = transparent // overall background-color
+$tableBackgroundAccent = #f9f9f9     // for striping
+$tableBackgroundHover  = #f5f5f5     // for hover
+$tableBorder           = #ddd        // table and cell border
+
+// Forms
+$inputBackground         = $white
+$inputBorder             = #ccc
+$inputBorderRadius       = $baseBorderRadius
+$inputDisabledBackground = $grayLighter
+$formActionsBackground   = #f5f5f5
+$inputHeight             = $baseLineHeight + 10px 
+
+// Form states and alerts
+$infoText          = #3a87ad
+$infoBackground    = #d9edf7
+$infoBorder        = darken(spin($infoBackground, -10), 7%)
+$successText       = #468847
+$successBackground = #dff0d8
+$successBorder     = darken(spin($successBackground, -10), 5%)
+$warningText       = #c09853
+$warningBackground = #fcf8e3
+$warningBorder     = darken(spin($warningBackground, -10), 3%)
+$errorText         = #b94a48
+$errorBackground   = #f2dede
+$errorBorder       = darken(spin($errorBackground, -10), 3%)
+
+//----------------------------------------------------------------------------
+// Mixins
+//----------------------------------------------------------------------------
+
+clearfix()
+  zoom: 1
+  &:after
+  &:before
+    content: ""
+    display: table
+  &:after
+    clear: both
+
+// center align a block level element
+center-block()
+  display: block
+  margin-left: auto
+  margin-right: auto
+
+// size shortcut
+size(h, w)
+  height: h
+  width: w
+
+// text overflow
+text-overflow()
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+
+spin(kolor, degs)
+  kolor + degs
+
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  -o-{prop} args
+  {prop} args
+
+// Border Radius
+border-radius(radius)
+  vendor('border-radius', arguments)
+
+// Transitions
+transition(transition)
+  vendor('transition', arguments)
+
+transition-delay(transition-delay)
+  vendor('transition-delay', arguments)
+
+transition-duration(transition-duration)
+  vendor('transition-duration', arguments)
+
+// Transformations
+rotate(degrees)
+  vendor('transform', s("rotate(%s)", degrees))
+
+scale(ratio)
+  vendor('transform', s("scale(%s)", ratio))
+
+translate(x, y)
+  vendor('transform', s("translate(%s, %s)", x, y))
+
+skew(x, y)
+  vendor('transform', s("skew(%s, %s)", $x, $y))
+  -webkit-backface-visibility: hidden 
+
+translate3d(x, y, z)
+  vendor('transform', s("translate(%s, %s, %s)", x, y, z))
+
+//----------------------------------------------------------------------------
+// 
+//----------------------------------------------------------------------------
+
+body
+  background-color: $grayLighter
+  color: $grayDark 
+  width: 1000px 
+  min-height: 300px
+  font-family: $sansFontFamily 
+  font-size: $baseFontSize
+  line-height: $baseLineHeight
+  margin: 0 auto
+
+a
+  color: $linkColor
+  text-decoration: none
+  &:hover
+    color: $linkColorHover
+
+
+#message
+  center-block()
+  font-size: $fontSizeLarge
+
+#message
+  .info
+  .success
+  .warning
+  .error
+    padding: 8px 35px 8px 14px
+    margin-bottom: $baseLineHeight
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5)
+    border-radius($baseBorderRadius)
+
+  .info
+    background-color: $infoBackground
+    border-color: $infoBorder
+    color: $infoText
+  .success
+    background-color: $successBackground
+    border-color: $successBorder
+    color: $successText
+  .warning
+    background-color: $warningBackground
+    border-color: $warningBorder
+    color: $warningText
+  .error
+    background-color: $errorBackground
+    border-color: $errorBorder
+    color: $errorText
+
+
+button
+  background-color: #f5f5f5;
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  display: inline-block
+  height: $inputHeight
+  line-height: $baseLineHeight - 3px
+  font-size: $baseFontSize
+  text-align: center
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75)
+  vertical-align: middle
+  cursor: pointer
+  padding: 6px
+  border: 1px solid $gray
+
+  &.danger
+    background-color: #ee5f5b
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+
+  &:hover
+    border-color: $grayLight
+    background-image: none
+
+
+table 
+  max-width: 100%
+  background-color: $tableBackground
+  border-collapse: collapse
+  border-spacing: 0
+
+.table 
+  width: 100%
+  margin-bottom: $baseLineHeight
+  border: 1px solid $tableBorder
+  border-collapse: separate // Done so we can round those corners!
+  *border-collapse: collapse // IE7 can't round corners anyway
+  border-left: 0
+  border-radius($baseBorderRadius)
+
+  thead th 
+    vertical-align: bottom
+
+  th 
+    font-weight: bold
+
+  // stripes every other line
+  tbody 
+    > tr:nth-child(odd) > td
+    > tr:nth-child(odd) > th 
+      background-color: $tableBackgroundAccent
+    tr
+      &.success > td 
+        background-color: $successBackground
+      &.error > td 
+        background-color: $errorBackground
+      &.warning > td 
+        background-color: $warningBackground
+      &.info > td 
+        background-color: $infoBackground
+
+  th
+  td 
+    height: $inputHeight
+    padding: $paddingSmall
+    line-height: $baseLineHeight
+    text-align: left
+    border-top: 1px solid $tableBorder
+    border-left: 1px solid $tableBorder
+
+//----------------------------------------------------------------------------
+// Forms
+//----------------------------------------------------------------------------
+
+// Shared size and type resets
+select
+textarea
+input[type="text"]
+input[type="url"]
+input[type="search"]
+  display: inline-block
+  vertical-align: middle
+  height: $baseLineHeight
+  line-height: $baseLineHeight
+  background-color: $inputBackground
+  font-size: $baseFontSize
+  color: $gray
+  padding: 4px 6px
+  margin-top: ($baseLineHeight / 2)
+  margin-bottom: ($baseLineHeight / 2)
+  border: 1px solid $inputBorder
+  border-radius($inputBorderRadius)
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+
+  &:focus
+    border-color: red
+    outline: 0
+    box-shadow inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)
+    //border-radius(10px)
+    transition: all .5s ease
+
+
+// Set the height of select and file controls to match text inputs
+select
+  height: $inputHeight 
+  line-height: $inputHeight
+  *margin-top: 4px /* For IE7, add top margin to align select with labels */
+  border: 1px solid $inputBorder
+  background-color: $inputBackground // Chrome on Linux and Mobile Safari need background-color
+
+
+form#nyaa_options
+  ul
+    list-style: none
+    margin-left: 0
+    padding-left: 2px
+    li
+      margin: ($baseLineHeight / 2) 0
+  input[type="checkbox"]
+    width: auto
+    margin: 4px 4px 0
+    line-height: normal
+  button
+    margin-top: 10px;
+
