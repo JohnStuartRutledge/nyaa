@@ -1,66 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>Nyaa Enhancement Suite Settings Page</title>
-<style>
-body {
-    background-color:#333;
-    color: #CCC;
-    width: 800px;
-    min-height: 300px;
-    font: 13px 'RobotoRegular', Arial, sans-serif;
-    font-size:100%;
-    line-height:1.7em;
-    margin:0 auto;
-}
-a {
-    color: skyblue;
-}
-
-.edit_anime {
-    margin: 0 0 0 10px;
-}
-
-label { display: block; }
-.message {
-    height: 20px;
-    background: #333;
-    color: green;
-    padding: 5px;
-}
-
-#my_anime {
-    font-size: 10px;
-    margin-bottom: 10px;
-}
-
-#my_anime li {
-    clear: both;
-}
-
-.form_div {
-
-}
-
-.anime_form {
-    float: left;
-    width: 530px;
-}
-
-.anime_form button {
-    float: right;
-    margin-left: 5px;
-}
-
-</style>
+<link type="text/css" rel="stylesheet" href="css/nyaa.css" />
 </head>
 <body>
-    <div class="message"></div>
+
+    <div id="message">
+      <!--
+      <br />
+      <div class="info">I am a message</div>
+      <div class="success">I am a message</div>
+      <div class="warning">I am a message</div>
+      <div class="error">I am a message</div>
+      -->
+    </div>
+
+    <br />
+
     <a href="http://www.nyaa.eu">&lt; Back to Nyaa</a>
     <h3>Add new anime</h3>
-    <form class="form-inline">
+    <form id="anime_form">
         <input id="fansubber" name="fansubber" type="text" placeholder="Fansubber" list="fansubbers">
-        <datalist id="fansubbers">
+        <datalist id="fansubber_datalist">
             <option value="Commie"></option>
             <option value="gg"></option>
             <option value="Hadena"></option>
@@ -68,14 +30,16 @@ label { display: block; }
             <option value="UTW"></option>
             <option value="Yibis"></option>
         </datalist>
-        <input id="anime_title" name="anime_title" type="text" placeholder="Name">
+        <input id="main_title" name="main_title" type="text" placeholder="Name">
         <select id="fidelity" placeholder="fidelity">
+            <option value="?" disabled selected>Fidelity</option>
             <option>none</option>
             <option>480p</option>
             <option>720p</option>
             <option>1080</option>
         </select>
-        <select id="release_date" name="release_date">
+        <select id="air_day" name="air_day">
+            <option value="?" disabled selected>Air Day</option>
             <option>unknown</option>
             <option>mon</option>
             <option>tue</option>
@@ -91,15 +55,35 @@ label { display: block; }
 
     <hr />
 
+    <table id="anime_table" class="table">
+      <thead>
+         <tr>
+           <th>Fansubber</th>
+           <th>Main Title</th>
+           <th>Fidelity</th>
+           <th>Air Day</th>
+           <th>Animeplanet</th>
+           <th></th>
+         </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <hr />
+
     <h3>Your Anime</h3>
     <ul id="my_anime"></ul>
     <button class="reset">Reset Everything</button>
     <hr />
 
     <h3>Other Options</h3>
-    <input type="checkbox" name="lang" value="en">Restrict anime to enlish subs only
-    <br />
-    <input type="checkbox" name="nightmode" value="nightmode">Skin nyaa.eu in a dark theme
+    <form id="nyaa_options" action="#" method="post">
+      <ul>
+        <li><input id="settings_english_only" type="checkbox" name="english_only" value="english_only">Restrict anime to english subs only</li>
+        <li><input id="settings_nightmode" type="checkbox" name="nightmode" value="nightmode">use dark theme</li>
+        <li><input id="settings_animeplanet" type="checkbox" name="animeplanet" value="animeplanet">use animeplanet links</li>
+      </ul>
+    </form>
 
     <hr />
     <h3>Links to useful sites</h3>
@@ -112,12 +96,30 @@ label { display: block; }
         <li><a href="http://www.reddit.com/r/Animesuggest">Anime Suggestions via Reddit</a></li>
     </ul>
 
-    <hr />
-    <button class="print_storage">print storage contents</button>
-    <button class="print_anime">print stored anime</button>
+    <datalist id="fansubbers">
+        <option value="Commie"></option>
+        <option value="gg"></option>
+        <option value="Hadena"></option>
+        <option value="HorribleSubs"></option>
+        <option value="UTW"></option>
+        <option value="Yibis"></option>
+    </datalist>
 
+    <hr />
+    <br />
+      <button class="print_storage">print storage contents</button>
+      <button class="print_anime">print stored anime</button>
+    <br />
     <br />
 
-    <script src="options.js"></script>
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script> 
+    <script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+
+    <script> window.app = {}; </script>
+    <script type="text/javascript" src="store.js"></script>
+    <script type="text/javascript" src="model.js"></script>
+    <script type="text/javascript" src="view.js"></script>
+    <script type="text/javascript" src="controller.js"></script>
+    <script type="text/javascript" src="options.js"></script>
 </body>
 </html>

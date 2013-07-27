@@ -250,6 +250,11 @@ table
 
   th 
     font-weight: bold
+    &:nth-child(-n + 4)
+      background-image: url('../img/sort_arrows.gif');
+      background-repeat: no-repeat;
+      background-position: center right;
+      cursor: pointer;
 
   // stripes every other line
   tbody 
@@ -315,6 +320,16 @@ select
   border: 1px solid $inputBorder
   background-color: $inputBackground // Chrome on Linux and Mobile Safari need background-color
 
+
+#fansubber,
+#animeplanet
+  width: 150px
+
+#animeplanet
+  display: none
+ 
+#main_title
+  width: 300px
 
 form#nyaa_options
   ul
