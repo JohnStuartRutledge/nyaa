@@ -1,7 +1,8 @@
 {
   "name": "Nyaa Enhancement Suite",
-  "description": "Enhancments to nyaa.eu",
-  "version": "0.1",
+  "description": "Enhancments to the website nyaa.eu",
+  "version": "0.2",
+  "manifest_version": 2,
 
   "permissions": [
     "storage",
@@ -9,21 +10,29 @@
     "<all_urls>"
   ],
 
+  "background": {
+    "scripts": ["background.js"]
+  },
+
   "options_page": "options.html",
+
   "content_scripts": [
     {
       "matches": ["http://www.nyaa.eu/*"],
-      "js":      ["jquery-1.8.0.min.js", "jquery.regex.extend.js", "jquery.tinysort.min.js", "jquery.highlight.js", "contentscript.js"],
-      "css":     ["nyaa.css"],
+      "js":      [
+        "js/jquery-2.0.3.min.js",
+        "js/jquery.tablesorter.min.js",
+        "js/jquery.highlight.js",
+        "contentscript.js"
+      ],
+      "css":     ["css/nyaa.css"],
       "run_at":  "document_end"
     }
   ],
 
   "page_action": {
-    "default_icon": "icon.png",
-    "default_title": "Nyaa Anime",
-    "default_popup": "popup.html"
-  },
+    "default_icon": "img/icon.png",
+    "default_title": "Nyaa Enhancement Suite"
+  }
 
-  "manifest_version": 2
 }

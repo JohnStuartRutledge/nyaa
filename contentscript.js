@@ -1,4 +1,7 @@
 
+//var storage = (localStorage) ? localStorage : chrome.storage.local;
+//var storage = chrome.storage.local;
+
 // set default selection to english translated anime
 $('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
 $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
@@ -9,37 +12,79 @@ var weekday = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 var today   = weekday[d.getDay()];
 
 // construct nested HTML divs for holding my list of anime
-var mywrapper = $(document.createElement('div')).attr('id', 'stu_wrapper');
-var mydiv     = $(document.createElement('div')).attr('id', 'stu_showtimes');
-var animelist = $(document.createElement('ul')).attr('id', 'stu_anime_list');
+var mywrapper = $(document.createElement('div')).attr('id', 'nyaajs_wrapper');
+var mydiv     = $(document.createElement('div')).attr('id', 'nyaajs_showtimes');
+var animelist = $(document.createElement('ul')).attr('id', 'nyaajs_anime_list');
 var optionspg = $(document.createElement('a')).attr('id', 'btn_add_anime')
                     .attr("href", chrome.extension.getURL("options.html"))
                     .text("add anime");
-var stubutton = $(document.createElement('a')).attr('id', 'stu_btn')
+var nyaajs_btn = $(document.createElement('a')).attr('id', 'nyaajs_btn')
                     .attr('href', '')
                     .text('sort me');
+
 
 //----------------------------------------------------------------------------
 // 
 //----------------------------------------------------------------------------
 
+
+/*
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (sender.tab) {
+        console.log('from a content script:'+sender.tab.url);
+    } else {
+        console.log('from the extension');
+    }
+    if (request.status === 'good') sendResponse({data: 'your data'});
+});
+*/
+
+/*
+var port = chrome.runtime.connect({name: 'nyaadb'});
+port.postMessage({joke: 'knock knock'});
+port.onMessage.addListener(function(msg) {
+    console.log(msg);
+});
+*/
+
+chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
+    console.log(response);
+});
+
+
+
+
+// append your completed HTML to the webpage and sort your list
+mydiv.append(nyaajs_btn);
+mydiv.append(optionspg);
+mydiv.append(animelist);
+mywrapper.append(mydiv);
+$('#main').prepend(mywrapper);
+
+
+//----------------------------------------------------------------------------
+// 
+//----------------------------------------------------------------------------
+/*
 function loadAnime() {
     // load anime from local storage and append it as a list on side bar.
     // Highlight the users saved anime/preferences and apply them to page.
-    chrome.storage.local.get('anime_list', function(result) {
+
+
+    storage.get('animeList', function(result) {
         // make a link to the options page when no anime is found
-        if (result.anime_list==undefined) {
+        if (result.animeList === undefined) {
             var options_link = $('<a>')
                 .attr("href", chrome.extension.getURL("options.html"))
-                .text("Go To The Options Page To Add Your Anime");
-            $('#stu_anime_list').append(options_link);
+                .text("Add New Anime");
+            $('#nyaajs_anime_list').append(options_link);
             return;
         }
 
-        //$.each(result.anime_list, function(){});
-        for (var i in result.anime_list) {
+        //$.each(result.animeList, function(){});
+        for (var i in result.animeList) {
 
-            var anime = result.anime_list[i];
+            var anime = result.animeList[i];
 
             // create li element to hold each anime the user is watching
             var li = $('<li>')
@@ -58,14 +103,14 @@ function loadAnime() {
 
             // add the anime title as a link and append to the sidebar
             var aa = $('<a>')
-                .addClass('stu_anime')
+                .addClass('nyaajs_anime')
                 .text(display_title +' ('+ anime.release_date +')')
                 .attr('href', anime_link)
                 .appendTo(li);
 
             // add link to each animes anime-planet profile page
             $('<a>')
-                .addClass('stu_anime_planet')
+                .addClass('nyaajs_anime_planet')
                 .text('A')
                 .attr('href', anime.anime_planet)
                 .attr('target', '_blank')
@@ -109,19 +154,20 @@ function loadAnime() {
             //$('a:contains('+ anime.fansubber +'):contains('+ anime.title +'):contains('+ anime.fidelity +')').highlight(anime.title);
 
             // highlight anime whose release date is today
-            if (anime.release_date === today) { aa.addClass('stu_today'); }
+            if (anime.release_date === today) { aa.addClass('nyaajs_today'); }
         }
 
     });
 }
+*/
 
 //----------------------------------------------------------------------------
 //
 //----------------------------------------------------------------------------
-
-stubutton.click(function(){
+/*
+nyaajs_btn.click(function(){
     // toggle the sort functionality when clicking the 'sort me' button
-    var anime_list = $('ul#stu_anime_list>li');
+    var anime_list = $('ul#nyaajs_anime_list>li');
     if(sessionStorage.animeSortState==0) {
         anime_list.tsort('', {attr:'data'});
         sessionStorage.animeSortState=1;
@@ -134,11 +180,12 @@ stubutton.click(function(){
     }
 });
 
+
 function sortAnime() {
     // persist the anime-list's sort state across page refreshes.
     // setTimeout is used to recursively run this function until
-    // the dynamically created #stu_anime_list object exists
-    var anime_list = $('ul#stu_anime_list>li');
+    // the dynamically created #nyaajs_anime_list object exists
+    var anime_list = $('ul#nyaajs_anime_list>li');
     if(anime_list) {
         if(sessionStorage.animeSortState==0) {
             anime_list.tsort();
@@ -152,16 +199,18 @@ function sortAnime() {
     }
 }
 
+
 // load anime from local strage
-loadAnime();
+//loadAnime();
 
 // append your completed HTML to the webpage and sort your list
-mydiv.append(stubutton);
+mydiv.append(nyaajs_btn);
 mydiv.append(optionspg);
 mydiv.append(animelist);
 mywrapper.append(mydiv);
 $('#main').prepend(mywrapper);
-sortAnime();
+//sortAnime();
+*/
 
 //----------------------------------------------------------------------------
 // TODO

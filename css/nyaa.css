@@ -205,3 +205,106 @@ form#nyaa_options input[type="checkbox"] {
 form#nyaa_options button {
   margin-top: 10px;
 }
+/*
+#main
+  &.content
+    a:hover
+      color: tomato
+    a:visited
+      color: violet !important
+
+  div
+    &.content, .remake, .trusted, .aplus
+      background-color: #444 !important
+
+    &.comment
+      background-color: #999
+      clear: both
+      color: black
+      display: inline-block
+      min-width: 800px
+
+    &.tinfodescription
+      background-color: #383838
+
+    & td.tlisticon a img
+      height: 70%
+      width: 70%
+
+  .tinfodownloadbutton
+    background-color: #222
+    border: 2px solid yellow
+    padding: 20px 0px
+    text-align: center
+
+  .tlistsn
+    color: cornsilk
+    font-size: 15px
+    font-weight: 400
+    margin: 0px 2px
+
+*/
+#topbar,
+#navbar {
+  z-index: 101;
+}
+.highlight {
+  color: #800080;
+  background-color: #ff0;
+  font-weight: 300;
+}
+#nyaajs_wrapper {
+  position: relative;
+  z-index: 100;
+  float: right;
+  right: 110px;
+  font-size: 10px;
+  color: #ccc;
+}
+#nyaajs_anime_list {
+  min-width: 180px;
+}
+#nyaajs_showtimes {
+  position: absolute;
+  display: block;
+  min-height: 300px;
+  margin-top: 10px;
+  float: right;
+  background: #333;
+  border: 2px solid #666;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+#nyaajs_btn,
+#btn_add_anime {
+  padding: 7px;
+  text-decoration: underline;
+  float: right;
+}
+#nyaajs_btn:hover {
+  color: #ff6347;
+}
+#nyaajs_showtimes a:visited {
+  color: #a8a8a8;
+}
+#nyaajs_showtimes ul {
+  margin-top: 5px;
+  list-style-type: none;
+  padding: 7px;
+  clear: both;
+}
+#nyaajs_showtimes li {
+  padding: 3px;
+  width: 200px;
+}
+.nyaajs_anime_planet {
+  color: #87ceeb !important;
+  margin-left: 3px;
+}
+.nyaajs_today {
+  color: #ff0 !important;
+  text-decoration: underline;
+}

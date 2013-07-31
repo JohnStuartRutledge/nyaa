@@ -1,4 +1,4 @@
-(function (window) {
+(function (NyaaJS) {
 
 //============================================================================
 //============================================================================
@@ -153,6 +153,6 @@ function message(msg, msgtype) {
 //============================================================================
 
 // Export to window
-window.app.Controller = Controller;
+NyaaJS.Controller = Controller;
 
-})(window);
+})(NyaaJS);

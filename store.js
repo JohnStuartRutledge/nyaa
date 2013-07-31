@@ -1,12 +1,10 @@
-(function (window) {
 
-//============================================================================
-//============================================================================
-//============================================================================
+var NyaaJS = {};
 
-// TODO
-// make this file table agnostic. Currently it only works using the 
-// animeList table in the DB.
+(function (NyaaJS) {
+
+//var storage = chrome.storage.local;
+var storage = (localStorage) ? localStorage : chrome.storage.local;
 
 //----------------------------------------------------------------------------
 // 							     HELPERS
@@ -32,11 +30,11 @@ function Store(name, callback) {
 	callback = callback || function () {};
 	dbName   = this._dbName = name;
 
-	if (!localStorage[dbName]) {
+	if (!storage[dbName]) {
 		data = { animeList : [] };
-		localStorage[dbName] = JSON.stringify(data);
+		storage[dbName] = JSON.stringify(data);
 	}
-	callback.call(this, JSON.parse(localStorage[dbName]));
+	callback.call(this, JSON.parse(storage[dbName]));
 };
 
 Store.prototype.find = function (query, callback) {
@@ -44,7 +42,7 @@ Store.prototype.find = function (query, callback) {
 	//   @query    : query to match against (i.e. {foo: 'bar'})
 	//   @callback : callback to fire when query completed
 	if (!callback) return;
-	var animeList = JSON.parse(localStorage[this._dbName]).animeList;
+	var animeList = JSON.parse(storage[this._dbName]).animeList;
 
 	callback.call(this, animeList.filter(function (anime) {
 		for (var q in query) {
@@ -57,7 +55,7 @@ Store.prototype.findAll = function (callback) {
 	// Retrives all data from a collection
 	//   @callback : the callback that fires on completion
 	callback = callback || function () {};
-	callback.call(this, JSON.parse(localStorage[this._dbName]).animeList);
+	callback.call(this, JSON.parse(storage[this._dbName]).animeList);
 };
 
 Store.prototype.save = function (id, updateData, callback) {
@@ -66,7 +64,7 @@ Store.prototype.save = function (id, updateData, callback) {
 	//   @id         : (optional) ID of item to update
 	//   @updateData : the data to save into the DB
 	//   @callback   : callback to fire after saving
-	var data      = JSON.parse(localStorage[this._dbName]),
+	var data      = JSON.parse(storage[this._dbName]),
 		animeList = data.animeList;
 
 	callback = callback || function () {};
@@ -81,8 +79,8 @@ Store.prototype.save = function (id, updateData, callback) {
 			}
 		}
 
-		localStorage[this._dbName] = JSON.stringify(data);
-		callback.call(this, JSON.parse(localStorage[this._dbName]).animeList);
+		storage[this._dbName] = JSON.stringify(data);
+		callback.call(this, JSON.parse(storage[this._dbName]).animeList);
 	} else {
 		callback   = updateData;
 		updateData = id;
@@ -90,7 +88,7 @@ Store.prototype.save = function (id, updateData, callback) {
 		// Generate an ID
 		updateData.id = makeGUID();
 		animeList.push(updateData);
-		localStorage[this._dbName] = JSON.stringify(data);
+		storage[this._dbName] = JSON.stringify(data);
 		callback.call(this, [updateData]);
 	}
 };
@@ -99,7 +97,7 @@ Store.prototype.remove = function (id, callback) {
 	// Remove an item matching the given ID from the DB
 	//   @id       : ID of the item you want to remove
 	//   @callback : callback function to fire after saving
-	var data      = JSON.parse(localStorage[this._dbName]),
+	var data      = JSON.parse(storage[this._dbName]),
 		animeList = data.animeList;
 
 	for (var i=0, len=animeList.length; i<len; i++) {
@@ -109,22 +107,27 @@ Store.prototype.remove = function (id, callback) {
 		}
 	}
 
-	localStorage[this._dbName] = JSON.stringify(data);
-	callback.call(this, JSON.parse(localStorage[this._dbName]).animeList);
+	storage[this._dbName] = JSON.stringify(data);
+	callback.call(this, JSON.parse(storage[this._dbName]).animeList);
 };
 
 Store.prototype.drop = function (callback) {
-	// Drops the entire DB in localStorage and starts fresh
+	// Drops the entire DB in storage and starts fresh
 	//   @callback : the callback function to fire on after dropping data
-	localStorage[this._dbName] = JSON.stringify({animeList: []});
-	callback.call(this, JSON.parse(localStorage[this._dbName]).animeList);
+	storage[this._dbName] = JSON.stringify({animeList: []});
+	callback.call(this, JSON.parse(storage[this._dbName]).animeList);
 };
 
 // Export to window
-window.app.Store = Store;
+NyaaJS.Store = Store;
 
 //============================================================================
 //============================================================================
 //============================================================================
 
-})(window);
+})(NyaaJS);
+
+
+// TODO
+// make this file table agnostic. Currently it only works using the 
+// animeList table in the DB.

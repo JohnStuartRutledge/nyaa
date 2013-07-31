@@ -206,8 +206,8 @@ a
 
 
 button
-  background-color: #f5f5f5;
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-color: #f5f5f5
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6)
   display: inline-block
   height: $inputHeight
   line-height: $baseLineHeight - 3px
@@ -221,9 +221,9 @@ button
 
   &.danger
     background-color: #ee5f5b
-    color: #ffffff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f);
+    color: #ffffff
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)
+    background-image: linear-gradient(to bottom, #ee5f5b, #bd362f)
 
   &:hover
     border-color: $grayLight
@@ -251,10 +251,10 @@ table
   th 
     font-weight: bold
     &:nth-child(-n + 4)
-      background-image: url('../img/sort_arrows.gif');
-      background-repeat: no-repeat;
-      background-position: center right;
-      cursor: pointer;
+      background-image: url('../img/sort_arrows.gif')
+      background-repeat: no-repeat
+      background-position: center right
+      cursor: pointer
 
   // stripes every other line
   tbody 
@@ -343,5 +343,117 @@ form#nyaa_options
     margin: 4px 4px 0
     line-height: normal
   button
-    margin-top: 10px;
+    margin-top: 10px
 
+
+//----------------------------------------------------------------------------
+// CONTENT SCRIPTS AND MAIN SITE STYLES
+//----------------------------------------------------------------------------
+
+// MAIN SITE STYLES
+//background-color: #222 !important
+//a
+// color: #A8A8A8 !important
+/*
+#main
+  &.content
+    a:hover
+      color: tomato
+    a:visited
+      color: violet !important
+
+  div
+    &.content, .remake, .trusted, .aplus
+      background-color: #444 !important
+
+    &.comment
+      background-color: #999
+      clear: both
+      color: black
+      display: inline-block
+      min-width: 800px
+
+    &.tinfodescription
+      background-color: #383838
+
+    & td.tlisticon a img
+      height: 70%
+      width: 70%
+
+  .tinfodownloadbutton
+    background-color: #222
+    border: 2px solid yellow
+    padding: 20px 0px
+    text-align: center
+
+  .tlistsn
+    color: cornsilk
+    font-size: 15px
+    font-weight: 400
+    margin: 0px 2px
+
+*/
+
+//----------------------------------------------------------------------------
+// SIDEBAR STYLES
+
+#topbar
+#navbar
+  z-index: 101
+
+.highlight
+  color: purple
+  background-color: yellow
+  font-weight: 300
+
+#nyaajs_wrapper
+  position: relative
+  z-index: 100
+  float: right
+  right: 110px
+  font-size: 10px
+  color: #ccc
+
+#nyaajs_anime_list
+  min-width: 180px
+
+//.nyaajs_anime
+
+#nyaajs_showtimes
+  position: absolute
+  display: block
+  min-height: 300px
+  margin-top: 10px
+  float: right
+  background: #333
+  border: 2px solid #666666
+  border-radius: 5px
+
+#nyaajs_btn, #btn_add_anime
+  padding: 7px
+  text-decoration: underline
+  float: right
+
+#nyaajs_btn:hover
+  color: tomato
+
+#nyaajs_showtimes a:visited
+  color: #A8A8A8
+
+#nyaajs_showtimes ul
+  margin-top: 5px
+  list-style-type: none
+  padding: 7px
+  clear: both
+
+#nyaajs_showtimes li
+  padding: 3px
+  width: 200px
+
+.nyaajs_anime_planet
+  color: skyblue !important
+  margin-left: 3px
+
+.nyaajs_today
+  color: yellow !important
+  text-decoration: underline
