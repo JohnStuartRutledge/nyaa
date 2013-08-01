@@ -1,16 +1,4 @@
 
-/*
-
-        "js/jquery-2.0.3.min.js",
-        "js/jquery.tablesorter.min.js",
-        "js/jquery.highlight.js",
-        "store.js",
-        "model.js",
-        "view.js",
-        "controller.js",
-
-*/
-
 function Anime(name) {
 	this.storage    = new NyaaJS.Store(name);
 	this.model      = new NyaaJS.Model(this.storage);
@@ -19,15 +7,6 @@ function Anime(name) {
 }
 
 window.anime = new Anime('AnimeDB');
-
-
-/*
-chrome.runtime.getBackgroundPage(function(data) {
-	// refresh the anime list everytime the page loads
-	data.anime.controller.loadAnime();
-	main(data.anime);
-});
-*/
 
 
 // make the anime table sortable
@@ -56,10 +35,6 @@ $('#anime_form button').on("click", function(evt) {
 	evt.preventDefault();
 	console.log('adding anime');
 	anime.controller.addAnime();
-
-	//chrome.storage.local.set({'anime_list': {'testing': 'hi'}}, function() {
-	//	console.log('storing in chrome.storage.local');
-	//});
 });
 
 $('.table').on("click", function(evt) {
@@ -76,29 +51,36 @@ $('.table').on("click", function(evt) {
 });
 
 $('#nyaa_options input[type=checkbox]').change(function() {
+	// they made an adjustment to the settings box
 	anime.controller.updateSettings($(this));
 });
 
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+	// this is a listener that sends an anime list to the contentscript
+	// page and is rendered in the sidebar throughout nyaa.eu
 	if (request.cmd === 'getStoredAnime') {
-
 		anime.model.read(function (animeList) {
-			sendResponse({ 'animeList' : animeList });
+			sendResponse({ 'animeList' : anime.view.renderList(animeList) });
 		});
 	}
-	sendResponse({status:'bad'});
 });
 
 
 /*
-
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-	if (request.cmd === 'getStoredAnime') {
-		this.model.read(function (animeList) {
-			sendResponse({dbcopy: animeList});
-		});
-	}
-	sendResponse({status:'bad'});
+chrome.runtime.getBackgroundPage(function(data) {
+	// refresh the anime list everytime the page loads
+	data.anime.controller.loadAnime();
+	main(data.anime);
 });
+
+
+        "js/jquery-2.0.3.min.js",
+        "js/jquery.tablesorter.min.js",
+        "js/jquery.highlight.js",
+        "store.js",
+        "model.js",
+        "view.js",
+        "controller.js",
+
 */

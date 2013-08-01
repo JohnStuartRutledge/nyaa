@@ -48,7 +48,7 @@ port.onMessage.addListener(function(msg) {
 */
 
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
-    console.log(response);
+    $('#nyaajs_anime_list').html(response.animeList);
 });
 
 

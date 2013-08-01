@@ -17,6 +17,12 @@ function View() {
     +   '<td><button>edit</button></td>'
 	+ '</tr>';
 
+    this.animeListTemplate 
+    = '<li class="anime_info_mode">'
+    +   '<a class="nyaajs_anime" href="#">{{ title }}</a> {{ air_day }} '
+    +   '<a class="nyaajs_anime_planet" href="{{ animeplanet }}" target="_blank">A</a>'
+    + '</li>';
+
 	this.animeFormTemplate
 	= '<tr data-anime-id="{{ animeID }}" class="anime_edit_mode">'
 	+    '<td><input type="text" class="form_fansubber" value="{{ fansubber }}"></td>'
@@ -52,8 +58,8 @@ function View() {
 
 View.prototype.renderTable = function (animeList) {
 	// Take an anime model and render it's data into a template
-	//   @anime : anime object whose data will be put in the template
-    var view;
+	//   @animeList : anime objects whose data will be put in the template
+    var view = '';
 
     for (i=0, len=animeList.length; i<len; i++) {
         var template = this.animeTableTemplate;
@@ -71,10 +77,28 @@ View.prototype.renderTable = function (animeList) {
     return view;
 };
 
+View.prototype.renderList = function (animeList) {
+    // Take an anime model and reder it's data into a list item
+    //  @animeList : the list of anime to convert to <li> items
+    var view = '';
+
+    for (i=0, len=animeList.length; i<len; i++) {
+        var template = this.animeListTemplate;
+        var anime    = animeList[i];
+
+        template = template.replace('{{ title }}',       anime.title);
+        template = template.replace('{{ air_day }}',     anime.air_day);
+        template = template.replace('{{ animeplanet }}', anime.animeplanet);
+
+        view += template;
+    }
+    return view;
+};
+
 View.prototype.renderForm = function (animeList) {
 	// Take an anime model and render it's data into editiable forms
-	//   @anime : anime whose data will be put in the template
-    var view;
+	//   @animeList : anime objects whose data will be put in the template
+    var view = '';
 
     for (i=0, len=animeList.length; i<len; i++) {
         var template = this.animeFormTemplate;
