@@ -11,7 +11,16 @@
   ],
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+        "js/jquery-2.0.3.min.js",
+        "js/jquery.tablesorter.min.js",
+        "store.js",
+        "model.js",
+        "view.js",
+        "controller.js",
+        "options.js",
+        "background.js"
+    ]
   },
 
   "options_page": "options.html",

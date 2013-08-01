@@ -8,8 +8,8 @@ function Controller(model, view) {
 	// Controls the rendering of Model data into views based on user events
 	//   @model : the model constructor
 	//   @view  : the view constructor
-	this.model      = model;
-	this.view       = view;
+	this.model = model;
+	this.view  = view;
 
 	// the default settings
 	// TODO - get this variable via

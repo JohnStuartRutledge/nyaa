@@ -14,7 +14,7 @@ It does the following things:
 ## 3rd Party Dependencies
 - [Jquery1.8](http://jquery.com/)
 - [Jquery Highlight Plugin](http://bartaz.github.com/sandbox.js/jquery.highlight.html)
-- [Jquery TinysSort Plugin](http://tinysort.sjeiti.com/)
+
 
 ## TODOS
 - when sorting anime by release date, ensure the day names are in order
@@ -33,4 +33,3 @@ It does the following things:
 - fix bug where anime that uses underscores instead of spaces in the title
   breaks the highlighting feature.
 - relocate nyaa's into a tab on your sidebar. Set the sidebar min-width to the exact width of the ad
-- put some real effort into making the UI design look better
