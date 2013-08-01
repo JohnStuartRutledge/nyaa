@@ -48,7 +48,16 @@ port.onMessage.addListener(function(msg) {
 */
 
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
-    $('#nyaajs_anime_list').html(response.animeList);
+
+    if (!response.animeList) {
+        $('#nyaajs_anime_list').append(
+            $('<a>')
+                .attr("href", chrome.extension.getURL("options.html"))
+                .text("Add New Anime"));
+    } else {
+        $('#nyaajs_anime_list').html(response.animeList);
+    }
+
 });
 
 
@@ -70,16 +79,6 @@ function loadAnime() {
     // load anime from local storage and append it as a list on side bar.
     // Highlight the users saved anime/preferences and apply them to page.
 
-
-    storage.get('animeList', function(result) {
-        // make a link to the options page when no anime is found
-        if (result.animeList === undefined) {
-            var options_link = $('<a>')
-                .attr("href", chrome.extension.getURL("options.html"))
-                .text("Add New Anime");
-            $('#nyaajs_anime_list').append(options_link);
-            return;
-        }
 
         //$.each(result.animeList, function(){});
         for (var i in result.animeList) {

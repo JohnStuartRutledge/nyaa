@@ -19,7 +19,7 @@ function View() {
 
     this.animeListTemplate 
     = '<li class="anime_info_mode">'
-    +   '<a class="nyaajs_anime" href="#">{{ title }}</a> {{ air_day }} '
+    +   '<a class="nyaajs_anime" href="#">{{ title }}</a> ({{ air_day }}) '
     +   '<a class="nyaajs_anime_planet" href="{{ animeplanet }}" target="_blank">A</a>'
     + '</li>';
 

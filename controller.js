@@ -46,6 +46,16 @@ Controller.prototype.loadAnime = function () {
 	}
 };
 
+Controller.prototype.makeList = function (callback) {
+	// make an anime list for the sidebar
+	var view = this.view;
+	this.model.read(function (animeList) {
+		// TODO parse animeplanet url
+		// construct the special <a> tag for querying nyaa here
+		callback(view.renderList(animeList));
+	});
+}
+
 Controller.prototype.addAnime = function () {
 	// they are saving a new anime to the DB
 	var fansubber   = $('#fansubber').val(),
