@@ -45,7 +45,7 @@ function View() {
 	+    '<td><input type="text" class="form_fansubber" value="{{ fansubber }}"></td>'
     +    '<td><input type="text" class="form_title" value="{{ title }}"></td>'
     +    '<td>'
-    +      '<select class="form_fielity">'
+    +      '<select class="form_fidelity">'
     +        '<option>none</option>'
     +        '<option>480p</option>'
     +        '<option>720p</option>'

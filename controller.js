@@ -114,6 +114,8 @@ Controller.prototype.addAnime = function () {
 		air_day     = $('#air_day').val(),
 		animeplanet = $('#animeplanet').val();
 
+	//fidelity = (fidelity === undefined) ? 'none' : fidelity;
+	//air_day  = (air_day === undefined) ? '?' : air_day;
 	this.model.create(fansubber, title, fidelity, air_day, animeplanet, function() {
 		message('anime successfully saved', 'success');
 	});

@@ -170,17 +170,20 @@ body#options_page
       color: $linkColorHover
 
 #message
-  center-block()
+  //center-block()
   font-size: $fontSizeLarge
+  position: absolute
+  top: 20px
+  left 20%
 
   .info
   .success
   .warning
   .error
     padding: 8px 35px 8px 14px
-    margin-bottom: $baseLineHeight
     text-shadow: 0 1px 0 rgba(255, 255, 255, .5)
     border-radius($baseBorderRadius)
+    margin-bottom: $baseLineHeight
 
   .info
     background-color: $infoBackground
