@@ -42,7 +42,8 @@ Controller.prototype.loadAnime = function () {
 			$('#settings_'+name).attr('checked', this.nyaa_settings[name]);
 		}
 		// unhide the animeplanet field if the animeplanet setting is true
-		if (this.nyaa_settings['animeplanet']) $('#animeplanet').toggle();
+		// TODO - make sure this is not toggling every other insertion
+		if (this.nyaa_settings['animeplanet']) $('#animeplanet').show();
 	}
 };
 
@@ -63,13 +64,14 @@ Controller.prototype.makeSideBar = function (callback) {
 				+ anime.fansubber + ' ' + anime.fidelity) + '&sort=1';
 			animeList[i]['url'] = url + urlquery;
 
-			// trucate anime titles that are too long to fit in the sidebar
+			// truncate anime titles that are too long to fit in the sidebar
 			var display_title = (anime.title.length <= 31
 				) ? anime.title : anime.title.substring(0, 31) + '..';
 			animeList[i]['title'] = display_title;
 
 			// if animeplanet is active, convert to proper link
-
+			animeList[i]['highlight'] = isToday(anime.air_day) ? true : false; 
+			console.log(animeList[i]);
 		});
 		callback(view.renderSidebar(animeList));
 	});
@@ -115,7 +117,6 @@ Controller.prototype.addAnime = function () {
 	this.model.create(fansubber, title, fidelity, air_day, animeplanet, function() {
 		console.log('call message function "anime successfully saved" ');
 	});
-
 	this.loadAnime(); // refresh the page
 };
 
@@ -178,8 +179,17 @@ Controller.prototype.cancelEdit = function (elem) {
 };
 
 //----------------------------------------------------------------------------
-// 
+// Helpers
 //----------------------------------------------------------------------------
+
+function isToday(airday) {
+	// A function that returns true if an animes release date is today
+	var d = new Date(),
+		weekday = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"],
+	    today   = weekday[d.getDay()];
+	if (airday === today) return true;
+	return false
+}
 
 function tableUpdated() {
 	$('#anime_table').trigger('update');

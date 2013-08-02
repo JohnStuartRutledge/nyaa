@@ -34,7 +34,7 @@ function View() {
     + '</div>';
 
     this.animeRowsTemplate
-    = '<tr>'
+    = '<tr {{ highlight }}>'
     +   '<td><a class="nyaajs_anime" href="{{ url }}">{{ title }}</a></td>'
     +   '<td class="nyaajs_anime_airday">{{ air_day }}</td>'
     +   '<td><a class="nyaajs_anime_planet" href="{{ animeplanet }}" target="_blank">A</a></td>'
@@ -107,6 +107,14 @@ View.prototype.renderRows = function (animeList) {
         template = template.replace('{{ title }}',       anime.title);
         template = template.replace('{{ air_day }}',     anime.air_day);
         template = template.replace('{{ animeplanet }}', anime.animeplanet);
+
+        // add class to highlight anime if it airs today
+        console.log(anime.title, anime.highlight);
+        if (anime.highlight) {
+            template = template.replace('{{ highlight }}', 'class="nyaajs_today"');
+        } else {
+            template = template.replace('{{ highlight }}', '');
+        }
 
         view += template;
     }

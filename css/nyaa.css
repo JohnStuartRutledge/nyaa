@@ -281,8 +281,7 @@ button:hover {
   color: #ee82ee !important;
 }
 #nyaa_main .nyaajs_today {
-  color: #ff0 !important;
-  text-decoration: underline;
+  background-color: #ff0;
 }
 /*
 #nyaa_main
