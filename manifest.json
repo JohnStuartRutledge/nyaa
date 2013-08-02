@@ -18,8 +18,8 @@
         "model.js",
         "view.js",
         "controller.js",
-        "options.js",
-        "background.js"
+        "background.js",
+        "options.js"
     ]
   },
 

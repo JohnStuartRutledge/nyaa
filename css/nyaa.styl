@@ -27,9 +27,6 @@ $linkColor      = #08c
 $linkColorHover = darken($linkColor, 15%)
 
 // Typography
-
-
-
 $sansFontFamily = "Helvetica Neue", Helvetica, Arial, sans-serif
 $serifFontFamily= Georgia, "Times New Roman", Times, serif
 $monoFontFamily = Monaco, Menlo, Consolas, "Courier New", monospace
@@ -156,7 +153,7 @@ translate3d(x, y, z)
 // 
 //----------------------------------------------------------------------------
 
-body
+body#options_page
   background-color: $grayLighter
   color: $grayDark 
   width: 1000px 
@@ -166,18 +163,16 @@ body
   line-height: $baseLineHeight
   margin: 0 auto
 
-a
-  color: $linkColor
-  text-decoration: none
-  &:hover
-    color: $linkColorHover
-
+  a
+    color: $linkColor
+    text-decoration: none
+    &:hover
+      color: $linkColorHover
 
 #message
   center-block()
   font-size: $fontSizeLarge
 
-#message
   .info
   .success
   .warning
@@ -204,7 +199,6 @@ a
     border-color: $errorBorder
     color: $errorText
 
-
 button
   background-color: #f5f5f5
   background-image: linear-gradient(to bottom, #ffffff, #e6e6e6)
@@ -229,121 +223,114 @@ button
     border-color: $grayLight
     background-image: none
 
+#options_page
+  table 
+    max-width: 100%
+    background-color: $tableBackground
+    border-collapse: collapse
+    border-spacing: 0
 
-table 
-  max-width: 100%
-  background-color: $tableBackground
-  border-collapse: collapse
-  border-spacing: 0
+  .table 
+    width: 100%
+    margin-bottom: $baseLineHeight
+    border: 1px solid $tableBorder
+    border-collapse: separate // Done so we can round those corners!
+    *border-collapse: collapse // IE7 can't round corners anyway
+    border-left: 0
+    border-radius($baseBorderRadius)
 
-.table 
-  width: 100%
-  margin-bottom: $baseLineHeight
-  border: 1px solid $tableBorder
-  border-collapse: separate // Done so we can round those corners!
-  *border-collapse: collapse // IE7 can't round corners anyway
-  border-left: 0
-  border-radius($baseBorderRadius)
+    thead th 
+      vertical-align: bottom
 
-  thead th 
-    vertical-align: bottom
+    th 
+      font-weight: bold
+      &:nth-child(-n + 4)
+        background-image: url('../img/sort_arrows.gif')
+        background-repeat: no-repeat
+        background-position: center right
+        cursor: pointer
 
-  th 
-    font-weight: bold
-    &:nth-child(-n + 4)
-      background-image: url('../img/sort_arrows.gif')
-      background-repeat: no-repeat
-      background-position: center right
-      cursor: pointer
+    // stripes every other line
+    tbody 
+      > tr:nth-child(odd) > td
+      > tr:nth-child(odd) > th 
+        background-color: $tableBackgroundAccent
+      tr
+        &.success > td 
+          background-color: $successBackground
+        &.error > td 
+          background-color: $errorBackground
+        &.warning > td 
+          background-color: $warningBackground
+        &.info > td 
+          background-color: $infoBackground
 
-  // stripes every other line
-  tbody 
-    > tr:nth-child(odd) > td
-    > tr:nth-child(odd) > th 
-      background-color: $tableBackgroundAccent
-    tr
-      &.success > td 
-        background-color: $successBackground
-      &.error > td 
-        background-color: $errorBackground
-      &.warning > td 
-        background-color: $warningBackground
-      &.info > td 
-        background-color: $infoBackground
+    th
+    td 
+      height: $inputHeight
+      padding: $paddingSmall
+      line-height: $baseLineHeight
+      text-align: left
+      border-top: 1px solid $tableBorder
+      border-left: 1px solid $tableBorder
 
-  th
-  td 
-    height: $inputHeight
-    padding: $paddingSmall
+  //----------------------------------------------------------------------------
+  // Forms
+  //----------------------------------------------------------------------------
+  // Shared size and type resets
+  select, textarea, input[type="text"], input[type="url"], input[type="search"]
+    display: inline-block
+    vertical-align: middle
+    height: $baseLineHeight
     line-height: $baseLineHeight
-    text-align: left
-    border-top: 1px solid $tableBorder
-    border-left: 1px solid $tableBorder
+    background-color: $inputBackground
+    font-size: $baseFontSize
+    color: $gray
+    padding: 4px 6px
+    margin-top: ($baseLineHeight / 2)
+    margin-bottom: ($baseLineHeight / 2)
+    border: 1px solid $inputBorder
+    border-radius($inputBorderRadius)
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
 
-//----------------------------------------------------------------------------
-// Forms
-//----------------------------------------------------------------------------
+    &:focus
+      border-color: red
+      outline: 0
+      box-shadow inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)
+      //border-radius(10px)
+      transition: all .5s ease
 
-// Shared size and type resets
-select
-textarea
-input[type="text"]
-input[type="url"]
-input[type="search"]
-  display: inline-block
-  vertical-align: middle
-  height: $baseLineHeight
-  line-height: $baseLineHeight
-  background-color: $inputBackground
-  font-size: $baseFontSize
-  color: $gray
-  padding: 4px 6px
-  margin-top: ($baseLineHeight / 2)
-  margin-bottom: ($baseLineHeight / 2)
-  border: 1px solid $inputBorder
-  border-radius($inputBorderRadius)
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075)
+  // Set the height of select and file controls to match text inputs
+  select
+    height: $inputHeight 
+    line-height: $inputHeight
+    *margin-top: 4px /* For IE7, add top margin to align select with labels */
+    border: 1px solid $inputBorder
+    background-color: $inputBackground // Chrome on Linux and Mobile Safari need background-color
 
-  &:focus
-    border-color: red
-    outline: 0
-    box-shadow inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)
-    //border-radius(10px)
-    transition: all .5s ease
+  #fansubber,
+  #animeplanet
+    width: 150px
 
+  #animeplanet
+    display: none
 
-// Set the height of select and file controls to match text inputs
-select
-  height: $inputHeight 
-  line-height: $inputHeight
-  *margin-top: 4px /* For IE7, add top margin to align select with labels */
-  border: 1px solid $inputBorder
-  background-color: $inputBackground // Chrome on Linux and Mobile Safari need background-color
+  #main_title
+    width: 300px
 
-
-#fansubber,
-#animeplanet
-  width: 150px
-
-#animeplanet
-  display: none
- 
-#main_title
-  width: 300px
-
-form#nyaa_options
-  ul
-    list-style: none
-    margin-left: 0
-    padding-left: 2px
-    li
-      margin: ($baseLineHeight / 2) 0
-  input[type="checkbox"]
-    width: auto
-    margin: 4px 4px 0
-    line-height: normal
-  button
-    margin-top: 10px
+  form#nyaa_options
+    ul
+      list-style: none
+      margin-left: 0
+      padding-left: 2px
+      li
+        margin: ($baseLineHeight / 2) 0
+    input[type="checkbox"]
+      width: auto
+      margin: 4px 4px 0
+      line-height: normal
+    button
+      margin-top: 10px
 
 
 //----------------------------------------------------------------------------
@@ -354,8 +341,9 @@ form#nyaa_options
 //background-color: #222 !important
 //a
 // color: #A8A8A8 !important
+
 /*
-#main
+#nyaa_main
   &.content
     a:hover
       color: tomato
@@ -391,69 +379,122 @@ form#nyaa_options
     font-size: 15px
     font-weight: 400
     margin: 0px 2px
-
 */
 
 //----------------------------------------------------------------------------
 // SIDEBAR STYLES
+#nyaa_main
+  #topbar
+  #navbar
+    z-index: 101
 
-#topbar
-#navbar
-  z-index: 101
+  .highlight
+    color: purple
+    background-color: yellow
+    font-weight: 300
 
-.highlight
-  color: purple
-  background-color: yellow
-  font-weight: 300
+  #nyaajs_wrapper
+    position: relative
+    z-index: 100
+    float: right
+    right: 110px
+    font-size: 10px
+    color: #ccc
 
-#nyaajs_wrapper
-  position: relative
-  z-index: 100
-  float: right
-  right: 110px
-  font-size: 10px
-  color: #ccc
+  #nyaajs_showtimes
+    position: absolute
+    display: block
+    min-height: 300px
+    margin-top: 10px
+    float: right
+    border: 2px solid #666666
+    border-radius: 5px
+    color: $grayDark
+    a
+      text-decoration: none
+      &:hover
+        color: $linkColorHover
 
-#nyaajs_anime_list
-  min-width: 180px
+    table
+      //border-collapse: collapse
+      border-spacing: 0
+      width: 230px
+      padding: 7px
+      thead
+        size(0px, 0px)
+        visibility: hidden
+        & *
+          display: none
+      tbody 
+        tr
+          padding: 3px
+          width: 200px
+        > tr:nth-child(odd)
+          background-color: $tableBackgroundAccent
+        td
+          padding: 3px
 
-//.nyaajs_anime
+  #nyaajs_btn_sort
+  #nyaajs_btn_add
+    padding: 7px
+    color: #005544
+    text-decoration: underline !important
+    float: right
+    cursor: pointer
+    &:hover
+      color: tomato !important
 
-#nyaajs_showtimes
-  position: absolute
-  display: block
-  min-height: 300px
-  margin-top: 10px
-  float: right
-  background: #333
-  border: 2px solid #666666
-  border-radius: 5px
+  .nyaajs_anime_planet
+    color: violet !important
 
-#nyaajs_btn, #btn_add_anime
-  padding: 7px
-  text-decoration: underline
-  float: right
+  .nyaajs_today
+    color: yellow !important
+    text-decoration: underline
 
-#nyaajs_btn:hover
-  color: tomato
 
-#nyaajs_showtimes a:visited
-  color: #A8A8A8
 
-#nyaajs_showtimes ul
-  margin-top: 5px
-  list-style-type: none
-  padding: 7px
-  clear: both
+/*
+  #nyaajs_showtimes
+    position: absolute
+    display: block
+    min-height: 300px
+    margin-top: 10px
+    float: right
+    border: 2px solid #666666
+    border-radius: 5px
+    color: $grayDark
+    a
+      text-decoration: none
+      &:hover
+        color: $linkColorHover
+    ul
+      min-width: 180px
+      margin-top: 5px
+      list-style-type: none
+      padding: 7px
+      clear: both
+    li
+      padding: 3px
+      width: 200px
 
-#nyaajs_showtimes li
-  padding: 3px
-  width: 200px
+    .nyaajs_anime_li
+      .nyaajs_anime
+        display: inline-block
+        width: 150px
 
-.nyaajs_anime_planet
-  color: skyblue !important
-  margin-left: 3px
 
-.nyaajs_today
-  color: yellow !important
-  text-decoration: underline
+  #nyaajs_btn, #btn_add_anime
+    padding: 7px
+    text-decoration: underline
+    float: right
+    &:hover
+      color: tomato !important
+
+  .nyaajs_anime_planet
+    color: skyblue !important
+    margin-left: 3px
+
+  .nyaajs_today
+    color: yellow !important
+    text-decoration: underline
+*/

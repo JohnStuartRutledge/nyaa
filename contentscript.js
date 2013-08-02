@@ -13,63 +13,42 @@ var today   = weekday[d.getDay()];
 
 // construct nested HTML divs for holding my list of anime
 var mywrapper = $(document.createElement('div')).attr('id', 'nyaajs_wrapper');
-var mydiv     = $(document.createElement('div')).attr('id', 'nyaajs_showtimes');
-var animelist = $(document.createElement('ul')).attr('id', 'nyaajs_anime_list');
-var optionspg = $(document.createElement('a')).attr('id', 'btn_add_anime')
-                    .attr("href", chrome.extension.getURL("options.html"))
-                    .text("add anime");
-var nyaajs_btn = $(document.createElement('a')).attr('id', 'nyaajs_btn')
-                    .attr('href', '')
-                    .text('sort me');
 
+$('body').attr('id', 'nyaa_main'); // add id for custom styling
+$('#main').prepend(mywrapper);
 
 //----------------------------------------------------------------------------
 // 
 //----------------------------------------------------------------------------
 
 
-/*
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-    if (sender.tab) {
-        console.log('from a content script:'+sender.tab.url);
-    } else {
-        console.log('from the extension');
-    }
-    if (request.status === 'good') sendResponse({data: 'your data'});
-});
-*/
-
-/*
-var port = chrome.runtime.connect({name: 'nyaadb'});
-port.postMessage({joke: 'knock knock'});
-port.onMessage.addListener(function(msg) {
-    console.log(msg);
-});
-*/
-
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
+    // Send message through background.js to options.js to render the
+    // the animelist contents of the sidebar
 
-    if (!response.animeList) {
-        $('#nyaajs_anime_list').append(
+    if (!response.sidebar) {
+        $('#nyaajs_wrapper').html(
             $('<a>')
                 .attr("href", chrome.extension.getURL("options.html"))
                 .text("Add New Anime"));
     } else {
-        $('#nyaajs_anime_list').html(response.animeList);
+        $('#nyaajs_wrapper').html(response.sidebar);
     }
 
 });
 
-
-
-
-// append your completed HTML to the webpage and sort your list
-mydiv.append(nyaajs_btn);
-mydiv.append(optionspg);
-mydiv.append(animelist);
-mywrapper.append(mydiv);
-$('#main').prepend(mywrapper);
-
+$(document).ready(function() { 
+    var i = 1;
+    $("#nyaajs_wrapper table").tablesorter({ sortList: [[0,0]] }); 
+    $("#nyaajs_btn_sort").click(function() { 
+        // TODO - make this toggle between sorting on title and sorting on date
+        //        Consider displaying the table headers instead
+        i++;
+        var sorting = ((i % 2) !== 0) ? [[0, 0]] : [[0, 1]];
+        $("#nyaajs_wrapper table").trigger("sorton",[sorting]); 
+        return false; // this prevents default link action
+    }); 
+});
 
 //----------------------------------------------------------------------------
 // 

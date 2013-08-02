@@ -46,12 +46,60 @@ Controller.prototype.loadAnime = function () {
 	}
 };
 
+Controller.prototype.makeSideBar = function (callback) {
+	// render the anime sidebar for the contentscript
+	var view = this.view;
+	var url = "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=";
+
+	this.model.read(function (animeList) {
+		// TODO
+		// Make the URI encoding a seperate function that lets you pass in
+		// an object to use for encoding. 
+		$.each(animeList, function(i) {
+			var anime = animeList[i];
+
+			// Encode the URL
+			var urlquery = encodeURIComponent(anime.title + ' ' 
+				+ anime.fansubber + ' ' + anime.fidelity) + '&sort=1';
+			animeList[i]['url'] = url + urlquery;
+
+			// trucate anime titles that are too long to fit in the sidebar
+			var display_title = (anime.title.length <= 31
+				) ? anime.title : anime.title.substring(0, 31) + '..';
+			animeList[i]['title'] = display_title;
+
+			// if animeplanet is active, convert to proper link
+
+		});
+		callback(view.renderSidebar(animeList));
+	});
+}
+
 Controller.prototype.makeList = function (callback) {
 	// make an anime list for the sidebar
 	var view = this.view;
+	var url = "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=";
+
 	this.model.read(function (animeList) {
-		// TODO parse animeplanet url
-		// construct the special <a> tag for querying nyaa here
+		// TODO
+		// Make the URI encoding a seperate function that lets you pass in
+		// an object to use for encoding. 
+		$.each(animeList, function(i) {
+			var anime = animeList[i];
+
+			// Encode the URL
+			var urlquery = encodeURIComponent(anime.title + ' ' 
+				+ anime.fansubber + ' ' + anime.fidelity) + '&sort=1';
+			animeList[i]['url'] = url + urlquery;
+
+			// trucate anime titles that are too long to fit in the sidebar
+			var display_title = (anime.title.length <= 31
+				) ? anime.title : anime.title.substring(0, 31) + '..';
+			animeList[i]['title'] = display_title;
+
+			// if animeplanet is active, convert to proper link
+
+		});
 		callback(view.renderList(animeList));
 	});
 }

@@ -1,4 +1,4 @@
-body {
+body#options_page {
   background-color: #eee;
   color: #333;
   width: 1000px;
@@ -8,11 +8,11 @@ body {
   line-height: 15px;
   margin: 0 auto;
 }
-a {
+body#options_page a {
   color: #08c;
   text-decoration: none;
 }
-a:hover {
+body#options_page a:hover {
   color: #0074ad;
 }
 #message {
@@ -78,13 +78,13 @@ button:hover {
   border-color: #999;
   background-image: none;
 }
-table {
+#options_page table {
   max-width: 100%;
   background-color: transparent;
   border-collapse: collapse;
   border-spacing: 0;
 }
-.table {
+#options_page .table {
   width: 100%;
   margin-bottom: 15px;
   border: 1px solid #ddd;
@@ -97,36 +97,36 @@ table {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-.table thead th {
+#options_page .table thead th {
   vertical-align: bottom;
 }
-.table th {
+#options_page .table th {
   font-weight: bold;
 }
-.table th:nth-child(-n + 4) {
+#options_page .table th:nth-child(-n + 4) {
   background-image: url("../img/sort_arrows.gif");
   background-repeat: no-repeat;
   background-position: center right;
   cursor: pointer;
 }
-.table tbody > tr:nth-child(odd) > td,
-.table tbody > tr:nth-child(odd) > th {
+#options_page .table tbody > tr:nth-child(odd) > td,
+#options_page .table tbody > tr:nth-child(odd) > th {
   background-color: #f9f9f9;
 }
-.table tbody tr.success > td {
+#options_page .table tbody tr.success > td {
   background-color: #dff0d8;
 }
-.table tbody tr.error > td {
+#options_page .table tbody tr.error > td {
   background-color: #f2dede;
 }
-.table tbody tr.warning > td {
+#options_page .table tbody tr.warning > td {
   background-color: #fcf8e3;
 }
-.table tbody tr.info > td {
+#options_page .table tbody tr.info > td {
   background-color: #d9edf7;
 }
-.table th,
-.table td {
+#options_page .table th,
+#options_page .table td {
   height: 25px;
   padding: 2px 10px;
   line-height: 15px;
@@ -134,11 +134,11 @@ table {
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;
 }
-select,
-textarea,
-input[type="text"],
-input[type="url"],
-input[type="search"] {
+#options_page select,
+#options_page textarea,
+#options_page input[type="text"],
+#options_page input[type="url"],
+#options_page input[type="search"] {
   display: inline-block;
   vertical-align: middle;
   height: 15px;
@@ -157,11 +157,11 @@ input[type="search"] {
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
 }
-select:focus,
-textarea:focus,
-input[type="text"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus {
+#options_page select:focus,
+#options_page textarea:focus,
+#options_page input[type="text"]:focus,
+#options_page input[type="url"]:focus,
+#options_page input[type="search"]:focus {
   border-color: #f00;
   outline: 0;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(82,168,236,0.6);
@@ -171,7 +171,7 @@ input[type="search"]:focus {
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
 }
-select {
+#options_page select {
   height: 25px;
   line-height: 25px;
   *margin-top: 4px;
@@ -179,34 +179,34 @@ select {
   border: 1px solid #ccc;
   background-color: #fff;
 }
-#fansubber,
-#animeplanet {
+#options_page #fansubber,
+#options_page #animeplanet {
   width: 150px;
 }
-#animeplanet {
+#options_page #animeplanet {
   display: none;
 }
-#main_title {
+#options_page #main_title {
   width: 300px;
 }
-form#nyaa_options ul {
+#options_page form#nyaa_options ul {
   list-style: none;
   margin-left: 0;
   padding-left: 2px;
 }
-form#nyaa_options ul li {
+#options_page form#nyaa_options ul li {
   margin: 7.5px 0;
 }
-form#nyaa_options input[type="checkbox"] {
+#options_page form#nyaa_options input[type="checkbox"] {
   width: auto;
   margin: 4px 4px 0;
   line-height: normal;
 }
-form#nyaa_options button {
+#options_page form#nyaa_options button {
   margin-top: 10px;
 }
 /*
-#main
+#nyaa_main
   &.content
     a:hover
       color: tomato
@@ -242,18 +242,17 @@ form#nyaa_options button {
     font-size: 15px
     font-weight: 400
     margin: 0px 2px
-
 */
-#topbar,
-#navbar {
+#nyaa_main #topbar,
+#nyaa_main #navbar {
   z-index: 101;
 }
-.highlight {
+#nyaa_main .highlight {
   color: #800080;
   background-color: #ff0;
   font-weight: 300;
 }
-#nyaajs_wrapper {
+#nyaa_main #nyaajs_wrapper {
   position: relative;
   z-index: 100;
   float: right;
@@ -261,50 +260,110 @@ form#nyaa_options button {
   font-size: 10px;
   color: #ccc;
 }
-#nyaajs_anime_list {
-  min-width: 180px;
-}
-#nyaajs_showtimes {
+#nyaa_main #nyaajs_showtimes {
   position: absolute;
   display: block;
   min-height: 300px;
   margin-top: 10px;
   float: right;
-  background: #333;
   border: 2px solid #666;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
+  color: #333;
 }
-#nyaajs_btn,
-#btn_add_anime {
+#nyaa_main #nyaajs_showtimes a {
+  text-decoration: none;
+}
+#nyaa_main #nyaajs_showtimes a:hover {
+  color: #0074ad;
+}
+#nyaa_main #nyaajs_showtimes table {
+  border-spacing: 0;
+  width: 230px;
   padding: 7px;
-  text-decoration: underline;
-  float: right;
 }
-#nyaajs_btn:hover {
-  color: #ff6347;
+#nyaa_main #nyaajs_showtimes table thead {
+  height: 0px;
+  width: 0px;
+  visibility: hidden;
 }
-#nyaajs_showtimes a:visited {
-  color: #a8a8a8;
+#nyaa_main #nyaajs_showtimes table thead * {
+  display: none;
 }
-#nyaajs_showtimes ul {
-  margin-top: 5px;
-  list-style-type: none;
-  padding: 7px;
-  clear: both;
-}
-#nyaajs_showtimes li {
+#nyaa_main #nyaajs_showtimes table tbody tr {
   padding: 3px;
   width: 200px;
 }
-.nyaajs_anime_planet {
-  color: #87ceeb !important;
-  margin-left: 3px;
+#nyaa_main #nyaajs_showtimes table tbody > tr:nth-child(odd) {
+  background-color: #f9f9f9;
 }
-.nyaajs_today {
+#nyaa_main #nyaajs_showtimes table tbody td {
+  padding: 3px;
+}
+#nyaa_main #nyaajs_btn_sort,
+#nyaa_main #nyaajs_btn_add {
+  padding: 7px;
+  color: #054;
+  text-decoration: underline !important;
+  float: right;
+  cursor: pointer;
+}
+#nyaa_main #nyaajs_btn_sort:hover,
+#nyaa_main #nyaajs_btn_add:hover {
+  color: #ff6347 !important;
+}
+#nyaa_main .nyaajs_anime_planet {
+  color: #ee82ee !important;
+}
+#nyaa_main .nyaajs_today {
   color: #ff0 !important;
   text-decoration: underline;
 }
+/*
+  #nyaajs_showtimes
+    position: absolute
+    display: block
+    min-height: 300px
+    margin-top: 10px
+    float: right
+    border: 2px solid #666666
+    border-radius: 5px
+    color: $grayDark
+    a
+      text-decoration: none
+      &:hover
+        color: $linkColorHover
+    ul
+      min-width: 180px
+      margin-top: 5px
+      list-style-type: none
+      padding: 7px
+      clear: both
+    li
+      padding: 3px
+      width: 200px
+
+    .nyaajs_anime_li
+      .nyaajs_anime
+        display: inline-block
+        width: 150px
+
+
+  #nyaajs_btn, #btn_add_anime
+    padding: 7px
+    text-decoration: underline
+    float: right
+    &:hover
+      color: tomato !important
+
+  .nyaajs_anime_planet
+    color: skyblue !important
+    margin-left: 3px
+
+  .nyaajs_today
+    color: yellow !important
+    text-decoration: underline
+*/
