@@ -50,6 +50,16 @@ $('.table').on("click", function(evt) {
 	} 
 });
 
+$('#reset_btn').on('click', function(evt) {
+	// confirm if they want to clear all anime from the list
+	if(confirm("Are you sure you want to delete all your anime?")) {
+		anime.storage.drop(function() {
+			console.log('all anime was deleted');
+			anime.controller.loadAnime();
+		});
+	} 
+});
+
 $('#nyaa_options input[type=checkbox]').change(function() {
 	// they made an adjustment to the settings box
 	anime.controller.updateSettings($(this));

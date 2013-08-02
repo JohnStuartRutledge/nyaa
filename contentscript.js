@@ -53,7 +53,7 @@ function sidebarConfig () {
         //        Consider displaying the table headers instead
         i++;
         var sorting = ((i % 2) !== 0) ? [[0, 0]] : [[0, 1]];
-        $("#nyaajs_wrapper table").trigger("sorton",[sorting]); 
+        $("#nyaajs_wrapper table").trigger("sorton", [sorting]); 
         return false; // this prevents default link action
     }); 
 };
