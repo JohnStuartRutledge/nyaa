@@ -1,16 +1,16 @@
 # Chrome Extension for Nyaa
 
-An extension for Google Chrome that augments the anime torrent tracking site [nyaa.eu](http://nyaa.eu) with extra functionality. It keeps a list of anime you are currently watching and makes it convenient to locate new releases. 
+An extension for Google Chrome that augments the anime torrent tracking site [nyaa.eu](http://nyaa.eu) with extra functionality. It keeps an editable list of your watched anime making it convenient to locate new releases. 
 
 It has the following capabailities:
 
-- provides an options page to add new anime (you define fansubber, title, fidelity, release date)
+- provides an options page to add new anime (fansubber, title, fidelity, release date)
+- adds a side bar containing your watch-list to the right side of the page
+- clicking on titles in the side bar automatically searches nyaa for that title 
 - optionally associate [anime-planet](http://www.anime-planet.com/) anime profiles with your watched anime.
 - optionally make nyaas seach default to 'english-translated anime' 
-- adds a side bar containing your watch-list to the right side of the page
 - highlights anime on the page that matches anime in your watch-list
-- clicking on anime titles in your side bar automatically generates a search for that anime
-- anime titles whose release date matches todays date, automatically get highlighted
+- highlights anime in the side bar whose release date matches todays date
 
 ## 3rd Party Dependencies
 - [Jquery2.0.3](http://jquery.com/)
