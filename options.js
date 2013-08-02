@@ -74,13 +74,4 @@ chrome.runtime.getBackgroundPage(function(data) {
 	main(data.anime);
 });
 
-
-        "js/jquery-2.0.3.min.js",
-        "js/jquery.tablesorter.min.js",
-        "js/jquery.highlight.js",
-        "store.js",
-        "model.js",
-        "view.js",
-        "controller.js",
-
 */

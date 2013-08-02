@@ -205,44 +205,6 @@ button:hover {
 #options_page form#nyaa_options button {
   margin-top: 10px;
 }
-/*
-#nyaa_main
-  &.content
-    a:hover
-      color: tomato
-    a:visited
-      color: violet !important
-
-  div
-    &.content, .remake, .trusted, .aplus
-      background-color: #444 !important
-
-    &.comment
-      background-color: #999
-      clear: both
-      color: black
-      display: inline-block
-      min-width: 800px
-
-    &.tinfodescription
-      background-color: #383838
-
-    & td.tlisticon a img
-      height: 70%
-      width: 70%
-
-  .tinfodownloadbutton
-    background-color: #222
-    border: 2px solid yellow
-    padding: 20px 0px
-    text-align: center
-
-  .tlistsn
-    color: cornsilk
-    font-size: 15px
-    font-weight: 400
-    margin: 0px 2px
-*/
 #nyaa_main #topbar,
 #nyaa_main #navbar {
   z-index: 101;
@@ -323,47 +285,40 @@ button:hover {
   text-decoration: underline;
 }
 /*
-  #nyaajs_showtimes
-    position: absolute
-    display: block
-    min-height: 300px
-    margin-top: 10px
-    float: right
-    border: 2px solid #666666
-    border-radius: 5px
-    color: $grayDark
-    a
-      text-decoration: none
-      &:hover
-        color: $linkColorHover
-    ul
-      min-width: 180px
-      margin-top: 5px
-      list-style-type: none
-      padding: 7px
+#nyaa_main
+  &.content
+    a:hover
+      color: tomato
+    a:visited
+      color: violet !important
+
+  div
+    &.content, .remake, .trusted, .aplus
+      background-color: #444 !important
+
+    &.comment
+      background-color: #999
       clear: both
-    li
-      padding: 3px
-      width: 200px
+      color: black
+      display: inline-block
+      min-width: 800px
 
-    .nyaajs_anime_li
-      .nyaajs_anime
-        display: inline-block
-        width: 150px
+    &.tinfodescription
+      background-color: #383838
 
+    & td.tlisticon a img
+      height: 70%
+      width: 70%
 
-  #nyaajs_btn, #btn_add_anime
-    padding: 7px
-    text-decoration: underline
-    float: right
-    &:hover
-      color: tomato !important
+  .tinfodownloadbutton
+    background-color: #222
+    border: 2px solid yellow
+    padding: 20px 0px
+    text-align: center
 
-  .nyaajs_anime_planet
-    color: skyblue !important
-    margin-left: 3px
-
-  .nyaajs_today
-    color: yellow !important
-    text-decoration: underline
+  .tlistsn
+    color: cornsilk
+    font-size: 15px
+    font-weight: 400
+    margin: 0px 2px
 */
