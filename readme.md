@@ -15,11 +15,10 @@ It has the following capabailities:
 ## 3rd Party Dependencies
 - [Jquery2.0.3](http://jquery.com/)
 - [Jquery.tablesorter.2.0.5](http://tablesorter.com/docs/)
-- [Jquery Highlight Plugin](http://bartaz.github.com/sandbox.js/jquery.highlight.html)
-
+- [Jquery.regex.extend](https://gist.github.com/Mottie/461488)
 
 ## TODOS
-- use a reeal templating language like handlebars/mustache
+- use a minamalist templating language like mustache
 - add the ability to sort sidebar anime by release date
 - do not highlight episodes you have already downloaded
 - optionally activate a dark theme similar to reddit enhancment suites (night mode)
@@ -28,4 +27,3 @@ It has the following capabailities:
 - auto-convert trusted fansubber tags to links to that fansubbers home site 
 - add tabs to the sidebar and place nyaas ad banner in a tab
 - when anime is from a fansubber who does only raw untranslated anime ensure the url uses &cats=1_11
-- ensure anime with underscores in them get highlighted

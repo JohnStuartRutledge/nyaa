@@ -47,9 +47,8 @@ function sidebarConfig () {
     // the watched list, and highlighting todays anime
     var i = 1;
     $("#nyaajs_wrapper table").tablesorter({ sortList: [[0,0]] }); 
+    // resort your anime when they click the sort button
     $("#nyaajs_btn_sort").click(function() { 
-        // TODO - make this toggle between sorting on title and sorting on date
-        //        Consider displaying the table headers instead
         i++;
         var sorting = ((i % 2) !== 0) ? [[0, 0]] : [[0, 1]];
         $("#nyaajs_wrapper table").trigger("sorton", [sorting]); 
@@ -58,13 +57,12 @@ function sidebarConfig () {
 };
 
 function highlightAnime (anime) {
-    // TODO - find a more efficent way to do this
     // function for highlighting anime on the page
     var escaped_pattern = new RegExp("[\\s+\\_\\-\\.]", "g");
     var title_regex = anime.title.replace(
                         escaped_pattern, "[\\s+\\_\\-\\.]");
-    // _nartuo_shippuden  plus
-    // [...]naruto[...]shippuden[...]plus
+    // _nartuo_shippuden 
+    // [\s+\_\-\.]naruto[\s+\_\-\.]shippuden
     var pg_matches = $(
         '.content tr a:containsRegex("/'+ title_regex +'/i"):contains("'
         + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
@@ -90,36 +88,18 @@ function highlightAnime (anime) {
 
 
 /*----------------------------------------------------------------------------
-// 
-//----------------------------------------------------------------------------
-
-TODO
-- persist sidebar sort order across page loads
-
-
-// highlight matching anime on nyaa's list of torrents
-//$('a:contains('+ anime.fansubber +'):contains('+ anime.title +'):contains('+ anime.fidelity +')').highlight(anime.title);
-
-
-}
-*/
-
-//----------------------------------------------------------------------------
 // TODO
 //----------------------------------------------------------------------------
-/*
+
+- find a more efficent way to highlight anime on the page
+- persist sidebar sort order across page loads using local storage
 - sort by both date, and 2ndary sort by title
 - only highlight undownloaded anime
 - when searching for raw anime the url should include: &cats=1_11
 - fix your css class names
-- use chrome local storage to store sort state
 - everytime you click the download link of a particular anime you should run a
   search that checks the current page for all titles in local storage and when
   it finds a match it should update the latest number you have downloaded. That
   way you can force nyaa to only highlight anime you have not yet downloaded.
-- be sure to highlight anime with and without underscores between the words
-  in it's title. as it stands you are highlighting literal matches only.
 
-replace your jquery sort library with:
-    http://mottie.github.io/tablesorter/docs/
 */

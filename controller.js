@@ -200,7 +200,8 @@ function isToday(airday) {
 
 function sanitizeTitle(title) {
 	// Removes unecessary extra spaces from title from a title
-	// title = title.replace(/[\s+\_\-\.]/g, ' ');
+	// TODO - make sure first character in title is a [a-aA-Z0-9]
+	//        and if it's not then remove the initial character till it is
 	title = title.replace(/\s+/g, ' ');
 	return title.trim();
 }
@@ -208,11 +209,8 @@ function sanitizeTitle(title) {
 function tableUpdated() {
 	var sorting;
 	$('#anime_table').trigger('update');
-	try {
-		sorting = $('#anime_table').get(0).config.sortList; 
-	} catch (exception) {
-		sorting = [0, 0];
-	}
+	try { sorting = $('#anime_table').get(0).config.sortList; } 
+	catch (exception) { sorting = [0, 0]; }
 	$('#anime_table').trigger('sorton', [sorting]);
 	//$('#anime_table').trigger('appendCache');
 }

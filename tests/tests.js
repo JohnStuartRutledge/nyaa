@@ -52,7 +52,7 @@ var fixtures = [
     {fansubber: 'Leopard-Raws', title: '', fidelity: '', air_day: '', animeplanet: ''},
     {fansubber: 'S.N', title: '_Shingeki_no_Kyojin_', fidelity: '', air_day: '', animeplanet: ''},
     {fansubber: '초다링-Raws', title: 'Love Lab', fidelity: '', air_day: '', animeplanet: ''},
-    {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: '', title: '_Naruto_Shippuuden', fidelity: '', air_day: '', animeplanet: ''},
     {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
     {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
 ];
