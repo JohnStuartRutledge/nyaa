@@ -60,8 +60,11 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	// this is a listener that sends an anime list to the contentscript
 	// page and is rendered in the sidebar throughout nyaa.eu
 	if (request.cmd === 'getStoredAnime') {
-		var foo = anime.controller.makeSideBar(function (sidebar) {
-			sendResponse({ 'sidebar' : sidebar });
+		var foo = anime.controller.makeSideBar(function (sidebar, animeList) {
+			sendResponse({ 
+				'animeList': animeList,
+				'sidebar'  : sidebar 
+			});
 		});
 	}
 });

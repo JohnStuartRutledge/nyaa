@@ -34,8 +34,13 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
     } else {
         $('#nyaajs_wrapper').html(response.sidebar);
         sidebarConfig();
-    }
 
+        // highlight matching anime on the page
+        $.each(response.animeList, function(i) {
+            //var anime_name = response.animeList[i].title;
+            highlightAnime(response.animeList[i]);
+        });
+    }
 });
 
 function sidebarConfig () {
@@ -51,10 +56,43 @@ function sidebarConfig () {
         $("#nyaajs_wrapper table").trigger("sorton",[sorting]); 
         return false; // this prevents default link action
     }); 
-
-    // highlight anime whose release date is today
-    //if (anime.release_date === today) { aa.addClass('nyaajs_today'); }
 };
+
+function highlightAnime (anime) {
+    // function for highlighting anime on the page
+    //var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
+    //var title_regex = anime.title.replace(
+    //                    escaped_pattern, "[\\s|\\_|\\-|\\.]");
+
+    var pg_matches = $('.content tr a:contains("'+ anime.title +'"):contains("'
+        + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
+
+    pg_matches.each(function() {
+        var txt         = $(this).text(),
+            words       = anime.title.match(/\S+/gi),
+            first_word  = words[0],
+            last_word   = words[words.length-1],
+            start_index = txt.indexOf(words[0]),
+            start_end   = start_index + first_word.length,
+            end_index   = txt.lastIndexOf(last_word)+last_word.length,
+            end_start   = end_index - last_word.length;
+
+        var foo = txt.substring(0, start_index)
+            + '<span class="highlight">'
+            + txt.substring(start_index, end_index)
+            + '</span>'
+            + txt.substring(end_index, txt.length);
+
+        $(this).html(foo);
+    });
+    /*
+    matching_anime = $(
+        'a:containsRegex("/'+ title_regex +'/i"):contains("'
+        + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
+    */
+
+}
+
 
 /*----------------------------------------------------------------------------
 // 

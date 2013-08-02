@@ -71,9 +71,8 @@ Controller.prototype.makeSideBar = function (callback) {
 
 			// if animeplanet is active, convert to proper link
 			animeList[i]['highlight'] = isToday(anime.air_day) ? true : false; 
-			console.log(animeList[i]);
 		});
-		callback(view.renderSidebar(animeList));
+		callback(view.renderSidebar(animeList), animeList);
 	});
 }
 

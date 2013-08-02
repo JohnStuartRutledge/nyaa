@@ -109,7 +109,6 @@ View.prototype.renderRows = function (animeList) {
         template = template.replace('{{ animeplanet }}', anime.animeplanet);
 
         // add class to highlight anime if it airs today
-        console.log(anime.title, anime.highlight);
         if (anime.highlight) {
             template = template.replace('{{ highlight }}', 'class="nyaajs_today"');
         } else {
