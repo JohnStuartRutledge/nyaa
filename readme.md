@@ -1,35 +1,31 @@
 # Chrome Extension for Nyaa
 
-This is my personal extension for tracking and quickly navigating to my currently watched anime on [nyaa.eu](http://nyaa.eu).
+An extension for Google Chrome that augments the anime torrent tracking site [nyaa.eu](http://nyaa.eu) with extra functionality. It keeps a list of anime you are currently watching and makes it convenient to locate new releases. 
 
-It does the following things:
-- provides an options screen for you to add new anime narrowed by: fansubber, title, fidelity
-- auto-sets the catagory dropdown form on nyaa's homepage to the default value 'english-translated anime'
-- creates a side bar containing your currently watched anime on the right side of the page
-- each anime in your list automatically filters nyaa's anime to your chosen title/fansubber/quality
-- each anime in your list includes a link to it's [anime-planet](http://www.anime-planet.com/) profile page
-- each anime in your list includes the date the fansubber is expected to release the anime on
+It has the following capabailities:
 
+- provides an options page to add new anime (you define fansubber, title, fidelity, release date)
+- optionally associate [anime-planet](http://www.anime-planet.com/) anime profiles with your watched anime.
+- optionally make nyaas seach default to 'english-translated anime' 
+- adds a side bar containing your watch-list to the right side of the page
+- highlights anime on the page that matches anime in your watch-list
+- clicking on anime titles in your side bar automatically generates a search for that anime
+- anime titles whose release date matches todays date, automatically get highlighted
 
 ## 3rd Party Dependencies
-- [Jquery1.8](http://jquery.com/)
+- [Jquery2.0.3](http://jquery.com/)
+- [Jquery.tablesorter.2.0.5](http://tablesorter.com/docs/)
 - [Jquery Highlight Plugin](http://bartaz.github.com/sandbox.js/jquery.highlight.html)
 
 
 ## TODOS
-- when sorting anime by release date, ensure the day names are in order
-- find a new sorting plugin that supports sorting on two dimensions
-- use chrome local storage for storing your sort state
-- only highlight episodes you have not yet downloaded
-- when your anime is from a fansubber that does only raw untranslated anime make sure your url uses &cats=1_11
-- change the CSS class names to something more explicit
-- automatically create links out of the fansubber tags (e.g., [HorribleSubs]) to the fansubbers home site if the fansubber is in our trusted list.
-- make the dark theme an option similar to reddit enhancment suite (night mode)
-- make animeplanet urls and tracking optional. If the checkbox is not activated then remove all animeplanet related stuff.
-- change list of anime so its in a table element vs the current li element
-- add color coded error messages to the message() function
-- refactor the code to be more DRY. Currently you have some repetative code (see: instantiating a new Anime class and updating an anime)
-- add links to fansubber/user page on nyaa.
-- fix bug where anime that uses underscores instead of spaces in the title
-  breaks the highlighting feature.
-- relocate nyaa's into a tab on your sidebar. Set the sidebar min-width to the exact width of the ad
+- use a reeal templating language like handlebars/mustache
+- add the ability to sort sidebar anime by release date
+- do not highlight episodes you have already downloaded
+- optionally activate a dark theme similar to reddit enhancment suites (night mode)
+- fix the settings functionality
+- add convenience links to your fansubbers nyaa-user-page
+- auto-convert trusted fansubber tags to links to that fansubbers home site 
+- add tabs to the sidebar and place nyaas ad banner in a tab
+- when anime is from a fansubber who does only raw untranslated anime ensure the url uses &cats=1_11
+- ensure anime with underscores in them get highlighted
