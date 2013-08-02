@@ -14,6 +14,10 @@ $(document).ready(function () {
 	// refresh the anime list everytime the page loads
 	anime.controller.loadAnime();
 
+	// TODO
+	// if they click "Air Day" to sort by date in the thead then
+	// make the days sort in numeric and not alphabetical order
+
 	// make the anime table sortable
 	$('#anime_table').tablesorter({
 		sortList: [[0,0], [1,0]],
@@ -67,8 +71,8 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	if (request.cmd === 'getStoredAnime') {
 		var foo = anime.controller.makeSideBar(function (sidebar, animeList) {
 			sendResponse({ 
-				'animeList': animeList,
-				'sidebar'  : sidebar 
+				'sidebar'  : sidebar,
+				'animeList': animeList
 			});
 		});
 	}

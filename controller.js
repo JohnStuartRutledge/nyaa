@@ -57,6 +57,10 @@ Controller.prototype.makeSideBar = function (callback) {
 		// TODO
 		// Make the URI encoding a seperate function that lets you pass in
 		// an object to use for encoding. 
+
+		// deep copy the object in order to send raw data to contentscript pg.
+		var originalList = $.extend(true, {}, animeList);
+
 		$.each(animeList, function(i) {
 			var anime = animeList[i];
 
@@ -66,6 +70,7 @@ Controller.prototype.makeSideBar = function (callback) {
 			animeList[i]['url'] = url + urlquery;
 
 			// truncate anime titles that are too long to fit in the sidebar
+			var og_title = anime.title;
 			var display_title = (anime.title.length <= 31
 				) ? anime.title : anime.title.substring(0, 31) + '..';
 			animeList[i]['title'] = display_title;
@@ -73,7 +78,7 @@ Controller.prototype.makeSideBar = function (callback) {
 			// if animeplanet is active, convert to proper link
 			animeList[i]['highlight'] = isToday(anime.air_day) ? true : false; 
 		});
-		callback(view.renderSidebar(animeList), animeList);
+		callback(view.renderSidebar(animeList), originalList);
 	});
 }
 
@@ -109,13 +114,13 @@ Controller.prototype.makeList = function (callback) {
 Controller.prototype.addAnime = function () {
 	// they are saving a new anime to the DB
 	var fansubber   = $('#fansubber').val(),
-		title       = $('#main_title').val(),
+		title       = sanitizeTitle($('#main_title').val()),
 		fidelity    = $('#fidelity').val(),
 		air_day     = $('#air_day').val(),
 		animeplanet = $('#animeplanet').val();
 
-	//fidelity = (fidelity === undefined) ? 'none' : fidelity;
-	//air_day  = (air_day === undefined) ? '?' : air_day;
+	fidelity = (fidelity === 'none') ? '' : fidelity;
+	air_day  = (air_day === 'unknown') ? '?' : air_day;
 	this.model.create(fansubber, title, fidelity, air_day, animeplanet, function() {
 		message('anime successfully saved', 'success');
 	});
@@ -138,12 +143,13 @@ Controller.prototype.updateAnime = function (elem) {
 	// Update the anime with new data	
 	var newData = {
 		fansubber   : elem.find('.form_fansubber').val(),
-		title       : elem.find('.form_title').val(),
+		title       : sanitizeTitle(elem.find('.form_title').val()),
 		fidelity    : elem.find('.form_fidelity').val(),
 		air_day     : elem.find('.form_air_day').val(),
 		animeplanet : elem.find('.form_animeplanet').val()
 	};
-
+	newData.fidelity = (newData.fidelity === 'none') ? '' : newData.fidelity;
+	newData.air_day  = (newData.air_day === 'unknown') ? '?' : newData.air_day;
 	this.model.update(lookupId(elem), newData, function() {
 		message('your anime was updated', 'success');
 	});
@@ -190,6 +196,13 @@ function isToday(airday) {
 	    today   = weekday[d.getDay()];
 	if (airday === today) return true;
 	return false
+}
+
+function sanitizeTitle(title) {
+	// Removes unecessary extra spaces from title from a title
+	// title = title.replace(/[\s+\_\-\.]/g, ' ');
+	title = title.replace(/\s+/g, ' ');
+	return title.trim();
 }
 
 function tableUpdated() {

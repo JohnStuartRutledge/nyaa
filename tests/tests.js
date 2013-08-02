@@ -47,6 +47,16 @@ test("a test", function(assert) {
 
 */
 
+var fixtures = [
+    {fansubber: 'HorribleSubs', title: 'Naruto Shippuuden', fidelity: '720', air_day: 'thu', animeplanet: 'naruto-shippuden'},
+    {fansubber: 'Leopard-Raws', title: '', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: 'S.N', title: '_Shingeki_no_Kyojin_', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: '초다링-Raws', title: 'Love Lab', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
+    {fansubber: '', title: '', fidelity: '', air_day: '', animeplanet: ''},
+];
+
 
 //============================================================================
 //

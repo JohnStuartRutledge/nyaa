@@ -69,6 +69,10 @@ Store.prototype.save = function (id, updateData, callback) {
 
 	callback = callback || function () {};
 
+	// TODO
+	// check for duplicates and return error if anime matches on
+	// fansubber + title + fidelity
+
 	// If an ID was actually given, find the item and update each property
 	if (typeof id !== 'object') {
 		for (var i=0, len=animeList.length; i<len; i++) {

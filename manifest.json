@@ -31,7 +31,7 @@
       "js":      [
         "js/jquery-2.0.3.min.js",
         "js/jquery.tablesorter.min.js",
-        "js/jquery.highlight.js",
+        "js/jquery.regex.extend.js",
         "contentscript.js"
       ],
       "css":     ["css/nyaa.css"],

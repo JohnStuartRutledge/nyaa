@@ -37,7 +37,6 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
 
         // highlight matching anime on the page
         $.each(response.animeList, function(i) {
-            //var anime_name = response.animeList[i].title;
             highlightAnime(response.animeList[i]);
         });
     }
@@ -59,14 +58,16 @@ function sidebarConfig () {
 };
 
 function highlightAnime (anime) {
+    // TODO - find a more efficent way to do this
     // function for highlighting anime on the page
-    //var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
-    //var title_regex = anime.title.replace(
-    //                    escaped_pattern, "[\\s|\\_|\\-|\\.]");
-
-    var pg_matches = $('.content tr a:contains("'+ anime.title +'"):contains("'
+    var escaped_pattern = new RegExp("[\\s+\\_\\-\\.]", "g");
+    var title_regex = anime.title.replace(
+                        escaped_pattern, "[\\s+\\_\\-\\.]");
+    // _nartuo_shippuden  plus
+    // [...]naruto[...]shippuden[...]plus
+    var pg_matches = $(
+        '.content tr a:containsRegex("/'+ title_regex +'/i"):contains("'
         + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
-
     pg_matches.each(function() {
         var txt         = $(this).text(),
             words       = anime.title.match(/\S+/gi),
@@ -85,12 +86,6 @@ function highlightAnime (anime) {
 
         $(this).html(foo);
     });
-    /*
-    matching_anime = $(
-        'a:containsRegex("/'+ title_regex +'/i"):contains("'
-        + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
-    */
-
 }
 
 
@@ -101,40 +96,6 @@ function highlightAnime (anime) {
 TODO
 - persist sidebar sort order across page loads
 
-// ensure that the anime gets highlighted regardles of whether
-// whitespace, underscores, dashes, or periods seperate the words
-
-var escaped_pattern = new RegExp("[\\s|\\_|\\-|\\.]", "g");
-var title_regex = anime.title.replace(
-                        escaped_pattern, "[\\s|\\_|\\-|\\.]")
-matching_anime = $(
-    'a:containsRegex("/'+ title_regex +'/i"):contains("'
-    + anime.fansubber +'"):contains("'+ anime.fidelity +'")');
-
-matching_anime.each(function() {
-    // TODO
-    // move the variable declerations out of the each statement
-    // you only need to resave them once per anime.title
-    // this is also better done with a regex
-
-    // highlight just the title and not the whole line
-    var txt = $(this).text(),
-        words       = anime.title.match(/\S+/gi),
-        first_word  = words[0],
-        last_word   = words[words.length-1],
-        start_index = txt.indexOf(words[0]),
-        start_end   = start_index + first_word.length,
-        end_index   = txt.lastIndexOf(last_word)+last_word.length,
-        end_start   = end_index - last_word.length;
-
-    var foo = txt.substring(0, start_index)
-        + '<span class="highlight">'
-        + txt.substring(start_index, end_index)
-        + '</span>'
-        + txt.substring(end_index, txt.length);
-
-    $(this).html(foo);
-});
 
 // highlight matching anime on nyaa's list of torrents
 //$('a:contains('+ anime.fansubber +'):contains('+ anime.title +'):contains('+ anime.fidelity +')').highlight(anime.title);
