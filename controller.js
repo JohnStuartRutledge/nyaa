@@ -34,6 +34,7 @@ Controller.prototype.loadAnime = function () {
 	var view = this.view;
 	this.model.read(function (animeList) {
 		$('#anime_table tbody').html(view.renderTable(animeList));
+		tableUpdated();	
 	});
 
 	// update the settings options with values from DB
@@ -114,7 +115,7 @@ Controller.prototype.addAnime = function () {
 		animeplanet = $('#animeplanet').val();
 
 	this.model.create(fansubber, title, fidelity, air_day, animeplanet, function() {
-		console.log('call message function "anime successfully saved" ');
+		message('anime successfully saved', 'success');
 	});
 	this.loadAnime(); // refresh the page
 };
@@ -142,8 +143,7 @@ Controller.prototype.updateAnime = function (elem) {
 	};
 
 	this.model.update(lookupId(elem), newData, function() {
-		console.log('call message: "updated your anime" ');
-		tableUpdated();
+		message('your anime was updated', 'success');
 	});
 
 	this.loadAnime(); 
@@ -153,19 +153,19 @@ Controller.prototype.deleteAnime = function (elem) {
 	// Delete an anime from the database
 	var controller = this;
 	this.model.remove(lookupId(elem), function() {
-		console.log('call message: "successfully removed anime from DB" ');
+		message('your anime was deleted', 'success');
 	});
-
 	this.loadAnime();
+	tableUpdated();
 };
 
 Controller.prototype.removeAll = function () {
 	// remove all anime from the Database
-	this.model.removeAll(function () {
-		// TODO: make this a confirm()
-		console.log('call message: "successfully deleted all anime" ');
-	});	
-
+	if(confirm("Are you sure you want to delete all your anime?")) {
+		this.model.removeAll(function () {
+			message('successfully deleted all anime', 'success');
+		});	
+	}
 	this.loadAnime();
 };
 
@@ -191,8 +191,13 @@ function isToday(airday) {
 }
 
 function tableUpdated() {
+	var sorting;
 	$('#anime_table').trigger('update');
-	var sorting = $('#anime_table').get(0).config.sortList; 
+	try {
+		sorting = $('#anime_table').get(0).config.sortList; 
+	} catch (exception) {
+		sorting = [0, 0];
+	}
 	$('#anime_table').trigger('sorton', [sorting]);
 	//$('#anime_table').trigger('appendCache');
 }
