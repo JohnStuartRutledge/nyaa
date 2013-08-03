@@ -281,7 +281,7 @@ button:hover {
   color: #ee82ee !important;
 }
 #nyaa_main .nyaajs_today {
-  background-color: #ff0;
+  background-color: #ff0 !important;
 }
 .opt_animeplanet {
   display: none;

@@ -40,9 +40,12 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
 function sidebarConfig (settings) {
     // this function configures the sidebar 
 
+    // TODO
+    // make this toggle between sorting on the title of the anime
+    // and sorting on the release date
     // setup the sort button to sort the table
     var i = 1;
-    $("#nyaajs_wrapper table").tablesorter({ sortList: [[0,0]] }); 
+    $("#nyaajs_wrapper table").tablesorter({ sortList: [[0, 0]] }); 
     // resort your anime when they click the sort button
     $("#nyaajs_btn_sort").click(function() { 
         i++;
