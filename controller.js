@@ -42,14 +42,24 @@ Controller.prototype.loadAnime = function () {
 
 Controller.prototype.makeSideBar = function (callback) {
 	// render the anime sidebar for the contentscript
+	var context = this;
 	var view = this.view;
-	var url = "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=";
+	var url = "http://www.nyaa.eu/?page=search"
 	var animeplanetRoot = "http://www.anime-planet.com/anime/";
 
 	this.model.read(function (animeList) {
 		// TODO
 		// Make the URI encoding a seperate function that lets you pass in
 		// an object to use for encoding. 
+
+		// TODO
+		// find a way to move this settings lookup into the makeNyaaURL
+		// function without having to recall it each time in the $.each loop
+
+		// If they have animeplanet option on
+		context.model.getSettings(function (settings) {
+			if (settings['english_only']) url = url + '&cats=1_37';
+		});
 
 		// deep copy the object in order to send raw data to contentscript pg.
 		var originalList = $.extend(true, {}, animeList);
@@ -59,9 +69,7 @@ Controller.prototype.makeSideBar = function (callback) {
 			var anime = animeList[i];
 
 			// Encode the URL
-			var urlquery = encodeURIComponent(anime.title + ' ' 
-				+ anime.fansubber + ' ' + anime.fidelity) + '&sort=1';
-			animeList[i]['url'] = url + urlquery;
+			animeList[i]['url'] = makeNyaaURL(url, anime);
 
 			// truncate anime titles that are too long to fit in the sidebar
 			var display_title = (anime.title.length <= 31
@@ -81,35 +89,6 @@ Controller.prototype.makeSideBar = function (callback) {
 
 		// get the anime and settings from the DB and pass it in the callback
 		callback(view.renderSidebar(animeList), originalList);
-	});
-}
-
-Controller.prototype.makeList = function (callback) {
-	// make an anime list for the sidebar
-	var view = this.view;
-	var url = "http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=";
-
-	this.model.read(function (animeList) {
-		// TODO
-		// Make the URI encoding a seperate function that lets you pass in
-		// an object to use for encoding. 
-		$.each(animeList, function(i) {
-			var anime = animeList[i];
-
-			// Encode the URL
-			var urlquery = encodeURIComponent(anime.title + ' ' 
-				+ anime.fansubber + ' ' + anime.fidelity) + '&sort=1';
-			animeList[i]['url'] = url + urlquery;
-
-			// trucate anime titles that are too long to fit in the sidebar
-			var display_title = (anime.title.length <= 31
-				) ? anime.title : anime.title.substring(0, 31) + '..';
-			animeList[i]['title'] = display_title;
-
-			// if animeplanet is active, convert to proper link
-
-		});
-		callback(view.renderList(animeList));
 	});
 }
 
@@ -207,13 +186,33 @@ function applySettings(context) {
 			if (settings.hasOwnProperty(name)) {
 				$('#settings_'+name).attr('checked', settings[name]);
 			}
-			// If they have animeplanet option on
-			if (settings['animeplanet']) {
-				$('#animeplanet_input').show(); // show animeplanet input on add-form
-				$('.opt_animeplanet').show();
-			}
 		}
+
+		// If they have animeplanet option on
+		if (settings['animeplanet']) {
+			$('#animeplanet_input').show(); // show animeplanet input on add-form
+			$('.opt_animeplanet').show();
+		}
+
+		// if they have english only option on
+		//if (settings['english_only']) console.log('english only is on');
+
 	});
+}
+
+function makeNyaaURL(url, anime) {
+	// Encode the URL
+	// http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=
+	// &filter=0   Show all
+	// &filter=1   Filter remakes
+	// &filter=2   Trusted only
+	// &filter=3   A+ only
+
+	// TODO
+	// add ability to manipulate &filter
+	var query = anime.title + " " + anime.fansubber + " " + anime.fidelity;
+	var term  = escapeURIparam(query) + "&sort=1";
+	return url + "&filter=0&term=" + term;
 }
 
 //----------------------------------------------------------------------------
@@ -235,6 +234,16 @@ function sanitizeTitle(title) {
 	//        and if it's not then remove the initial character till it is
 	title = title.replace(/\s+/g, ' ');
 	return title.trim();
+}
+
+function escapeURIparam (url) {
+    // Encode a query string to be sent to a web server
+    //   @url : the url you want escaped and encoded
+    if (encodeURIComponent) url = encodeURIComponent(url);
+    else if (encodeURI) url = encodeURI(url);
+    else url = escape(url);
+    url = url.replace(/\+/g, '%2B'); // Force the replacement of "+"
+    return url;
 }
 
 function tableUpdated() {

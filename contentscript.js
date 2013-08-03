@@ -9,11 +9,6 @@ $('#main').prepend(
 // 
 //----------------------------------------------------------------------------
 
-// set default selection to english translated anime
-$('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
-$('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
-
-
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
     // Send message through background.js to options.js to render the
     // the animelist contents of the sidebar
@@ -23,12 +18,17 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
                 .attr("href", chrome.extension.getURL("options.html"))
                 .text("Add New Anime"));
     } else {
-
         // create the sidebar from the template
         $('#nyaajs_wrapper').html(response.sidebar);
 
         // configure the sidebar using the user settings
         sidebarConfig(response.settings);
+
+        // if anime is restricted to english-translated search only 
+        if (response.settings.english_only) {
+            $('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
+            $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
+        }
 
         // highlight matching anime on the page
         $.each(response.animeList, function(i) {
@@ -39,10 +39,11 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
 
 function sidebarConfig (settings) {
     // this function configures the sidebar 
-
+    
     // TODO
     // make this toggle between sorting on the title of the anime
     // and sorting on the release date
+
     // setup the sort button to sort the table
     var i = 1;
     $("#nyaajs_wrapper table").tablesorter({ sortList: [[0, 0]] }); 
@@ -59,6 +60,10 @@ function sidebarConfig (settings) {
 };
 
 function highlightAnime (anime) {
+    // TODO
+    // case insensitive matching is not working properly
+    // e.g, "Blood lad" only works if it is "Blood Lad"
+
     // function for highlighting anime on the page
     var escaped_pattern = new RegExp("[\\s+\\_\\-\\.]", "g");
     var title_regex = anime.title.replace(
