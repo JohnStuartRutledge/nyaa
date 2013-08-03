@@ -31,7 +31,15 @@ function Store(name, callback) {
 	dbName   = this._dbName = name;
 
 	if (!storage[dbName]) {
-		data = { animeList : [] };
+		// create default tables
+		data = {
+			animeList : [], 
+			settings  : {
+				english_only : false,
+				night_mode   : false,
+				animeplanet  : false
+			} 
+		};
 		storage[dbName] = JSON.stringify(data);
 	}
 	callback.call(this, JSON.parse(storage[dbName]));
@@ -56,6 +64,25 @@ Store.prototype.findAll = function (callback) {
 	//   @callback : the callback that fires on completion
 	callback = callback || function () {};
 	callback.call(this, JSON.parse(storage[this._dbName]).animeList);
+};
+
+Store.prototype.getSettings = function (callback) {
+	// Retrives all the settings data from the animedb 
+	//   @callback : the callback that fires on completion
+	callback = callback || function () {};
+	callback.call(this, JSON.parse(storage[this._dbName]).settings);
+};
+
+Store.prototype.saveSettings = function (new_settings, callback) {
+	// save new settings into the animedb 
+	//   @callback : the callback that fires on completion
+	callback = callback || function () {};
+	var data = JSON.parse(storage[this._dbName]);
+	data.settings = new_settings;
+	//storage[this._dbName].settings = JSON.stringify(new_settings);
+	storage[this._dbName] = JSON.stringify(data);
+
+	callback.call(this, JSON.parse(storage[this._dbName]).settings);
 };
 
 Store.prototype.save = function (id, updateData, callback) {

@@ -1,7 +1,4 @@
 
-//var storage = (localStorage) ? localStorage : chrome.storage.local;
-//var storage = chrome.storage.local;
-
 // set default selection to english translated anime
 $('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
 $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');

@@ -11,22 +11,22 @@ function Controller(model, view) {
 	this.model = model;
 	this.view  = view;
 
-	// the default settings
-	// TODO - get this variable via
-	// this.nyaa_settings = model.getSettings();
-	this.nyaa_settings = {
-		english_only : false,
-		nightmode    : false,
-		animeplanet  : true 
-	}
-
+	// get the default settings
+	this.model.getSettings(function(nyaa_settings) {
+		this.nyaa_settings = nyaa_settings;
+	}.bind(this));
 };
 
 Controller.prototype.updateSettings = function (checkbox) {
 	// they updated their settings panel
-	this.nyaa_settings[name] = checkbox.is(':checked');
-	// TODO
-	// save your settings to the database
+	var checkbox_name = checkbox.attr('name');
+	this.nyaa_settings[checkbox_name] = checkbox.is(':checked');
+
+	// save changes to the DB	
+	this.model.saveSettings(this.nyaa_settings, function(settings) {
+		message('settings were updated', 'success');
+		location.reload();
+	});
 };
 
 Controller.prototype.loadAnime = function () {
@@ -37,14 +37,16 @@ Controller.prototype.loadAnime = function () {
 		tableUpdated();	
 	});
 
-	// update the settings options with values from DB
+	// get the settings from the DB and enact them
 	for (var name in this.nyaa_settings) {
+		// make sure the checkboxes match the values in the DB
 		if (this.nyaa_settings.hasOwnProperty(name)) {
 			$('#settings_'+name).attr('checked', this.nyaa_settings[name]);
 		}
 		// unhide the animeplanet field if the animeplanet setting is true
 		// TODO - make sure this is not toggling every other insertion
 		if (this.nyaa_settings['animeplanet']) $('#animeplanet').show();
+		
 	}
 };
 

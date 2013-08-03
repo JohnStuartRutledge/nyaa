@@ -1,15 +1,12 @@
 
 function Anime(name) {
 	this.storage    = new NyaaJS.Store(name);
-	this.model      = new NyaaJS.Model(this.storage);
+	this.model      = new NyaaJS.AnimeModel(this.storage);
 	this.view       = new NyaaJS.View();
 	this.controller = new NyaaJS.Controller(this.model, this.view);
 }
+var anime = new Anime('AnimeDB');
 
-window.anime = new Anime('AnimeDB');
-
-
-// make the anime table sortable
 $(document).ready(function () {
 	// refresh the anime list everytime the page loads
 	anime.controller.loadAnime();
@@ -37,7 +34,6 @@ $(document).ready(function () {
 $('#anime_form button').on("click", function(evt) {
 	// they clicked the form to add a new anime
 	evt.preventDefault();
-	console.log('adding anime');
 	anime.controller.addAnime();
 });
 
@@ -78,12 +74,3 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 });
 
-
-/*
-chrome.runtime.getBackgroundPage(function(data) {
-	// refresh the anime list everytime the page loads
-	data.anime.controller.loadAnime();
-	main(data.anime);
-});
-
-*/
