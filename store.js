@@ -109,10 +109,10 @@ Store.prototype.save = function (id, updateData, callback) {
 				}
 			}
 		}
-
 		storage[this._dbName] = JSON.stringify(data);
 		callback.call(this, JSON.parse(storage[this._dbName]).animeList);
 	} else {
+		// they are updating, so return the object
 		callback   = updateData;
 		updateData = id;
 
