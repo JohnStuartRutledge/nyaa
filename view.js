@@ -13,7 +13,7 @@ function View() {
 	+   '<td>{{ title }}</td>'
 	+   '<td>{{ fidelity }}</td>'
 	+   '<td>{{ air_day }}</td>'
-	+   '<td>{{ animeplanet }}</td>'
+	+   '<td class="opt_animeplanet">{{ animeplanet }}</td>'
     +   '<td><button>edit</button></td>'
 	+ '</tr>';
 
@@ -26,7 +26,7 @@ function View() {
     +       '<tr>'
     +          '<th>title</th>'
     +          '<th>air day</th>'
-    +          '<th>animeplanet</th>'
+    +          '<th class="opt_animeplanet">animeplanet</th>'
     +       '</tr>'
     +     '</thead>'
     +     '<tbody>{{ anime_rows }}</tbody>'
@@ -37,7 +37,7 @@ function View() {
     = '<tr {{ highlight }}>'
     +   '<td><a class="nyaajs_anime" href="{{ url }}">{{ title }}</a></td>'
     +   '<td class="nyaajs_anime_airday">{{ air_day }}</td>'
-    +   '<td><a class="nyaajs_anime_planet" href="{{ animeplanet }}" target="_blank">A</a></td>'
+    +   '<td class="opt_animeplanet"><a class="nyaajs_anime_planet" href="{{ animeplanet }}" target="_blank">A</a></td>'
     + '</tr>';
 
 	this.animeFormTemplate
@@ -66,7 +66,7 @@ function View() {
     +        '<option>sun</option>'
    	+      '</select>'
    	+    '</td>'
-   	+    '<td><input type="text" class="form_animeplanet" value="{{ animeplanet }}"></td>'
+   	+    '<td class="opt_animeplanet"><input type="text" class="form_animeplanet" value="{{ animeplanet }}"></td>'
    	+    '<td>'
     +      '<button>update</button>'
     +      '<button class="danger">delete</button>'

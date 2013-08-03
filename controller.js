@@ -43,10 +43,13 @@ Controller.prototype.loadAnime = function () {
 		if (this.nyaa_settings.hasOwnProperty(name)) {
 			$('#settings_'+name).attr('checked', this.nyaa_settings[name]);
 		}
-		// unhide the animeplanet field if the animeplanet setting is true
-		// TODO - make sure this is not toggling every other insertion
-		if (this.nyaa_settings['animeplanet']) $('#animeplanet').show();
-		
+
+		// If they have animeplanet option on
+		if (this.nyaa_settings['animeplanet']) {
+			$('#animeplanet_input').show(); // show animeplanet input on add-form
+			$('.opt_animeplanet').show();
+		}
+
 	}
 };
 
@@ -63,6 +66,7 @@ Controller.prototype.makeSideBar = function (callback) {
 		// deep copy the object in order to send raw data to contentscript pg.
 		var originalList = $.extend(true, {}, animeList);
 
+		// modify the data for display in the sidebar template
 		$.each(animeList, function(i) {
 			var anime = animeList[i];
 
@@ -80,6 +84,8 @@ Controller.prototype.makeSideBar = function (callback) {
 			// if animeplanet is active, convert to proper link
 			animeList[i]['highlight'] = isToday(anime.air_day) ? true : false; 
 		});
+
+		// get the anime and settings from the DB and pass it in the callback
 		callback(view.renderSidebar(animeList), originalList);
 	});
 }
@@ -119,7 +125,7 @@ Controller.prototype.addAnime = function () {
 		title       = sanitizeTitle($('#main_title').val()),
 		fidelity    = $('#fidelity').val(),
 		air_day     = $('#air_day').val(),
-		animeplanet = $('#animeplanet').val();
+		animeplanet = $('#animeplanet_input').val();
 
 	fidelity = (fidelity === 'none') ? '' : fidelity;
 	air_day  = (air_day === 'unknown') ? '?' : air_day;

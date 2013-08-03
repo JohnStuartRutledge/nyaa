@@ -1,36 +1,34 @@
 
-// set default selection to english translated anime
-$('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
-$('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
-
-// get current day
-var d = new Date();
-var weekday = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-var today   = weekday[d.getDay()];
-
 // construct nested HTML divs for holding my list of anime
-var mywrapper = $(document.createElement('div')).attr('id', 'nyaajs_wrapper');
-
 $('body').attr('id', 'nyaa_main'); // add id for custom styling
-$('#main').prepend(mywrapper);
+$('#main').prepend(
+    $(document.createElement('div')).attr('id', 'nyaajs_wrapper')
+);
 
 //----------------------------------------------------------------------------
 // 
 //----------------------------------------------------------------------------
 
+// set default selection to english translated anime
+$('.inputsearchcategory option[value="1_0"]').removeAttr('selected');
+$('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
+
 
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
     // Send message through background.js to options.js to render the
     // the animelist contents of the sidebar
-
     if (!response.sidebar) {
         $('#nyaajs_wrapper').html(
             $('<a>')
                 .attr("href", chrome.extension.getURL("options.html"))
                 .text("Add New Anime"));
     } else {
+
+        // create the sidebar from the template
         $('#nyaajs_wrapper').html(response.sidebar);
-        sidebarConfig();
+
+        // configure the sidebar using the user settings
+        sidebarConfig(response.settings);
 
         // highlight matching anime on the page
         $.each(response.animeList, function(i) {
@@ -39,9 +37,10 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
     }
 });
 
-function sidebarConfig () {
-    // this function configures the sidebar by adding tablesorting to
-    // the watched list, and highlighting todays anime
+function sidebarConfig (settings) {
+    // this function configures the sidebar 
+
+    // setup the sort button to sort the table
     var i = 1;
     $("#nyaajs_wrapper table").tablesorter({ sortList: [[0,0]] }); 
     // resort your anime when they click the sort button
@@ -51,6 +50,9 @@ function sidebarConfig () {
         $("#nyaajs_wrapper table").trigger("sorton", [sorting]); 
         return false; // this prevents default link action
     }); 
+
+    // show the animeplanet links if the animeplanet setting is checked
+    if (settings.animeplanet) $('.opt_animeplanet').show();
 };
 
 function highlightAnime (anime) {
