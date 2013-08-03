@@ -215,6 +215,19 @@ function makeNyaaURL(url, anime) {
 	return url + "&filter=0&term=" + term;
 }
 
+var serializeURL = function(obj) {
+	// e.g.
+	//   serializeURL({'filter':0, 'term':encodeURIComponent(query), 'sort':1})
+	// example response
+	//   filter=0&term=naruto&sort=1
+	 var pairs = [];
+	 for (var prop in obj) {
+		  if (!obj.hasOwnProperty(prop)) continue;
+		  pairs.push(prop + '=' + obj[prop]);
+	 }
+	 return pairs.join('&');
+}
+
 //----------------------------------------------------------------------------
 // Helpers
 //----------------------------------------------------------------------------

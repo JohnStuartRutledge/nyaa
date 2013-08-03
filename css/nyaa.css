@@ -205,6 +205,12 @@ button:hover {
 #options_page form#nyaa_options button {
   margin-top: 10px;
 }
+#nyaa_main div.content a:visited {
+  color: #999;
+}
+#nyaa_main div.content a:visited .highlight {
+  background-color: #9acd05 !important;
+}
 #nyaa_main #topbar,
 #nyaa_main #navbar {
   z-index: 101;

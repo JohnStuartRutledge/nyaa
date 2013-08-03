@@ -9,6 +9,18 @@ $('#main').prepend(
 // 
 //----------------------------------------------------------------------------
 
+// TODO
+// create a chrome.runtime.addListener that checks the current page url
+// and if the url parameter ?page=view is found then search the page
+// to find the .viewtorrentname class and extract the anime's name.
+// Then see if the anime matches one in your watch list.
+// next add an onclick event listener to the download button with the 
+// class name .viewdownloadbutton
+// when the download button is clicked, push the episode number to the
+// watched_episodes array in your animeDB for that particular anime.
+// finally you can apply styles that grays out already watched anime
+// and highlights unwatched anime
+
 chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
     // Send message through background.js to options.js to render the
     // the animelist contents of the sidebar
@@ -63,6 +75,7 @@ function highlightAnime (anime) {
     // TODO
     // case insensitive matching is not working properly
     // e.g, "Blood lad" only works if it is "Blood Lad"
+    // highlight also fails on "Rozen Maiden (2013)" b/c of ()
 
     // function for highlighting anime on the page
     var escaped_pattern = new RegExp("[\\s+\\_\\-\\.]", "g");
