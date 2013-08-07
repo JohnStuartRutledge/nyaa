@@ -21,7 +21,6 @@ It has the following capabailities:
 
 - add the ability to sort sidebar anime by release date
 - do not highlight episodes you have already downloaded
-- optionally activate a dark theme similar to reddit enhancment suites (night mode)
 - add convenience links to your fansubbers nyaa-user-page
 - auto-convert trusted fansubber tags to links to that fansubbers home site 
 - add tabs to the sidebar and place nyaas ad banner in a tab

@@ -293,8 +293,8 @@ button:hover {
   display: none;
 }
 .nyaajs_nightmode {
-  background-color: #333;
-  color: #bbb;
+  background-color: #333 !important;
+  color: #bbb !important;
 }
 .nyaajs_nightmode #nyaajs_showtimes a,
 .nyaajs_nightmode .content a {
@@ -394,3 +394,47 @@ button:hover {
 .nyaajs_nightmode .viewdescription {
   background-color: #333;
 }
+.nyaajs_nightmode a {
+  color: #48daec !important;
+}
+.nyaajs_nightmode h3 {
+  color: #fff;
+}
+.nyaajs_nightmode #fansubber,
+.nyaajs_nightmode #main_title,
+.nyaajs_nightmode #fidelity,
+.nyaajs_nightmode #air_day,
+.nyaajs_nightmode #animeplanet_input,
+.nyaajs_nightmode .form_fansubber,
+.nyaajs_nightmode .form_title,
+.nyaajs_nightmode .form_fidelity,
+.nyaajs_nightmode .form_air_day,
+.nyaajs_nightmode .form_animeplanet {
+  color: #fff !important;
+  background-color: #222 !important;
+}
+.nyaajs_nightmode #anime_table {
+  background-color: #333 !important;
+}
+.nyaajs_nightmode .table {
+  border-top: none !important;
+}
+.nyaajs_nightmode .table th {
+  color: #eee !important;
+}
+.nyaajs_nightmode .table th:nth-child(-n + 4) {
+  background-image: url("../img/sort_arrows.gif");
+}
+.nyaajs_nightmode .table tbody > tr:nth-child(odd) > td,
+.nyaajs_nightmode .table tbody > tr:nth-child(odd) > th {
+  background-color: #444 !important;
+}
+/* 
+$black       = #000
+$grayDarker  = #222
+$grayDark    = #333
+$gray        = #555
+$grayLight   = #999
+$grayLighter = #eee
+$white       = #fff
+*/
