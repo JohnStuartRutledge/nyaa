@@ -44,7 +44,6 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
 
         // if they have night mode activated then append the nightmode CSS tag
         if (response.settings.night_mode) {
-            console.log('night mode activated');
             $('body').addClass('nyaajs_nightmode');
         }
 
