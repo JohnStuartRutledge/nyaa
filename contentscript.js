@@ -42,6 +42,12 @@ chrome.runtime.sendMessage({cmd: "getStoredAnime"}, function(response) {
             $('.inputsearchcategory option[value="1_37"]').attr('selected', 'selected');
         }
 
+        // if they have night mode activated then append the nightmode CSS tag
+        if (response.settings.night_mode) {
+            console.log('night mode activated');
+            $('body').addClass('nyaajs_nightmode');
+        }
+
         // highlight matching anime on the page
         $.each(response.animeList, function(i) {
             highlightAnime(response.animeList[i]);

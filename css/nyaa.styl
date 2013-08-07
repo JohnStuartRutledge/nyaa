@@ -22,6 +22,14 @@ $orange   = #f89406
 $pink     = #c3325f
 $purple   = #7a43b6
 
+// neons
+$neonGreen  = #A2E155
+$neonBlue   = #48DAEC
+$neonPink   = #E1236A
+$neonPurple = #9F84F3
+$neonOrange = #F3923C
+$neonHighlight = #E6DA81
+
 // Links
 $linkColor      = #08c
 $linkColorHover = darken($linkColor, 15%)
@@ -344,7 +352,7 @@ button
   
   div.content a:visited
     color: $grayLight
-    & .highlight
+    .highlight
       background-color: yellowgreen !important
 
   #topbar
@@ -377,9 +385,7 @@ button
       text-decoration: none
       &:hover
         color: $linkColorHover
-
     table
-      //border-collapse: collapse
       border-spacing: 0
       width: 230px
       padding: 7px
@@ -412,7 +418,6 @@ button
 
   .nyaajs_today
     background-color: yellow !important
-    //color: yellow !important
 
 
 //----------------------------------------------------------------------------
@@ -426,46 +431,91 @@ button
 // Night Mode Styles
 //----------------------------------------------------------------------------
 
-// MAIN SITE STYLES
-//background-color: #222 !important
-//a
-// color: #A8A8A8 !important
-
-/*
-#nyaa_main
-  &.content
+.nyaajs_nightmode
+  background-color: $grayDark
+  color: #BBB
+  #nyaajs_showtimes
+  .content
+    a
+      color: #BBB !important
     a:hover
-      color: tomato
-    a:visited
-      color: violet !important
+      color: $white !important
 
+  .content
+    background-color: #444 !important
+    font-weight: 500
+    .tlistpages td b
+      color: $neonPink
+    .tlist
+      a:visited
+        color: $neonPurple !important
+      .tlisthead
+        color: #EEE
+        line-height: 25px
+      .trusted
+        background-color: darken($neonGreen, 70%) !important
+      .remake
+        background-color: darken($neonPink, 70%) !important
+      .aplus
+        background-color: darken($neonBlue, 70%) !important
+
+  .torrentcats
+    width: 30%
   div
-    &.content, .remake, .trusted, .aplus
-      background-color: #444 !important
-
-    &.comment
+    #nyaajs_showtimes
+      a:hover
+        color: $white !important
+      #nyaajs_btn_sort
+      #nyaajs_btn_add
+        &:hover
+          color: $white !important
+      tr:nth-child(odd)
+        background-color: #383838 !important
+      .nyaajs_anime_airday
+        color: $neonPink !important
+      .nyaajs_anime_planet
+        color: $neonBlue !important 
+      .nyaajs_today
+        .nyaajs_anime
+        .nyaajs_anime_planet
+          color: $black !important
+    .comment
       background-color: #999
       clear: both
       color: black
       display: inline-block
       min-width: 800px
-
-    &.tinfodescription
+    .tinfodescription
       background-color: #383838
-
-    & td.tlisticon a img
+    td.tlisticon a img
       height: 70%
       width: 70%
-
   .tinfodownloadbutton
     background-color: #222
     border: 2px solid yellow
     padding: 20px 0px
     text-align: center
-
-  .tlistsn
-    color: cornsilk
-    font-size: 15px
+  .tlistrow
+    font-size: 12px
     font-weight: 400
+  .tlistsn
+    color: $neonGreen 
     margin: 0px 2px
-*/
+  .tlistln
+    color: $neonPink
+  .tlistmn
+    color: $neonBlue
+
+  //--------------------------------------------
+  // Profile Page
+  //--------------------------------------------
+  .viewtable
+    tr:nth-child(3) a span
+    .viewsn
+      color: $neonGreen !important
+    .viewln
+      color: $neonPink
+  .viewdescription
+    background-color: $grayDark
+
+  

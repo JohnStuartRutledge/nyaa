@@ -19,8 +19,8 @@ function View() {
 
     this.animeSidebarTemplate
     = '<div id="nyaajs_showtimes">'
-    +   '<a id="nyaajs_btn_add" href="{{ options_pg }}">add anime</a>'
-    +   '<a id="nyaajs_btn_sort">sort me</a>'
+    +   '<a id="nyaajs_btn_add" href="{{ options_pg }}">edit anime</a>'
+    +   '<a id="nyaajs_btn_sort">sort</a>'
     +   '<table>'
     +     '<thead>'
     +       '<tr>'

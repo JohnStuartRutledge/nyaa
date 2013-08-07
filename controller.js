@@ -195,7 +195,10 @@ function applySettings(context) {
 		}
 
 		// if they have english only option on
-		//if (settings['english_only']) console.log('english only is on');
+		// if (settings['english_only']) console.log('english only is on');
+
+		// if they have night_mode on
+		if (settings['night_mode']) $('body').addClass('nyaajs_nightmode');
 
 	});
 }

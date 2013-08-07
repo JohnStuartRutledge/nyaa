@@ -18,7 +18,7 @@ It has the following capabailities:
 - [Jquery.regex.extend](https://gist.github.com/Mottie/461488)
 
 ## TODOS
-- use a minamalist templating language like mustache
+
 - add the ability to sort sidebar anime by release date
 - do not highlight episodes you have already downloaded
 - optionally activate a dark theme similar to reddit enhancment suites (night mode)
@@ -26,3 +26,9 @@ It has the following capabailities:
 - auto-convert trusted fansubber tags to links to that fansubbers home site 
 - add tabs to the sidebar and place nyaas ad banner in a tab
 - when anime is from a fansubber who does only raw untranslated anime ensure the url uses &cats=1_11
+
+## On The Horizon
+- convert app to backbone.js + requie.js 
+- use handlebars for templating 
+- use [lawnchair](brian.io/lawnchair/) with the chrome-storage adapter to manage localstorage
+

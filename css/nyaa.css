@@ -292,41 +292,105 @@ button:hover {
 .opt_animeplanet {
   display: none;
 }
-/*
-#nyaa_main
-  &.content
-    a:hover
-      color: tomato
-    a:visited
-      color: violet !important
-
-  div
-    &.content, .remake, .trusted, .aplus
-      background-color: #444 !important
-
-    &.comment
-      background-color: #999
-      clear: both
-      color: black
-      display: inline-block
-      min-width: 800px
-
-    &.tinfodescription
-      background-color: #383838
-
-    & td.tlisticon a img
-      height: 70%
-      width: 70%
-
-  .tinfodownloadbutton
-    background-color: #222
-    border: 2px solid yellow
-    padding: 20px 0px
-    text-align: center
-
-  .tlistsn
-    color: cornsilk
-    font-size: 15px
-    font-weight: 400
-    margin: 0px 2px
-*/
+.nyaajs_nightmode {
+  background-color: #333;
+  color: #bbb;
+}
+.nyaajs_nightmode #nyaajs_showtimes a,
+.nyaajs_nightmode .content a {
+  color: #bbb !important;
+}
+.nyaajs_nightmode #nyaajs_showtimes a:hover,
+.nyaajs_nightmode .content a:hover {
+  color: #fff !important;
+}
+.nyaajs_nightmode .content {
+  background-color: #444 !important;
+  font-weight: 500;
+}
+.nyaajs_nightmode .content .tlistpages td b {
+  color: #e1236a;
+}
+.nyaajs_nightmode .content .tlist a:visited {
+  color: #9f84f3 !important;
+}
+.nyaajs_nightmode .content .tlist .tlisthead {
+  color: #eee;
+  line-height: 25px;
+}
+.nyaajs_nightmode .content .tlist .trusted {
+  background-color: #324f0e !important;
+}
+.nyaajs_nightmode .content .tlist .remake {
+  background-color: #450920 !important;
+}
+.nyaajs_nightmode .content .tlist .aplus {
+  background-color: #094b54 !important;
+}
+.nyaajs_nightmode .torrentcats {
+  width: 30%;
+}
+.nyaajs_nightmode div #nyaajs_showtimes a:hover {
+  color: #fff !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes #nyaajs_btn_sort:hover,
+.nyaajs_nightmode div #nyaajs_showtimes #nyaajs_btn_add:hover {
+  color: #fff !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes tr:nth-child(odd) {
+  background-color: #383838 !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes .nyaajs_anime_airday {
+  color: #e1236a !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes .nyaajs_anime_planet {
+  color: #48daec !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes .nyaajs_today .nyaajs_anime,
+.nyaajs_nightmode div #nyaajs_showtimes .nyaajs_today .nyaajs_anime_planet {
+  color: #000 !important;
+}
+.nyaajs_nightmode div .comment {
+  background-color: #999;
+  clear: both;
+  color: #000;
+  display: inline-block;
+  min-width: 800px;
+}
+.nyaajs_nightmode div .tinfodescription {
+  background-color: #383838;
+}
+.nyaajs_nightmode div td.tlisticon a img {
+  height: 70%;
+  width: 70%;
+}
+.nyaajs_nightmode .tinfodownloadbutton {
+  background-color: #222;
+  border: 2px solid #ff0;
+  padding: 20px 0px;
+  text-align: center;
+}
+.nyaajs_nightmode .tlistrow {
+  font-size: 12px;
+  font-weight: 400;
+}
+.nyaajs_nightmode .tlistsn {
+  color: #a2e155;
+  margin: 0px 2px;
+}
+.nyaajs_nightmode .tlistln {
+  color: #e1236a;
+}
+.nyaajs_nightmode .tlistmn {
+  color: #48daec;
+}
+.nyaajs_nightmode .viewtable tr:nth-child(3) a span,
+.nyaajs_nightmode .viewtable .viewsn {
+  color: #a2e155 !important;
+}
+.nyaajs_nightmode .viewtable .viewln {
+  color: #e1236a;
+}
+.nyaajs_nightmode .viewdescription {
+  background-color: #333;
+}
