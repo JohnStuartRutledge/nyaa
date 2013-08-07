@@ -44,7 +44,7 @@ Controller.prototype.makeSideBar = function (callback) {
 	// render the anime sidebar for the contentscript
 	var context = this;
 	var view = this.view;
-	var url = "http://www.nyaa.eu/?page=search"
+	var url = "http://www.nyaa.se/?page=search"
 	var animeplanetRoot = "http://www.anime-planet.com/anime/";
 
 	this.model.read(function (animeList) {
@@ -205,7 +205,7 @@ function applySettings(context) {
 
 function makeNyaaURL(url, anime) {
 	// Encode the URL
-	// http://www.nyaa.eu/?page=search&cats=1_37&filter=0&term=
+	// http://www.nyaa.se/?page=search&cats=1_37&filter=0&term=
 	// &filter=0   Show all
 	// &filter=1   Filter remakes
 	// &filter=2   Trusted only

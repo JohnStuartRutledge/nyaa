@@ -1,6 +1,6 @@
 # Chrome Extension for Nyaa
 
-An extension for Google Chrome that augments the anime torrent tracking site [nyaa.eu](http://nyaa.eu) with extra functionality. It keeps an editable list of your watched anime making it convenient to locate new releases. 
+An extension for Google Chrome that augments the anime torrent tracking site [nyaa.se](http://nyaa.se) with extra functionality. It keeps an editable list of your watched anime making it convenient to locate new releases. 
 
 It has the following capabailities:
 

@@ -229,6 +229,7 @@ button:hover {
   color: #ccc;
 }
 #nyaa_main #nyaajs_showtimes {
+  background-color: #fff;
   position: absolute;
   display: block;
   min-height: 300px;
@@ -329,6 +330,9 @@ button:hover {
 }
 .nyaajs_nightmode .torrentcats {
   width: 30%;
+}
+.nyaajs_nightmode div #nyaajs_showtimes {
+  background-color: #333 !important;
 }
 .nyaajs_nightmode div #nyaajs_showtimes a:hover {
   color: #fff !important;

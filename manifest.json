@@ -27,7 +27,7 @@
 
   "content_scripts": [
     {
-      "matches": ["http://www.nyaa.eu/*"],
+      "matches": ["http://www.nyaa.se/*"],
       "js":      [
         "js/jquery-2.0.3.min.js",
         "js/jquery.tablesorter.min.js",
