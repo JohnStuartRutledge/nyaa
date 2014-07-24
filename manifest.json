@@ -47,6 +47,8 @@
   "icons" : {
     "16" : "img/nyaa_icon-16.png",
     "48" : "img/nyaa_icon-48.png"
-  }
+  },
+
+  "web_accessible_resources": ["options.html"]
 
 }

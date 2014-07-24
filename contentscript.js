@@ -1,6 +1,6 @@
 
-// construct nested HTML divs for holding my list of anime
-$('body').attr('id', 'nyaa_main'); // add id for custom styling
+// add class for nyaa styling and create div for holding our anime list
+$('body').addClass('nyaa_main'); 
 $('#main').prepend(
     $(document.createElement('div')).attr('id', 'nyaajs_wrapper')
 );

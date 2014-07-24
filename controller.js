@@ -158,6 +158,8 @@ Controller.prototype.editAnime = function (elem) {
 	var context = this;
 	this.model.read(lookupId(elem), function(anime) {
 		elem.replaceWith(view.renderForm(anime));
+		// append delete button to left of table row
+		// $()
 		applySettings(context);
 		tableUpdated();
 	});

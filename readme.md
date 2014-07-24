@@ -24,10 +24,12 @@ It has the following capabailities:
 - add convenience links to your fansubbers nyaa-user-page
 - auto-convert trusted fansubber tags to links to that fansubbers home site 
 - add tabs to the sidebar and place nyaas ad banner in a tab
+- add settings for filtering out anime by a min-max size 
 - when anime is from a fansubber who does only raw untranslated anime ensure the url uses &cats=1_11
 
 ## On The Horizon
 - convert app to backbone.js + requie.js 
 - use handlebars for templating 
 - use [lawnchair](brian.io/lawnchair/) with the chrome-storage adapter to manage localstorage
+- integrate [myanimelist](http://myanimelist.net/) into the project
 

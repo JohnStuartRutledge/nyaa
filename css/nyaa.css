@@ -205,22 +205,22 @@ button:hover {
 #options_page form#nyaa_options button {
   margin-top: 10px;
 }
-#nyaa_main div.content a:visited {
+.nyaa_main div.content a:visited {
   color: #999;
 }
-#nyaa_main div.content a:visited .highlight {
+.nyaa_main div.content a:visited .highlight {
   background-color: #9acd05 !important;
 }
-#nyaa_main #topbar,
-#nyaa_main #navbar {
+.nyaa_main #topbar,
+.nyaa_main #navbar {
   z-index: 101;
 }
-#nyaa_main .highlight {
+.nyaa_main .highlight {
   color: #800080;
   background-color: #ff0;
   font-weight: 300;
 }
-#nyaa_main #nyaajs_wrapper {
+.nyaa_main #nyaajs_wrapper {
   position: relative;
   z-index: 100;
   float: right;
@@ -228,7 +228,7 @@ button:hover {
   font-size: 10px;
   color: #ccc;
 }
-#nyaa_main #nyaajs_showtimes {
+.nyaa_main #nyaajs_showtimes {
   background-color: #fff;
   position: absolute;
   display: block;
@@ -243,51 +243,52 @@ button:hover {
   border-radius: 5px;
   color: #333;
 }
-#nyaa_main #nyaajs_showtimes a {
+.nyaa_main #nyaajs_showtimes a {
   text-decoration: none;
 }
-#nyaa_main #nyaajs_showtimes a:hover {
+.nyaa_main #nyaajs_showtimes a:hover {
   color: #0074ad;
 }
-#nyaa_main #nyaajs_showtimes table {
+.nyaa_main #nyaajs_showtimes table {
   border-spacing: 0;
   width: 230px;
   padding: 7px;
 }
-#nyaa_main #nyaajs_showtimes table thead {
+.nyaa_main #nyaajs_showtimes table thead {
   height: 0px;
   width: 0px;
   visibility: hidden;
 }
-#nyaa_main #nyaajs_showtimes table thead * {
+.nyaa_main #nyaajs_showtimes table thead * {
   display: none;
 }
-#nyaa_main #nyaajs_showtimes table tbody tr {
+.nyaa_main #nyaajs_showtimes table tbody tr {
   padding: 3px;
   width: 200px;
 }
-#nyaa_main #nyaajs_showtimes table tbody > tr:nth-child(odd) {
+.nyaa_main #nyaajs_showtimes table tbody > tr:nth-child(odd) {
   background-color: #f9f9f9;
 }
-#nyaa_main #nyaajs_showtimes table tbody td {
+.nyaa_main #nyaajs_showtimes table tbody td {
   padding: 3px;
 }
-#nyaa_main #nyaajs_btn_sort,
-#nyaa_main #nyaajs_btn_add {
+.nyaa_main #nyaajs_btn_sort,
+.nyaa_main #nyaajs_btn_add {
   padding: 7px;
   color: #054;
   text-decoration: underline !important;
   float: right;
   cursor: pointer;
 }
-#nyaa_main #nyaajs_btn_sort:hover,
-#nyaa_main #nyaajs_btn_add:hover {
+.nyaa_main #nyaajs_btn_sort:hover,
+.nyaa_main #nyaajs_btn_add:hover {
   color: #ff6347 !important;
 }
-#nyaa_main .nyaajs_anime_planet {
+.nyaa_main .nyaajs_anime_planet {
   color: #ee82ee !important;
 }
-#nyaa_main .nyaajs_today {
+.nyaa_main .nyaajs_today {
+  background: #ff0 !important;
   background-color: #ff0 !important;
 }
 .opt_animeplanet {
@@ -341,14 +342,17 @@ button:hover {
 .nyaajs_nightmode div #nyaajs_showtimes #nyaajs_btn_add:hover {
   color: #fff !important;
 }
-.nyaajs_nightmode div #nyaajs_showtimes tr:nth-child(odd) {
-  background-color: #383838 !important;
+.nyaajs_nightmode div #nyaajs_showtimes table tbody > tr:nth-child(odd) {
+  background-color: #383838;
 }
 .nyaajs_nightmode div #nyaajs_showtimes .nyaajs_anime_airday {
   color: #e1236a !important;
 }
 .nyaajs_nightmode div #nyaajs_showtimes .nyaajs_anime_planet {
   color: #48daec !important;
+}
+.nyaajs_nightmode div #nyaajs_showtimes .nyaajs_today {
+  background-color: #ff0 !important;
 }
 .nyaajs_nightmode div #nyaajs_showtimes .nyaajs_today .nyaajs_anime,
 .nyaajs_nightmode div #nyaajs_showtimes .nyaajs_today .nyaajs_anime_planet {

@@ -348,7 +348,7 @@ button
 // SIDEBAR STYLES
 //----------------------------------------------------------------------------
 
-#nyaa_main
+.nyaa_main
   
   div.content a:visited
     color: $grayLight
@@ -418,6 +418,7 @@ button
     color: violet !important
 
   .nyaajs_today
+    background: yellow !important
     background-color: yellow !important
 
 
@@ -431,6 +432,7 @@ button
 //----------------------------------------------------------------------------
 // Night Mode Styles
 //----------------------------------------------------------------------------
+
 
 .nyaajs_nightmode
   background-color: $grayDark !important
@@ -463,6 +465,7 @@ button
 
   .torrentcats
     width: 30%
+
   div
     #nyaajs_showtimes
       background-color: $grayDark !important
@@ -472,13 +475,14 @@ button
       #nyaajs_btn_add
         &:hover
           color: $white !important
-      tr:nth-child(odd)
-        background-color: #383838 !important
+      table tbody > tr:nth-child(odd)
+        background-color: #383838 
       .nyaajs_anime_airday
         color: $neonPink !important
       .nyaajs_anime_planet
         color: $neonBlue !important 
       .nyaajs_today
+        background-color: yellow !important
         .nyaajs_anime
         .nyaajs_anime_planet
           color: $black !important
